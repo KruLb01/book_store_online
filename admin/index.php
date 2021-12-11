@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+    session_start();
+    if (!isset($_SESSION["user"])) {
+        header("Location: templates/login.php");
+    }
+?>
 <html dir="ltr" lang="en">
 
 <head>
@@ -14,12 +20,12 @@
     <title>Ample Admin Lite Template by WrapPixel</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../static/plugins/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/plugins/images/favicon.png">
     <!-- Custom CSS -->
-    <link href="../static/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <link href="static/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
     <!-- Custom CSS -->
-    <link href="../static/css/style.min.css" rel="stylesheet">
+    <link href="static/css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -46,17 +52,17 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="dashboard.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!-- Dark Logo icon -->
-                            <img src="../static/plugins/images/logo-icon.png" alt="homepage" />
+                            <img src="static/plugins/images/logo-icon.png" alt="homepage" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="../static/plugins/images/logo-text.png" alt="homepage" />
+                            <img src="static/plugins/images/logo-text.png" alt="homepage" />
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -94,8 +100,8 @@
                         <!-- ============================================================== -->
                         <li>
                             <a class="profile-pic" href="#">
-                                <img src="../static/plugins/images/users/varun.jpg" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">Steave</span></a>
+                                <img src="static/plugins/images/users/varun.jpg" alt="user-img" width="36"
+                                     class="img-circle"><span class="text-white font-medium">Steave</span></a>
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -118,49 +124,63 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.html"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php"
                                 aria-expanded="false">
                                 <i class="far fa-clock" aria-hidden="true"></i>
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="profile.html"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="templates/profile.html"
                                 aria-expanded="false">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 <span class="hide-menu">Profile</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="basic-table.html"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="templates/basic-table.html"
                                 aria-expanded="false">
                                 <i class="fa fa-table" aria-hidden="true"></i>
                                 <span class="hide-menu">Basic Table</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="fontawesome.html"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="templates/basic-table.html"
+                               aria-expanded="false">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                                <span class="hide-menu">Customers</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="templates/basic-table.html"
+                               aria-expanded="false">
+                                <i class="fas fa-user" aria-hidden="true"></i>
+                                <span class="hide-menu">Employees</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="templates/fontawesome.html"
                                 aria-expanded="false">
                                 <i class="fa fa-font" aria-hidden="true"></i>
                                 <span class="hide-menu">Icon</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="templates/map-google.html"
                                 aria-expanded="false">
                                 <i class="fa fa-globe" aria-hidden="true"></i>
                                 <span class="hide-menu">Google Map</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="blank.html"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="templates/blank.html"
                                 aria-expanded="false">
                                 <i class="fa fa-columns" aria-hidden="true"></i>
                                 <span class="hide-menu">Blank Page</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="404.html"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="templates/404.html"
                                 aria-expanded="false">
                                 <i class="fa fa-info-circle" aria-hidden="true"></i>
                                 <span class="hide-menu">Error 404</span>
@@ -381,7 +401,7 @@
                             <div class="comment-widgets">
                                 <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row p-3 mt-0">
-                                    <div class="p-2"><img src="../static/plugins/images/users/varun.jpg" alt="user" width="50" class="rounded-circle"></div>
+                                    <div class="p-2"><img src="static/plugins/images/users/varun.jpg" alt="user" width="50" class="rounded-circle"></div>
                                     <div class="comment-text ps-2 ps-md-3 w-100">
                                         <h5 class="font-medium">James Anderson</h5>
                                         <span class="mb-3 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry.It has survived not only five centuries. </span>
@@ -394,7 +414,7 @@
                                 </div>
                                 <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row p-3">
-                                    <div class="p-2"><img src="../static/plugins/images/users/genu.jpg" alt="user" width="50" class="rounded-circle"></div>
+                                    <div class="p-2"><img src="static/plugins/images/users/genu.jpg" alt="user" width="50" class="rounded-circle"></div>
                                     <div class="comment-text ps-2 ps-md-3 active w-100">
                                         <h5 class="font-medium">Michael Jorden</h5>
                                         <span class="mb-3 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry.It has survived not only five centuries. </span>
@@ -408,7 +428,7 @@
                                 </div>
                                 <!-- Comment Row -->
                                 <div class="d-flex flex-row comment-row p-3">
-                                    <div class="p-2"><img src="../static/plugins/images/users/ritesh.jpg" alt="user" width="50" class="rounded-circle"></div>
+                                    <div class="p-2"><img src="static/plugins/images/users/ritesh.jpg" alt="user" width="50" class="rounded-circle"></div>
                                     <div class="comment-text ps-2 ps-md-3 w-100">
                                         <h5 class="font-medium">Johnathan Doeting</h5>
                                         <span class="mb-3 d-block">Lorem Ipsum is simply dummy text of the printing and type setting industry.It has survived not only five centuries. </span>
@@ -440,7 +460,7 @@
                                             </button>
                                         </div>
                                         <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                                src="../static/plugins/images/users/varun.jpg" alt="user-img" class="img-circle">
+                                                src="static/plugins/images/users/varun.jpg" alt="user-img" class="img-circle">
                                             <div class="ms-2">
                                                 <span class="text-dark">Varun Dhavan <small
                                                         class="d-block text-success d-block">online</small></span>
@@ -457,7 +477,7 @@
                                             </button>
                                         </div>
                                         <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                                src="../static/plugins/images/users/genu.jpg" alt="user-img" class="img-circle">
+                                                src="static/plugins/images/users/genu.jpg" alt="user-img" class="img-circle">
                                             <div class="ms-2">
                                                 <span class="text-dark">Genelia
                                                     Deshmukh <small class="d-block text-warning">Away</small></span>
@@ -474,7 +494,7 @@
                                             </button>
                                         </div>
                                         <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                                src="../static/plugins/images/users/ritesh.jpg" alt="user-img" class="img-circle">
+                                                src="static/plugins/images/users/ritesh.jpg" alt="user-img" class="img-circle">
                                             <div class="ms-2">
                                                 <span class="text-dark">Ritesh
                                                     Deshmukh <small class="d-block text-danger">Busy</small></span>
@@ -491,7 +511,7 @@
                                             </button>
                                         </div>
                                         <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                                src="../static/plugins/images/users/arijit.jpg" alt="user-img" class="img-circle">
+                                                src="static/plugins/images/users/arijit.jpg" alt="user-img" class="img-circle">
                                             <div class="ms-2">
                                                 <span class="text-dark">Arijit
                                                     Sinh <small class="d-block text-muted">Offline</small></span>
@@ -508,7 +528,7 @@
                                             </button>
                                         </div>
                                         <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                                src="../static/plugins/images/users/govinda.jpg" alt="user-img"
+                                                src="static/plugins/images/users/govinda.jpg" alt="user-img"
                                                 class="img-circle">
                                             <div class="ms-2">
                                                 <span class="text-dark">Govinda
@@ -526,7 +546,7 @@
                                             </button>
                                         </div>
                                         <a href="javascript:void(0)" class="d-flex align-items-center"><img
-                                                src="../static/plugins/images/users/hritik.jpg" alt="user-img" class="img-circle">
+                                                src="static/plugins/images/users/hritik.jpg" alt="user-img" class="img-circle">
                                             <div class="ms-2">
                                                 <span class="text-dark">John
                                                     Abraham<small class="d-block text-success">online</small></span>
@@ -563,22 +583,22 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../static/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="static/plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../static/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/js/app-style-switcher.js"></script>
-    <script src="../static/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="static/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/app-style-switcher.js"></script>
+    <script src="static/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
     <!--Wave Effects -->
-    <script src="../static/js/waves.js"></script>
+    <script src="static/js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="../static/js/sidebarmenu.js"></script>
+    <script src="static/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="../static/js/custom.js"></script>
+    <script src="static/js/custom.js"></script>
     <!--This page JavaScript -->
     <!--chartis chart-->
-    <script src="../static/plugins/bower_components/chartist/dist/chartist.min.js"></script>
-    <script src="../static/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="../static/js/pages/dashboards/dashboard1.js"></script>
+    <script src="static/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="static/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="static/js/pages/dashboards/dashboard1.js"></script>
 </body>
 
 </html>
