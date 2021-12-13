@@ -57,7 +57,7 @@ if (!isset($_SESSION["user"])) {
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
                 <li>
-                    <a class="profile-pic" href="#">
+                    <a class="profile-pic" href="profile.php">
                         <img src="../static/plugins/images/users/varun.jpg" alt="user-img" width="36"
                              class="img-circle"><span class="text-white font-medium"><?php echo $_SESSION['user']['Name'] ?></span></a>
                 </li>

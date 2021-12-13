@@ -32,4 +32,14 @@ class nxb
         $query = "delete from nha_xuat_ban where id_nha_xuat_ban = '$code'";
         return $conn->execute($query);
     }
+
+    public function createNXB($nxb)
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "insert into nha_xuat_ban(id_nha_xuat_ban, ten_nha_xuat_ban, mo_ta_nha_xuat_ban) 
+                values('{$nxb['Code']}', '{$nxb['Name']}', '{$nxb['Description']}')";
+        return $conn->execute($query);
+    }
 }

@@ -40,4 +40,14 @@ class books
         $query = "delete from san_pham where id_san_pham = '$code'";
         return $conn->execute($query);
     }
+
+    public function createBook($book)
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "insert into san_pham(id_san_pham, id_danh_muc, ten_san_pham, id_tac_gia, id_nha_xuat_ban, nam_xuat_ban, so_luong, mo_ta_sach, ngon_ngu, gia_sach_giay, gia_sach_ebook) 
+                values('{$book['Code']}', '{$book['Category']}', '{$book['Name']}', '{$book['Author']}', '{$book['Nxb']}', '{$book['Released']}', '{$book['Amount']}', '{$book['Description']}', '{$book['Language']}', '{$book['Price']}', '{$book['Ebook']}')";
+        return $conn->execute($query);
+    }
 }

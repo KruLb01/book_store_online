@@ -138,7 +138,7 @@
                                                             <button f='role' type='button' class='btn btn-warning'>Role</button>";
                                         } else {
                                             $render = "<tr cs='1'>";
-                                            $actionBtn = "<button f='status' type='button' class='btn btn-danger'>Disable</button>
+                                            $actionBtn = "<button f='status' type='button' class='btn btn-secondary'>Disable</button>
                                                             <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
                                                             <button f='delete' type='button' class='btn btn-danger' style='background: red'><i class='fas fa-trash'></i></button>
                                                             <button f='role' type='button' class='btn btn-warning'>Role</button>";
@@ -319,7 +319,7 @@
         var address = document.getElementById("address").value;
         var role = document.getElementById("role").value;
 
-        if (username.length < 5 && password < 5 && name < 5 && email < 5 && phone < 5 && address < 5 && role.trim() == "Chọn quyền" ) {
+        if (username.length < 5 || password.length < 5 || name.length < 5 || email.length < 5 || phone.length < 5 || address.length < 5 || role.trim() == "Chọn quyền" ) {
             $("#create-form div.error").css("display", "unset");
             $("#create-form div.error").text("Fill out all inputs");
         } else {

@@ -101,9 +101,9 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Authors</h3>
+                            <h3 class="box-title">Category</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-10"><code>All authors</code></p>
+                                <p class="text-muted col-sm-10"><code>All categories</code></p>
                                 <div class="col-md-2">
                                     <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create</button>
                                     <button type="button" class="btn btn-secondary">Export</button>
@@ -116,16 +116,15 @@
                                             <th class="border-top-0">#</th>
                                             <th class="border-top-0">Code</th>
                                             <th class="border-top-0">Name</th>
-                                            <th class="border-top-0">Description</th>
                                             <th class="border-top-0">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                        include_once("../class/author.php");
-                                        $authorModel = new author();
+                                        include_once("../class/category.php");
+                                        $categoryModel = new category();
 
-                                        $data = $authorModel->getAuthors();
+                                        $data = $categoryModel->getCategory();
                                         $count = 1;
                                         foreach ($data as $key=>$val) {
                                             $actionBtn = "<button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
@@ -134,7 +133,6 @@
                                                     <td>$count</td>
                                                     <td>".$val["Id"]."</td>
                                                     <td>".$val["Name"]."</td>
-                                                    <td>".$val["Description"]."</td>
                                                     <td>".$actionBtn."</td>
                                                 </tr>";
                                             echo $render;
@@ -167,7 +165,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Create new author</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Create new category</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -177,12 +175,8 @@
                                     <input type="text" class="form-control" id="code">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Author name</label>
+                                    <label for="name" class="form-label">Name</label>
                                     <input type="text" class="form-control" id="name">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea type="text" class="form-control" id="description" rows="4"></textarea>
                                 </div>
                                 <div class="error">Error print here</div>
                             </form>
@@ -229,14 +223,14 @@
 <script>
     $(document).on("click", "tbody tr", function (e) {
         var code = $(this).find("td").eq(1).text();
-        if (e.target == $(this).find("button")[1] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa tác giả "${code}" ?!`)) {
+        if (e.target == $(this).find("button")[1] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa thể loại "${code}" ?!`)) {
             $.ajax({
                 method:"post",
-                url:"../handle/handle_author.php",
+                url:"../handle/handle_category.php",
                 data: {code: code, delete: "delete"},
                 success:function(res) {
                     if (res.trim() == "success") {
-                        window.location = "manage_authors.php";
+                        window.location = "manage_category.php";
                     } else alert("Thao tác thất bại !");
                 }
             })
@@ -246,7 +240,6 @@
     $("#submit-create-form").click(function () {
         var code = document.getElementById("code").value;
         var name = document.getElementById("name").value;
-        var description = document.getElementById("description").value;
 
         if (code.length < 5 || name.length < 5) {
             $("#create-form div.error").css("display", "unset");
@@ -254,16 +247,15 @@
         } else {
             $.ajax({
                 method:"post",
-                url:"../handle/handle_author.php",
+                url:"../handle/handle_category.php",
                 data: {
                     code: code,
                     name: name,
-                    description: description,
                     create: "create"
                 },
                 success:function(res) {
                     if (res.trim() == "success") {
-                        window.location = "manage_authors.php";
+                        window.location = "manage_category.php";
                     } else alert("Thao tác thất bại !");
                 }
             })

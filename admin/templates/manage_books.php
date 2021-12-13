@@ -182,7 +182,18 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="category" class="form-label">Category</label>
-                                    <input type="text" class="form-control" id="category">
+                                    <select class="form-select" id="category">
+                                        <option selected>Chọn danh mục</option>
+                                        <?php
+                                        include_once("../class/category.php");
+                                        $categoryModel = new category();
+
+                                        $roles = $categoryModel->getCategory();
+                                        foreach ($roles as $key=>$val) {
+                                            echo "<option value='{$val['Id']}'>{$val['Name']}</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
@@ -190,19 +201,41 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="author" class="form-label">Author</label>
-                                    <input type="text" class="form-control" id="author">
+                                    <select class="form-select" id="author">
+                                        <option selected>Chọn tác giả</option>
+                                        <?php
+                                        include_once("../class/author.php");
+                                        $authorModel = new author();
+
+                                        $roles = $authorModel->getAuthors();
+                                        foreach ($roles as $key=>$val) {
+                                            echo "<option value='{$val['Id']}'>{$val['Name']}</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="nxb" class="form-label">NXB</label>
-                                    <input type="text" class="form-control" id="nxb">
+                                    <select class="form-select" id="nxb">
+                                        <option selected>Chọn nhà xuất bản</option>
+                                        <?php
+                                        include_once("../class/nxb.php");
+                                        $nxbModel = new nxb();
+
+                                        $roles = $nxbModel->getNXB();
+                                        foreach ($roles as $key=>$val) {
+                                            echo "<option value='{$val['Id']}'>{$val['Name']}</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="released" class="form-label">Released</label>
-                                    <input type="number" class="form-control" id="released">
+                                    <input type="number" class="form-control" id="released" value="2021">
                                 </div>
                                 <div class="mb-3">
                                     <label for="amount" class="form-label">Amount</label>
-                                    <input type="number" class="form-control" id="amount">
+                                    <input type="number" class="form-control" id="amount" value="1">
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Description</label>
@@ -210,7 +243,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="language" class="form-label">Language</label>
-                                    <input type="text" class="form-control" id="language">
+                                    <input type="text" class="form-control" id="language" value="Tiếng Việt">
                                 </div>
                                 <div class="mb-3">
                                     <label for="price" class="form-label">Price</label>
@@ -280,33 +313,44 @@
     })
 
     $("#submit-create-form").click(function () {
-        return; // Unavailable now ~
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
+        var code = document.getElementById("code").value;
+        var category = document.getElementById("category").value;
         var name = document.getElementById("name").value;
-        var email = document.getElementById("email").value;
-        var phone = document.getElementById("phone").value;
-        var address = document.getElementById("address").value;
+        var author = document.getElementById("author").value;
+        var nxb = document.getElementById("nxb").value;
+        var released = document.getElementById("released").value;
+        var amount = document.getElementById("amount").value;
+        var description = document.getElementById("description").value;
+        var language = document.getElementById("language").value;
+        var price = document.getElementById("price").value;
+        var ebook = document.getElementById("ebook").value;
 
-        if (username.length < 5 && password < 5 && name < 5 && email < 5 && phone < 5 && address < 5 ) {
+        if (code.length < 5 || category.trim() == "Chọn danh mục" || name.length < 5 || author.trim() == "Chọn tác giả" ||
+            nxb.trim() == "Chọn nhà xuất bản" || released.length < 3 || amount.length == 0 ||
+            language.length < 5 || price.length < 3 || ebook.length < 3 ) {
             $("#create-form div.error").css("display", "unset");
             $("#create-form div.error").text("Fill out all inputs");
         } else {
             $.ajax({
                 method:"post",
-                url:"../handle/handle_account.php",
+                url:"../handle/handle_book.php",
                 data: {
-                    username: username,
-                    password: password,
+                    code: code,
+                    category: category,
                     name: name,
-                    email: email,
-                    phone: phone,
-                    address: address,
-                    create: "customer"
+                    author: author,
+                    nxb: nxb,
+                    released: released,
+                    amount: amount,
+                    description: description,
+                    language: language,
+                    price: price,
+                    ebook: ebook,
+                    create: "create"
                 },
                 success:function(res) {
                     if (res.trim() == "success") {
-                        window.location = "manage_customers.php";
+                        window.location = "manage_books.php";
                     } else alert("Thao tác thất bại !");
                 }
             })

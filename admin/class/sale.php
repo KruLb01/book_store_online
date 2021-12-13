@@ -1,35 +1,38 @@
 <?php
 
 
-class author
+class sale
 {
-    public function getAuthors()
+    public function getSales()
     {
         include_once("connect_db.php");
         $conn = new connect_db();
 
-        $query = "select * from tac_gia order by id_tac_gia";
+        $query = "select * from sale order by id_sale";
         $data = $conn->select($query);
         if (mysqli_num_rows($data)==0) {
-            $authors = array();
+            $sales = array();
         } else {
             while ($row = mysqli_fetch_array($data)) {
-                $authors[] = array(
-                    "Id" => $row["id_tac_gia"],
-                    "Name" => $row["ten_tac_gia"],
-                    "Description" => $row["mo_ta_tac_gia"]
+                $sales[] = array(
+                    "Id" => $row["id_sale"],
+                    "Name" => $row["ten_sale"],
+                    "Start" => join("/", array_reverse(explode("-", $row["ngay_bat_dau"]))),
+                    "End" => join("/", array_reverse(explode("-", $row["ngay_ket_thuc"]))),
+                    "Percent" => $row["giam_theo_%"],
+                    "Dong" => $row["giam_theo_vnd"],
                 );
             }
         }
-        return $authors;
+        return $sales;
     }
 
-    public function deleteAuthor($code)
+    public function deleteSale($code)
     {
         include_once("connect_db.php");
         $conn = new connect_db();
 
-        $query = "delete from tac_gia where id_tac_gia = '$code'";
+        $query = "delete from sale where id_sale = '$code'";
         return $conn->execute($query);
     }
 

@@ -76,7 +76,7 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Manage Authors</h4>
+                        <h4 class="page-title">Manage Shipping types</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
@@ -101,9 +101,9 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Authors</h3>
+                            <h3 class="box-title">Shipping types</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-10"><code>All authors</code></p>
+                                <p class="text-muted col-sm-10"><code>All types</code></p>
                                 <div class="col-md-2">
                                     <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create</button>
                                     <button type="button" class="btn btn-secondary">Export</button>
@@ -122,10 +122,10 @@
                                     </thead>
                                     <tbody>
                                     <?php
-                                        include_once("../class/author.php");
-                                        $authorModel = new author();
+                                        include_once("../class/shipping.php");
+                                        $shippingModel = new shipping();
 
-                                        $data = $authorModel->getAuthors();
+                                        $data = $shippingModel->getShipping();
                                         $count = 1;
                                         foreach ($data as $key=>$val) {
                                             $actionBtn = "<button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
@@ -167,7 +167,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Create new author</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Create new shipping type</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -177,7 +177,7 @@
                                     <input type="text" class="form-control" id="code">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Author name</label>
+                                    <label for="name" class="form-label">Name</label>
                                     <input type="text" class="form-control" id="name">
                                 </div>
                                 <div class="mb-3">
@@ -229,14 +229,14 @@
 <script>
     $(document).on("click", "tbody tr", function (e) {
         var code = $(this).find("td").eq(1).text();
-        if (e.target == $(this).find("button")[1] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa tác giả "${code}" ?!`)) {
+        if (e.target == $(this).find("button")[1] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa hình thức giao hàng "${code}" ?!`)) {
             $.ajax({
                 method:"post",
-                url:"../handle/handle_author.php",
+                url:"../handle/handle_shipping.php",
                 data: {code: code, delete: "delete"},
                 success:function(res) {
                     if (res.trim() == "success") {
-                        window.location = "manage_authors.php";
+                        window.location = "manage_shipping.php";
                     } else alert("Thao tác thất bại !");
                 }
             })
@@ -254,7 +254,7 @@
         } else {
             $.ajax({
                 method:"post",
-                url:"../handle/handle_author.php",
+                url:"../handle/handle_shipping.php",
                 data: {
                     code: code,
                     name: name,
@@ -263,7 +263,7 @@
                 },
                 success:function(res) {
                     if (res.trim() == "success") {
-                        window.location = "manage_authors.php";
+                        window.location = "manage_shipping.php";
                     } else alert("Thao tác thất bại !");
                 }
             })

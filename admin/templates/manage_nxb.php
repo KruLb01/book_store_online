@@ -167,61 +167,29 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Create new book</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm nhà xuất bản mới</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form id="create-form">
                                 <div class="mb-3">
-                                    <label for="code" class="form-label">Code</label>
+                                    <label for="code" class="form-label">Mã nhà xuất bản</label>
                                     <input type="text" class="form-control" id="code">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="category" class="form-label">Category</label>
-                                    <input type="text" class="form-control" id="category">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
+                                    <label for="name" class="form-label">Tên nhà xuất bản</label>
                                     <input type="text" class="form-control" id="name">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="author" class="form-label">Author</label>
-                                    <input type="text" class="form-control" id="author">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nxb" class="form-label">NXB</label>
-                                    <input type="text" class="form-control" id="nxb">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="released" class="form-label">Released</label>
-                                    <input type="number" class="form-control" id="released">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="amount" class="form-label">Amount</label>
-                                    <input type="number" class="form-control" id="amount">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
+                                    <label for="description" class="form-label">Mô tả</label>
                                     <textarea type="text" class="form-control" id="description" rows="4"></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="language" class="form-label">Language</label>
-                                    <input type="text" class="form-control" id="language">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="price" class="form-label">Price</label>
-                                    <input type="number" class="form-control" id="price">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="ebook" class="form-label">Price ebook</label>
-                                    <input type="number" class="form-control" id="ebook">
                                 </div>
                                 <div class="error">Error print here</div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button id="submit-create-form" type="button" class="btn btn-primary">Create</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="submit-create-form" type="button" class="btn btn-primary">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -276,33 +244,26 @@
     })
 
     $("#submit-create-form").click(function () {
-        return; // Unavailable now ~
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
+        var code = document.getElementById("code").value;
         var name = document.getElementById("name").value;
-        var email = document.getElementById("email").value;
-        var phone = document.getElementById("phone").value;
-        var address = document.getElementById("address").value;
+        var description = document.getElementById("description").value;
 
-        if (username.length < 5 && password < 5 && name < 5 && email < 5 && phone < 5 && address < 5 ) {
+        if (code.length < 5 || name.length < 5) {
             $("#create-form div.error").css("display", "unset");
             $("#create-form div.error").text("Fill out all inputs");
         } else {
             $.ajax({
                 method:"post",
-                url:"../handle/handle_author.php",
+                url:"../handle/handle_nxb.php",
                 data: {
-                    username: username,
-                    password: password,
+                    code: code,
                     name: name,
-                    email: email,
-                    phone: phone,
-                    address: address,
-                    create: "customer"
+                    description: description,
+                    create: "create"
                 },
                 success:function(res) {
                     if (res.trim() == "success") {
-                        window.location = "manage_customers.php";
+                        window.location = "manage_nxb.php";
                     } else alert("Thao tác thất bại !");
                 }
             })

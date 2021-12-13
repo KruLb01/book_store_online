@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2021 at 09:44 AM
+-- Generation Time: Dec 13, 2021 at 06:13 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -70,6 +70,10 @@ INSERT INTO `chi_tiet_quyen_chuc_nang` (`id_quyen`, `id_chuc_nang`) VALUES
 ('2', 'CN005'),
 ('2', 'CN006'),
 ('2', 'CN007'),
+('2', 'CN008'),
+('2', 'CN009'),
+('2', 'CN010'),
+('2', 'CN011'),
 ('2', 'CN099');
 
 -- --------------------------------------------------------
@@ -96,8 +100,12 @@ INSERT INTO `chuc_nang` (`id_chuc_nang`, `ten_chuc_nang`, `mo_ta`, `icon`, `file
 ('CN003', 'Customers', '', 'fas fa-users', 'manage_customers.php'),
 ('CN004', 'Employees', '', 'fas fa-user', 'manage_employees.php'),
 ('CN005', 'Books', '', ' fas fa-book', 'manage_books.php'),
-('CN006', 'Authors', '', ' fas fa-address-card', 'manage_authors.php'),
-('CN007', 'Nhà xuất bản', '', ' fas fa-warehouse', 'manage_nxb.php'),
+('CN006', 'Category', '', ' fas fa-heading', 'manage_category.php'),
+('CN007', 'Authors', '', ' fas fa-address-card', 'manage_authors.php'),
+('CN008', 'Nhà xuất bản', '', ' fas fa-warehouse', 'manage_nxb.php'),
+('CN009', 'Shipping', '', 'fas fa-motorcycle', 'manage_shipping.php'),
+('CN010', 'Phân quyền', '', 'fas fa-sitemap', 'manage_role.php'),
+('CN011', 'Sale', '', ' fas fa-dolly', 'manage_sale.php'),
 ('CN099', 'Icon Available', '', 'fas fa-font', 'fontawesome.html');
 
 -- --------------------------------------------------------
@@ -160,6 +168,16 @@ CREATE TABLE `hinh_thuc_giao_hang` (
   `ten_hinh_thuc` varchar(50) NOT NULL,
   `mo_ta` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hinh_thuc_giao_hang`
+--
+
+INSERT INTO `hinh_thuc_giao_hang` (`id_hinh_thuc`, `ten_hinh_thuc`, `mo_ta`) VALUES
+('HTGH001', 'Giao hàng bình thường', ''),
+('HTGH002', 'Giao hàng nhanh', ''),
+('HTGH003', 'Giao hàng hỏa tốc', ''),
+('HTGH004', 'Đến nhận tại cửa hàng', '');
 
 -- --------------------------------------------------------
 
@@ -274,7 +292,8 @@ CREATE TABLE `quyen` (
 INSERT INTO `quyen` (`id_quyen`, `ten_quyen`, `mo_ta`) VALUES
 ('1', 'Khách hàng', 'Quyền dành cho khách hàng'),
 ('2', 'Quản trị viên', 'Quyền dành cho quản trị viên'),
-('3', 'Nhân viên', 'Quyền dành cho nhân viên');
+('3', 'Nhân viên', 'Quyền dành cho nhân viên'),
+('4', 'ddsas', '');
 
 -- --------------------------------------------------------
 
