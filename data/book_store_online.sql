@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2021 at 04:44 AM
+-- Generation Time: Dec 13, 2021 at 09:44 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -58,6 +58,20 @@ CREATE TABLE `chi_tiet_quyen_chuc_nang` (
   `id_chuc_nang` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `chi_tiet_quyen_chuc_nang`
+--
+
+INSERT INTO `chi_tiet_quyen_chuc_nang` (`id_quyen`, `id_chuc_nang`) VALUES
+('2', 'CN001'),
+('2', 'CN002'),
+('2', 'CN003'),
+('2', 'CN004'),
+('2', 'CN005'),
+('2', 'CN006'),
+('2', 'CN007'),
+('2', 'CN099');
+
 -- --------------------------------------------------------
 
 --
@@ -68,8 +82,23 @@ CREATE TABLE `chuc_nang` (
   `id_chuc_nang` varchar(10) NOT NULL,
   `ten_chuc_nang` varchar(50) NOT NULL,
   `mo_ta` varchar(100) NOT NULL,
-  `icon` varchar(50) NOT NULL
+  `icon` varchar(50) NOT NULL,
+  `file` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `chuc_nang`
+--
+
+INSERT INTO `chuc_nang` (`id_chuc_nang`, `ten_chuc_nang`, `mo_ta`, `icon`, `file`) VALUES
+('CN001', 'Dashboard', '', 'far fa-clock', 'index.php'),
+('CN002', 'Profile', '', 'fas fa-user-circle', 'profile.php'),
+('CN003', 'Customers', '', 'fas fa-users', 'manage_customers.php'),
+('CN004', 'Employees', '', 'fas fa-user', 'manage_employees.php'),
+('CN005', 'Books', '', ' fas fa-book', 'manage_books.php'),
+('CN006', 'Authors', '', ' fas fa-address-card', 'manage_authors.php'),
+('CN007', 'Nhà xuất bản', '', ' fas fa-warehouse', 'manage_nxb.php'),
+('CN099', 'Icon Available', '', 'fas fa-font', 'fontawesome.html');
 
 -- --------------------------------------------------------
 
@@ -165,6 +194,22 @@ CREATE TABLE `nguoi_dung` (
   `id_quyen` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `nguoi_dung`
+--
+
+INSERT INTO `nguoi_dung` (`tai_khoan`, `mat_khau`, `email`, `ho_ten`, `dia_chi`, `so_dien_thoai`, `tinh_trang_tai_khoan`, `id_quyen`) VALUES
+('admin', '123', 'admin.work@gmail.com', 'Tên gì còn lâu mới nói', 'HCM City', 123456789, 1, '2'),
+('giaphuc', '3119560052', 'giaphuc.ec@gmail.com', 'Gia Phúc', 'HCM City', 123456789, 1, '1'),
+('nhanvien1', 'nhanvien1', 'nhanvien1.work@gmail.com', 'Thomas', 'New York', 123456789, 0, '3'),
+('nhanvien2', 'nhanvien2', 'nhanvien2.work@gmail.com', 'Peter', 'Shanghai', 123456789, 1, '3'),
+('nhanvien3', 'nhanvien3', 'nhanvien3.work@gmail.com', 'Logan', 'Paris', 123456789, 0, '3'),
+('nhanvien4', 'nhanvien4', 'nhanvien4.work@gmail.com', 'Lily', 'Bangkok', 123456789, 1, '3'),
+('nhanvien5', 'nhanvien5', 'nhanvien5.work@gmail.com', 'Helios 300', 'HCM City', 12456898, 1, '3'),
+('thanhhoa', '3119560021', 'thanhhoa.ec@gmail.com', 'Thanh Hòa', 'HCM City', 123456789, 0, '1'),
+('vankiet', '3119560033', 'vankiet.ec@gmail.com', 'Văn Kiệt', 'HCM City', 123456789, 1, '1'),
+('vanluan', '3119560039', 'vanluan.ec@gmail.com', 'Văn Luân', 'HCM City', 123456789, 1, '1');
+
 -- --------------------------------------------------------
 
 --
@@ -222,6 +267,15 @@ CREATE TABLE `quyen` (
   `mo_ta` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `quyen`
+--
+
+INSERT INTO `quyen` (`id_quyen`, `ten_quyen`, `mo_ta`) VALUES
+('1', 'Khách hàng', 'Quyền dành cho khách hàng'),
+('2', 'Quản trị viên', 'Quyền dành cho quản trị viên'),
+('3', 'Nhân viên', 'Quyền dành cho nhân viên');
+
 -- --------------------------------------------------------
 
 --
@@ -236,6 +290,17 @@ CREATE TABLE `sale` (
   `giam_theo_%` int(10) NOT NULL,
   `giam_theo_vnd` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sale`
+--
+
+INSERT INTO `sale` (`id_sale`, `ten_sale`, `ngay_bat_dau`, `ngay_ket_thuc`, `giam_theo_%`, `giam_theo_vnd`) VALUES
+('SALE001', 'Spring Sale', '2022-01-01', '2022-03-30', 30, 500000),
+('SALE002', 'Summer Sale', '2022-04-01', '2022-06-30', 25, 400000),
+('SALE003', 'Autumn Sale', '2022-07-01', '2022-09-30', 30, 450000),
+('SALE004', 'Winter Sale', '2022-10-01', '2022-12-31', 45, 600000),
+('SALE005', 'Black Friday Sale', '2022-11-26', '2022-11-29', 50, 500000);
 
 -- --------------------------------------------------------
 
