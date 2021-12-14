@@ -31,7 +31,7 @@
                 <li class="text-center p-20 upgrade-btn">
                     <a href="../handle/handle_login.php?username=<?php echo $_SESSION['user']['User'] ?>&logout=logout  "
                        class="btn d-grid btn-danger text-white" >
-                        Log out</a>
+                        Đăng xuất</a>
                 </li>
             </ul>
 

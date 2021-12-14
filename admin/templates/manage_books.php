@@ -76,12 +76,12 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Manage Books</h4>
+                        <h4 class="page-title">Quản lý sách</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="index.php" class="fw-normal">Back to Dashboard</a></li>
+                                <li><a href="index.php" class="fw-normal">Quay lại trang chính</a></li>
                             </ol>
                         </div>
                     </div>
@@ -101,12 +101,12 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Books</h3>
+                            <h3 class="box-title">Sách</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-10"><code>All books</code></p>
-                                <div class="col-md-2">
-                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create</button>
-                                    <button type="button" class="btn btn-secondary">Export</button>
+                                <p class="text-muted col-sm-9"><code>Tất cả sách trong hệ thống</code></p>
+                                <div class="col-md-3">
+                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>
+                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -114,12 +114,12 @@
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Code</th>
-                                            <th class="border-top-0">Name</th>
-                                            <th class="border-top-0">Amount</th>
-                                            <th class="border-top-0">Price (đồng)</th>
-                                            <th class="border-top-0">Ebook</th>
-                                            <th class="border-top-0">Action</th>
+                                            <th class="border-top-0">Mã sách</th>
+                                            <th class="border-top-0">Tên sách</th>
+                                            <th class="border-top-0">Số lượng</th>
+                                            <th class="border-top-0">Giá sách giấy (đồng)</th>
+                                            <th class="border-top-0">Giá sách Ebook</th>
+                                            <th class="border-top-0">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -171,17 +171,17 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Create new book</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Tạo sách mới</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form id="create-form">
                                 <div class="mb-3">
-                                    <label for="code" class="form-label">Code</label>
+                                    <label for="code" class="form-label">Mã sách</label>
                                     <input type="text" class="form-control" id="code">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="category" class="form-label">Category</label>
+                                    <label for="category" class="form-label">Thể loại</label>
                                     <select class="form-select" id="category">
                                         <option selected>Chọn danh mục</option>
                                         <?php
@@ -196,11 +196,11 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
+                                    <label for="name" class="form-label">Tên sách</label>
                                     <input type="text" class="form-control" id="name">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="author" class="form-label">Author</label>
+                                    <label for="author" class="form-label">Tác giả</label>
                                     <select class="form-select" id="author">
                                         <option selected>Chọn tác giả</option>
                                         <?php
@@ -215,7 +215,7 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nxb" class="form-label">NXB</label>
+                                    <label for="nxb" class="form-label">Nhà xuất bản</label>
                                     <select class="form-select" id="nxb">
                                         <option selected>Chọn nhà xuất bản</option>
                                         <?php
@@ -230,35 +230,35 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="released" class="form-label">Released</label>
+                                    <label for="released" class="form-label">Năm ra mắt</label>
                                     <input type="number" class="form-control" id="released" value="2021">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="amount" class="form-label">Amount</label>
+                                    <label for="amount" class="form-label">Số lượng</label>
                                     <input type="number" class="form-control" id="amount" value="1">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
+                                    <label for="description" class="form-label">Mô tả sách</label>
                                     <textarea type="text" class="form-control" id="description" rows="4"></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="language" class="form-label">Language</label>
+                                    <label for="language" class="form-label">Ngôn ngữ</label>
                                     <input type="text" class="form-control" id="language" value="Tiếng Việt">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="price" class="form-label">Price</label>
+                                    <label for="price" class="form-label">Giá sách giấy</label>
                                     <input type="number" class="form-control" id="price">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="ebook" class="form-label">Price ebook</label>
+                                    <label for="ebook" class="form-label">Giá sách ebook</label>
                                     <input type="number" class="form-control" id="ebook">
                                 </div>
                                 <div class="error">Error print here</div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button id="submit-create-form" type="button" class="btn btn-primary">Create</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="submit-create-form" type="button" class="btn btn-primary">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -329,7 +329,7 @@
             nxb.trim() == "Chọn nhà xuất bản" || released.length < 3 || amount.length == 0 ||
             language.length < 5 || price.length < 3 || ebook.length < 3 ) {
             $("#create-form div.error").css("display", "unset");
-            $("#create-form div.error").text("Fill out all inputs");
+            $("#create-form div.error").text("Vui lòng điền đầy đủ thông tin");
         } else {
             $.ajax({
                 method:"post",

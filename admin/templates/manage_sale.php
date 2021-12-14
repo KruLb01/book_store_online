@@ -76,12 +76,12 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Manage Sales</h4>
+                        <h4 class="page-title">Quản lý chương trình khuyến mãi</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="index.php" class="fw-normal">Back to Dashboard</a></li>
+                                <li><a href="index.php" class="fw-normal">Quay lại trang chính</a></li>
                             </ol>
                         </div>
                     </div>
@@ -101,12 +101,12 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Sales</h3>
+                            <h3 class="box-title">Chương trình khuyến mãi</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-10"><code>All sales</code></p>
-                                <div class="col-md-2">
-                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create</button>
-                                    <button type="button" class="btn btn-secondary">Export</button>
+                                <p class="text-muted col-sm-9"><code>Tất cả chương trình khuyến mãi trong hệ thống</code></p>
+                                <div class="col-md-3">
+                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>
+                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -114,13 +114,13 @@
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Code</th>
-                                            <th class="border-top-0">Name</th>
-                                            <th class="border-top-0">Start</th>
-                                            <th class="border-top-0">End</th>
-                                            <th class="border-top-0">Decrease %</th>
-                                            <th class="border-top-0">Decrease đồng</th>
-                                            <th class="border-top-0">Action</th>
+                                            <th class="border-top-0">Mã</th>
+                                            <th class="border-top-0">Tên chương trình</th>
+                                            <th class="border-top-0">Ngày bắt đầu</th>
+                                            <th class="border-top-0">Ngày kết thúc</th>
+                                            <th class="border-top-0">Giảm phần trăm</th>
+                                            <th class="border-top-0">Giảm đồng</th>
+                                            <th class="border-top-0">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -173,41 +173,41 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Create new sale</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Tạo chương trình khuyến mãi mới</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form id="create-form">
                                 <div class="mb-3">
-                                    <label for="code" class="form-label">Code</label>
+                                    <label for="code" class="form-label">Mã</label>
                                     <input type="text" class="form-control" id="code">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Sale name</label>
+                                    <label for="name" class="form-label">Tên chương trình khuyến mãi</label>
                                     <input type="text" class="form-control" id="name">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="start" class="form-label">Date start</label>
+                                    <label for="start" class="form-label">Ngày bắt đầu</label>
                                     <input type="date" class="form-control" id="start">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="end" class="form-label">Date end</label>
+                                    <label for="end" class="form-label">Ngày kết thúc</label>
                                     <input type="date" class="form-control" id="end">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="percent" class="form-label">Decrease as %</label>
+                                    <label for="percent" class="form-label">Giảm phần trăm</label>
                                     <input type="number" class="form-control" id="percent">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="dong" class="form-label">Decrease as dong</label>
+                                    <label for="dong" class="form-label">Giảm đồng</label>
                                     <input type="number" class="form-control" id="dong" value="000">
                                 </div>
                                 <div class="error">Error print here</div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button id="submit-create-form" type="button" class="btn btn-primary">Create</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="submit-create-form" type="button" class="btn btn-primary">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -270,7 +270,7 @@
         var dong = document.getElementById("dong").value;
         if (code.length < 5 || name.length < 5 || start == "" || end == "" || percent.length < 0 || dong.length < 3) {
             $("#create-form div.error").css("display", "unset");
-            $("#create-form div.error").text("Fill out all inputs");
+            $("#create-form div.error").text("Vui lòng điền đầy đủ thông tin");
         } else {
             $.ajax({
                 method:"post",

@@ -47,7 +47,7 @@ if (!isset($_SESSION["user"])) {
                 <!-- ============================================================== -->
                 <li class=" in">
                     <form role="search" class="app-search d-none d-md-block me-3">
-                        <input type="text" placeholder="Search..." class="form-control mt-0">
+                        <input type="text" placeholder="Tìm kiếm..." class="form-control mt-0">
                         <a href="" class="active">
                             <i class="fa fa-search"></i>
                         </a>

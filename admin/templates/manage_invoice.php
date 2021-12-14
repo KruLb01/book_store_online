@@ -81,7 +81,7 @@
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="index.php" class="fw-normal">Back to Dashboard</a></li>
+                                <li><a href="index.php" class="fw-normal">Quay lại trang chính</a></li>
                             </ol>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                             <div class="row">
                                 <p class="text-muted col-sm-10"><code>Tất cả hóa đơn</code></p>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-secondary">Export</button>
+                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -113,13 +113,13 @@
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Code</th>
-                                            <th class="border-top-0">Customer</th>
-                                            <th class="border-top-0">Date</th>
-                                            <th class="border-top-0">Shipping</th>
-                                            <th class="border-top-0">Total</th>
-                                            <th class="border-top-0">Status</th>
-                                            <th class="border-top-0">Action</th>
+                                            <th class="border-top-0">Mã hóa đơn</th>
+                                            <th class="border-top-0">Tên khách hàng</th>
+                                            <th class="border-top-0">Ngày mua</th>
+                                            <th class="border-top-0">Hình thức giao hàng</th>
+                                            <th class="border-top-0">Tổng giá</th>
+                                            <th class="border-top-0">Trạng thái đơn hàng</th>
+                                            <th class="border-top-0">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -130,7 +130,7 @@
                                         $data = $invoiceModel->getInvoices();
                                         $count = 1;
                                         foreach ($data as $key=>$val) {
-                                            $actionBtn = "<button f='details' type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#exampleModal'>Details</button>
+                                            $actionBtn = "<button f='details' type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#exampleModal'>Chi tiết</button>
                                                            <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
                                                            <button f='delete' type='button' class='btn btn-danger'><i class='fas fa-trash'></i></button>";
                                             $status = "Chờ xử lý";

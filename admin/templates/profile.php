@@ -76,12 +76,12 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Profile page</h4>
+                        <h4 class="page-title">Hồ sơ</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="index.php" class="fw-normal">Back to Dashboard</a></li>
+                                <li><a href="index.php" class="fw-normal">Quay lại trang chính</a></li>
                             </ol>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                             <div class="card-body">
                                 <form class="form-horizontal form-material" id="form-profile">
                                     <div class="form-group mb-4">
-                                        <label for="name" class="col-md-12 p-0">Name</label>
+                                        <label for="name" class="col-md-12 p-0">Họ tên</label>
                                         <div class="col-md-12 border-bottom p-0">
                                             <input type="text" value="<?php echo $_SESSION['user']['Name'] ?>"
                                                 class="form-control p-0 border-0" id="name"> </div>
@@ -147,21 +147,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="password" class="col-md-12 p-0">Password</label>
+                                        <label for="password" class="col-md-12 p-0">Mật khẩu</label>
                                         <div class="col-md-12 border-bottom p-0">
                                             <input type="password" value="<?php echo $_SESSION['user']['Password']?>" class="form-control p-0 border-0" id="password">
                                             <input type="hidden" id="root-password" value="<?php echo $_SESSION['user']['Password']?>">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="phone" class="col-md-12 p-0">Phone</label>
+                                        <label for="phone" class="col-md-12 p-0">Số điện thoại</label>
                                         <div class="col-md-12 border-bottom p-0">
                                             <input type="text" value="<?php echo $_SESSION['user']['Phone'] ?>"
                                                 class="form-control p-0 border-0" id="phone">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="address" class="col-md-12 p-0">Address</label>
+                                        <label for="address" class="col-md-12 p-0">Địa chỉ</label>
                                         <div class="col-md-12 border-bottom p-0">
                                             <input type="text" value="<?php echo $_SESSION['user']['Address'] ?>"
                                                 class="form-control p-0 border-0" id="address">
@@ -170,7 +170,7 @@
                                     <div class="form-group mb-4 error">Error print here</div>
                                     <div class="form-group mb-4">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-success">Update Profile</button>
+                                            <button class="btn btn-success">Cập nhật hồ sơ</button>
                                         </div>
                                     </div>
                                 </form>

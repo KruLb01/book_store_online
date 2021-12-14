@@ -81,7 +81,7 @@
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="index.php" class="fw-normal">Back to Dashboard</a></li>
+                                <li><a href="index.php" class="fw-normal">Quay lại trang chính</a></li>
                             </ol>
                         </div>
                     </div>
@@ -103,10 +103,10 @@
                         <div class="white-box">
                             <h3 class="box-title">Quyền</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-10"><code>Tất cả quyền trong hệ thống</code></p>
-                                <div class="col-md-2">
-                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create</button>
-                                    <button type="button" class="btn btn-secondary">Export</button>
+                                <p class="text-muted col-sm-9"><code>Tất cả quyền trong hệ thống</code></p>
+                                <div class="col-md-3">
+                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>
+                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -114,10 +114,10 @@
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Code</th>
-                                            <th class="border-top-0">Name</th>
-                                            <th class="border-top-0">Description</th>
-                                            <th class="border-top-0">Action</th>
+                                            <th class="border-top-0">Mã quyền</th>
+                                            <th class="border-top-0">Tên quyền</th>
+                                            <th class="border-top-0">Mô tả</th>
+                                            <th class="border-top-0">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody id="table-role">
@@ -249,10 +249,10 @@
                         <div class="white-box">
                             <h3 class="box-title">Chức năng</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-10"><code>Tất cả chức năng trong hệ thống</code></p>
-                                <div class="col-md-2">
-                                    <button id="create-btn1" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">Create</button>
-                                    <button type="button" class="btn btn-secondary">Export</button>
+                                <p class="text-muted col-sm-9"><code>Tất cả chức năng trong hệ thống</code></p>
+                                <div class="col-md-3">
+                                    <button id="create-btn1" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal1">Thêm</button>
+                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -260,11 +260,11 @@
                                     <thead>
                                     <tr>
                                         <th class="border-top-0">#</th>
-                                        <th class="border-top-0">Code</th>
-                                        <th class="border-top-0">Name</th>
-                                        <th class="border-top-0">Description</th>
-                                        <th class="border-top-0">File</th>
-                                        <th class="border-top-0">Action</th>
+                                        <th class="border-top-0">Mã chức năng</th>
+                                        <th class="border-top-0">Tên chưc năng</th>
+                                        <th class="border-top-0">Mô tả</th>
+                                        <th class="border-top-0">File liên kết</th>
+                                        <th class="border-top-0">Thao tác</th>
                                     </tr>
                                     </thead>
                                     <tbody id="table-func">
@@ -449,7 +449,7 @@
 
         if (name.length < 4) {
             $("#create-form div.error").css("display", "unset");
-            $("#create-form div.error").text("Fill out all inputs");
+            $("#create-form div.error").text("Vui lòng điền đầy đủ thông tin");
         } else {
             $.ajax({
                 method:"post",
@@ -493,7 +493,7 @@
 
         if (code.length < 4 || name.length < 5 || file.length < 5 ) {
             $("#create-form-func div.error").css("display", "unset");
-            $("#create-form-func div.error").text("Fill out all inputs");
+            $("#create-form-func div.error").text("Vui lòng điền đầy đủ thông tin");
         } else {
             $.ajax({
                 method:"post",

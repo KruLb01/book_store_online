@@ -76,12 +76,12 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Manage Authors</h4>
+                        <h4 class="page-title">Quản lý tác giả</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="index.php" class="fw-normal">Back to Dashboard</a></li>
+                                <li><a href="index.php" class="fw-normal">Quay lại trang chính</a></li>
                             </ol>
                         </div>
                     </div>
@@ -101,12 +101,12 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Authors</h3>
+                            <h3 class="box-title">Tác giả</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-10"><code>All authors</code></p>
-                                <div class="col-md-2">
-                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create</button>
-                                    <button type="button" class="btn btn-secondary">Export</button>
+                                <p class="text-muted col-sm-9"><code>Tất cả tác giả trong hệ thống</code></p>
+                                <div class="col-md-3">
+                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>
+                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -114,10 +114,10 @@
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Code</th>
-                                            <th class="border-top-0">Name</th>
-                                            <th class="border-top-0">Description</th>
-                                            <th class="border-top-0">Action</th>
+                                            <th class="border-top-0">Mã tác giả</th>
+                                            <th class="border-top-0">Tên tác giả</th>
+                                            <th class="border-top-0">Mô tả</th>
+                                            <th class="border-top-0">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -167,29 +167,29 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Create new author</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Tạo tác giả mới</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form id="create-form">
                                 <div class="mb-3">
-                                    <label for="code" class="form-label">Code</label>
+                                    <label for="code" class="form-label">Mã tác giả</label>
                                     <input type="text" class="form-control" id="code">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Author name</label>
+                                    <label for="name" class="form-label">Tên tác giả</label>
                                     <input type="text" class="form-control" id="name">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
+                                    <label for="description" class="form-label">Mô tả</label>
                                     <textarea type="text" class="form-control" id="description" rows="4"></textarea>
                                 </div>
                                 <div class="error">Error print here</div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button id="submit-create-form" type="button" class="btn btn-primary">Create</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="submit-create-form" type="button" class="btn btn-primary">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -250,7 +250,7 @@
 
         if (code.length < 5 || name.length < 5) {
             $("#create-form div.error").css("display", "unset");
-            $("#create-form div.error").text("Fill out all inputs");
+            $("#create-form div.error").text("Vui lòng điền đầy đủ thông tin");
         } else {
             $.ajax({
                 method:"post",

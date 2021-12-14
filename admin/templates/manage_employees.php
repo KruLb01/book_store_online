@@ -76,12 +76,12 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Manage Employees</h4>
+                        <h4 class="page-title">Quản lý nhân viên</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="index.php" class="fw-normal">Back to Dashboard</a></li>
+                                <li><a href="index.php" class="fw-normal">Quay lại trang chính</a></li>
                             </ol>
                         </div>
                     </div>
@@ -101,12 +101,12 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Employees</h3>
+                            <h3 class="box-title">Nhân viên</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-10"><code>Employee accounts</code></p>
-                                <div class="col-md-2">
-                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create</button>
-                                    <button type="button" class="btn btn-secondary">Export</button>
+                                <p class="text-muted col-sm-9"><code>Quản lý tài khoản nhân viên</code></p>
+                                <div class="col-md-3">
+                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>
+                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -114,12 +114,12 @@
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">#</th>
-                                            <th class="border-top-0">User</th>
-                                            <th class="border-top-0">Name</th>
+                                            <th class="border-top-0">Tài khoản</th>
+                                            <th class="border-top-0">Họ tên</th>
                                             <th class="border-top-0">Email</th>
-                                            <th class="border-top-0">Phone</th>
-                                            <th class="border-top-0">Role</th>
-                                            <th class="border-top-0">Action</th>
+                                            <th class="border-top-0">Số điện thoại</th>
+                                            <th class="border-top-0">Quyền</th>
+                                            <th class="border-top-0">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -132,16 +132,16 @@
                                     foreach ($data as $key=>$val) {
                                         if ($val["Status"] == 0) {
                                             $render = "<tr cs='0' style='color:red'>";
-                                            $actionBtn = "<button f='status' type='button' class='btn btn-success'>Enable</button>
+                                            $actionBtn = "<button f='status' type='button' class='btn btn-success'>Mở khóa</button>
                                                             <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
                                                             <button f='delete' type='button' class='btn btn-danger' style='background: red'><i class='fas fa-trash'></i></button>
-                                                            <button f='role' type='button' class='btn btn-warning'>Role</button>";
+                                                            <button f='role' type='button' class='btn btn-warning'>Phân quyền</button>";
                                         } else {
                                             $render = "<tr cs='1'>";
-                                            $actionBtn = "<button f='status' type='button' class='btn btn-secondary'>Disable</button>
+                                            $actionBtn = "<button f='status' type='button' class='btn btn-secondary'>Khóa</button>
                                                             <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
                                                             <button f='delete' type='button' class='btn btn-danger' style='background: red'><i class='fas fa-trash'></i></button>
-                                                            <button f='role' type='button' class='btn btn-warning'>Role</button>";
+                                                            <button f='role' type='button' class='btn btn-warning'>Phân quyền</button>";
                                         }
                                         if ($val["User"] == "admin") {
                                             $actionBtn= "";
@@ -184,21 +184,21 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Create new employee</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Tạo tài khoản nhân viên mới</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form id="create-form">
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
+                                    <label for="username" class="form-label">Tài khoản</label>
                                     <input type="text" class="form-control" id="username">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
+                                    <label for="password" class="form-label">Mật khẩu</label>
                                     <input type="password" class="form-control" id="password">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
+                                    <label for="name" class="form-label">Họ tên</label>
                                     <input type="text" class="form-control" id="name">
                                 </div>
                                 <div class="mb-3">
@@ -206,15 +206,15 @@
                                     <input type="text" class="form-control" id="email">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="phone" class="form-label">Phone</label>
+                                    <label for="phone" class="form-label">Số điện thoại</label>
                                     <input type="text" class="form-control" id="phone">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="address" class="form-label">Address</label>
+                                    <label for="address" class="form-label">Địa chỉ</label>
                                     <input type="text" class="form-control" id="address">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="role" class="form-label">Role</label>
+                                    <label for="role" class="form-label">Quyền</label>
                                     <select class="form-select" id="role">
                                         <option selected>Chọn quyền</option>
                                         <?php
@@ -232,8 +232,8 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button id="submit-create-form" type="button" class="btn btn-primary">Create</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="submit-create-form" type="button" class="btn btn-primary">Thêm</button>
                         </div>
                     </div>
                 </div>
@@ -291,7 +291,7 @@
                             $(first_target).css("color", "red");
                             $(e.target).replaceWith("<button f='status' type='button' class='btn btn-success'>Enable</button>");
                         }
-                    } else alert("Action faled !");
+                    } else alert("Thao tác thất bại !");
                 }
             })
         }
@@ -304,7 +304,7 @@
                 success:function(res) {
                     if (res.trim() == "success") {
                         window.location = "manage_employees.php";
-                    } else alert("Action failed !");
+                    } else alert("Thao tác thất bại !");
                 }
             })
         }
@@ -321,7 +321,7 @@
 
         if (username.length < 5 || password.length < 5 || name.length < 5 || email.length < 5 || phone.length < 5 || address.length < 5 || role.trim() == "Chọn quyền" ) {
             $("#create-form div.error").css("display", "unset");
-            $("#create-form div.error").text("Fill out all inputs");
+            $("#create-form div.error").text("Vui lòng điền đầy đủ thông tin");
         } else {
             $.ajax({
                 method:"post",
