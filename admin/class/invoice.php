@@ -38,6 +38,14 @@ class invoice
         $query = "delete from hoa_don where id_hoa_don = '$code'; delete from chi_tiet_hoa_don where id_hoa_don = '$code'";
         return $conn->multiExecute($query);
     }
+    public function updateStatusInvoice($code)
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "update hoa_don set tinh_trang_don_hang = (select tinh_trang_don_hang + 1 from hoa_don where id_hoa_don = '$code') where id_hoa_don = '$code'";
+        return $conn->execute($query);
+    }
 
     public function getDetails($code)
     {

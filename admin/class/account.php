@@ -117,4 +117,13 @@ class account
                     , mat_khau = '{$user['Password']}' where tai_khoan = '{$user['User']}'";
         return $conn->execute($query);
     }
+
+    public function updateRole($user, $role)
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "update nguoi_dung set id_quyen = $role where tai_khoan = '$user'";
+        return $conn->execute($query);
+    }
 }

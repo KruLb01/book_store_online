@@ -130,8 +130,9 @@
                                         $data = $invoiceModel->getInvoices();
                                         $count = 1;
                                         foreach ($data as $key=>$val) {
+                                            $typeUpdateBtn = $val["Status"] == 2 ? "none" : "unset";
                                             $actionBtn = "<button f='details' type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#exampleModal'>Chi tiết</button>
-                                                           <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
+                                                           <button f='update' type='hidden' class='btn btn-info' style='display: $typeUpdateBtn'>Cập nhật trạng thái</button>
                                                            <button f='delete' type='button' class='btn btn-danger'><i class='fas fa-trash'></i></button>";
                                             $status = "Chờ xử lý";
                                             if ($val["Status"] == 1) $status = "Đang giao hàng";
@@ -284,6 +285,19 @@
                 method:"post",
                 url:"../handle/handle_invoice.php",
                 data: {code: code, delete: "delete"},
+                success:function(res) {
+                    if (res.trim() == "success") {
+                        window.location = "manage_invoice.php";
+                    } else alert("Thao tác thất bại !");
+                }
+            })
+        }
+
+        if (e.target == $(this).find("button")[1] && e.target.getAttribute("f") == "update" && confirm(`Đồng ý cập nhật trạng thái đơn hàng "${code}" ?!`)) {
+            $.ajax({
+                method:"post",
+                url:"../handle/handle_invoice.php",
+                data: {code: code, update: "status"},
                 success:function(res) {
                     if (res.trim() == "success") {
                         window.location = "manage_invoice.php";

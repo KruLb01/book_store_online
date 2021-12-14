@@ -61,6 +61,18 @@
         include_once("../class/account.php");
         $accountModel = new account();
 
+        if ($_POST["update"]=="role") {
+            $user = $_POST["username"];
+            $role = $_POST["role"];
+
+            $res = $accountModel->updateRole($user, $role);
+            if (trim($res)) {
+                echo "success";
+            } else echo "fail";
+
+            return;
+        }
+
         // Nhan input
         $user = array(
             "User" => $_SESSION['user']['User'],

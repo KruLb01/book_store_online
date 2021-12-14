@@ -20,6 +20,16 @@
         $data = $invoiceModel->getDetails($code);
         echo json_encode($data);
     }
+    if (isset($_POST["code"]) && isset($_POST["update"])) {
+        include_once("../class/invoice.php");
+        $invoiceModel = new invoice();
+
+        $code = $_POST["code"];
+        $res = $invoiceModel->updateStatusInvoice($code);
+        if (trim($res)) {
+            echo "success";
+        } else echo "fail";
+    }
 
     if (isset($_POST["code"]) && isset($_POST["create"])) {
         include_once("../class/author.php");

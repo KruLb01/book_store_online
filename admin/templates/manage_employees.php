@@ -135,13 +135,13 @@
                                             $actionBtn = "<button f='status' type='button' class='btn btn-success'>Mở khóa</button>
                                                             <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
                                                             <button f='delete' type='button' class='btn btn-danger' style='background: red'><i class='fas fa-trash'></i></button>
-                                                            <button f='role' type='button' class='btn btn-warning'>Phân quyền</button>";
+                                                            <button f='role' type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#exampleModal1'>Phân quyền</button>";
                                         } else {
                                             $render = "<tr cs='1'>";
                                             $actionBtn = "<button f='status' type='button' class='btn btn-secondary'>Khóa</button>
                                                             <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
                                                             <button f='delete' type='button' class='btn btn-danger' style='background: red'><i class='fas fa-trash'></i></button>
-                                                            <button f='role' type='button' class='btn btn-warning'>Phân quyền</button>";
+                                                            <button f='role' type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#exampleModal1'>Phân quyền</button>";
                                         }
                                         if ($val["User"] == "admin") {
                                             $actionBtn= "";
@@ -239,6 +239,52 @@
                 </div>
             </div>
             <!-- ============================================================== -->
+
+            <!-- Pop up add accounts -->
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel1">Phân quyền cho tài khoản</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="role-form">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Tài khoản</label>
+                                    <input type="text" class="form-control" id="role-username" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Họ tên</label>
+                                    <input type="text" class="form-control" id="role-name" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="role" class="form-label">Quyền</label>
+                                    <select class="form-select" id="role-role">
+                                        <option selected>Chọn quyền</option>
+                                        <?php
+                                        include_once("../class/role.php");
+                                        $roleModel = new role();
+
+                                        $roles = $roleModel->getRoles();
+                                        foreach ($roles as $key=>$val) {
+                                            echo "<option value='{$val['Role']}'>{$val['Name']}</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="error">Error print here</div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="submit-role-form" type="button" class="btn btn-primary">Cập nhật</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
@@ -273,6 +319,7 @@
 <script>
     $(document).on("click", "tbody tr", function (e) {
         var user = $(this).find("td").eq(1).text();
+        var name = $(this).find("td").eq(2).text();
         var status = this.getAttribute("cs");
         var first_target = $(this);
         if (e.target == $(this).find("button")[0] && e.target.getAttribute("f") == "status" && confirm(`Đồng ý cập nhật trạng thái tài khoản "${user}" ?!`)) {
@@ -308,6 +355,11 @@
                 }
             })
         }
+
+        if (e.target == $(this).find("button")[3] && e.target.getAttribute("f") == "role") {
+            $("#role-form").find("#role-username").val(user);
+            $("#role-form").find("#role-name").val(name);
+        }
     })
 
     $("#submit-create-form").click(function () {
@@ -335,6 +387,31 @@
                     address: address,
                     permission: role,
                     create: "employee"
+                },
+                success:function(res) {
+                    if (res.trim() == "success") {
+                        window.location = "manage_employees.php";
+                    } else alert("Thao tác thất bại !");
+                }
+            })
+        }
+    })
+
+    $("#submit-role-form").click(function () {
+        var username = document.getElementById("role-username").value;
+        var role = document.getElementById("role-role").value;
+
+        if (role.trim() == "Chọn quyền" ) {
+            $("#create-form div.error").css("display", "unset");
+            $("#create-form div.error").text("Vui lòng chọn quyền cho tài khoản");
+        } else {
+            $.ajax({
+                method:"post",
+                url:"../handle/handle_account.php",
+                data: {
+                    username: username,
+                    role: role,
+                    update: "role"
                 },
                 success:function(res) {
                     if (res.trim() == "success") {
