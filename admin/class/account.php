@@ -106,4 +106,15 @@ class account
                 values('{$user['User']}', '{$user['Password']}', '{$user['Email']}', '{$user['Name']}', '{$user['Address']}', '{$user['Phone']}', '{$user['Status']}', '{$user['Permission']}')";
         return $conn->execute($query);
     }
+
+    public function updateAccount($user)
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "update nguoi_dung set ho_ten = N'{$user['Name']}', email = '{$user['Email']}'
+                    , dia_chi = N'{$user['Address']}', so_dien_thoai = '{$user['Phone']}'
+                    , mat_khau = '{$user['Password']}' where tai_khoan = '{$user['User']}'";
+        return $conn->execute($query);
+    }
 }

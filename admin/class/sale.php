@@ -36,13 +36,13 @@ class sale
         return $conn->execute($query);
     }
 
-    public function createAuthor($author)
+    public function createSale($sale)
     {
         include_once("connect_db.php");
         $conn = new connect_db();
 
-        $query = "insert into tac_gia(id_tac_gia, ten_tac_gia, mo_ta_tac_gia) 
-                values('{$author['Code']}', '{$author['Name']}', '{$author['Description']}')";
+        $query = "insert into sale(id_sale, ten_sale, ngay_bat_dau, ngay_ket_thuc, `giam_theo_%`, giam_theo_vnd) 
+                values('{$sale['Code']}', '{$sale['Name']}', '{$sale['Start']}', '{$sale['End']}', '{$sale['Percent']}', '{$sale['Dong']}')";
         return $conn->execute($query);
     }
 }

@@ -13,17 +13,20 @@
     }
 
     if (isset($_POST["code"]) && isset($_POST["create"])) {
-        include_once("../class/author.php");
-        $authorModel = new author();
+        include_once("../class/sale.php");
+        $saleModel = new sale();
 
         // Nhan input
-        $newAuthor = array(
+        $newSale = array(
             "Code" => $_POST["code"],
             "Name" => $_POST["name"],
-            "Description" => $_POST["description"]
+            "Start" => $_POST["start"],
+            "End" => $_POST["end"],
+            "Percent" => $_POST["percent"],
+            "Dong" => $_POST["dong"],
         );
 
-        $res = $authorModel->createAuthor($newAuthor);
+        $res = $saleModel->createSale($newSale);
         if (trim($res)) {
             echo "success";
         } else echo "fail";

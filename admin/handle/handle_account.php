@@ -54,4 +54,32 @@
             echo "success";
         } else echo "fail";
     }
+
+    if (isset($_POST["update"]))
+    {
+        session_start();
+        include_once("../class/account.php");
+        $accountModel = new account();
+
+        // Nhan input
+        $user = array(
+            "User" => $_SESSION['user']['User'],
+            "Name" => $_POST['name'],
+            "Email" => $_POST['email'],
+            "Password" => $_POST['password'],
+            "Phone" => $_POST['phone'],
+            "Address" => $_POST['address'],
+        );
+
+        $res = $accountModel->updateAccount($user);
+        if (trim($res)) {
+            echo "success";
+            $_SESSION["user"]["Password"] = $user["Password"];
+            $_SESSION["user"]["Name"] = $user["Name"];
+            $_SESSION["user"]["Email"] = $user["Email"];
+            $_SESSION["user"]["Phone"] = $user["Phone"];
+            $_SESSION["user"]["Address"] = $user["Address"];
+        } else echo "fail";
+    }
+
 ?>

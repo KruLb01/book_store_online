@@ -23,6 +23,14 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+    <style>
+        .error {
+            display: none;
+            color: red;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    </style>
 </head>
 
 <body>
@@ -73,11 +81,8 @@
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Dashboard</a></li>
+                                <li><a href="index.php" class="fw-normal">Back to Dashboard</a></li>
                             </ol>
-                            <a href="https://www.wrappixel.com/templates/ampleadmin/" target="_blank"
-                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Upgrade
-                                to Pro</a>
                         </div>
                     </div>
                 </div>
@@ -103,20 +108,20 @@
                                     <div class="user-content">
                                         <a href="javascript:void(0)"><img src="../static/plugins/images/users/genu.jpg"
                                                 class="thumb-lg img-circle" alt="img"></a>
-                                        <h4 class="text-white mt-2">User Name</h4>
-                                        <h5 class="text-white mt-2">info@myadmin.com</h5>
+                                        <h4 class="text-white mt-2"><?php echo $_SESSION['user']['Name'] ?></h4>
+                                        <h5 class="text-white mt-2"><?php echo $_SESSION['user']['Email'] ?></h5>
                                     </div>
                                 </div>
                             </div>
                             <div class="user-btm-box mt-5 d-md-flex">
                                 <div class="col-md-4 col-sm-4 text-center">
-                                    <h1>258</h1>
+<!--                                    // Add any info-->
                                 </div>
                                 <div class="col-md-4 col-sm-4 text-center">
-                                    <h1>125</h1>
+<!--                                    // Add any info-->
                                 </div>
                                 <div class="col-md-4 col-sm-4 text-center">
-                                    <h1>556</h1>
+<!--                                    // Add any info-->
                                 </div>
                             </div>
                         </div>
@@ -126,53 +131,43 @@
                     <div class="col-lg-8 col-xlg-9 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <form class="form-horizontal form-material">
+                                <form class="form-horizontal form-material" id="form-profile">
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Full Name</label>
+                                        <label for="name" class="col-md-12 p-0">Name</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="Johnathan Doe"
-                                                class="form-control p-0 border-0"> </div>
+                                            <input type="text" value="<?php echo $_SESSION['user']['Name'] ?>"
+                                                class="form-control p-0 border-0" id="name"> </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="example-email" class="col-md-12 p-0">Email</label>
+                                        <label for="email" class="col-md-12 p-0">Email</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="email" placeholder="johnathan@admin.com"
-                                                class="form-control p-0 border-0" name="example-email"
-                                                id="example-email">
+                                            <input type="email" value="<?php echo $_SESSION['user']['Email'] ?>"
+                                                class="form-control p-0 border-0"
+                                                id="email">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Password</label>
+                                        <label for="password" class="col-md-12 p-0">Password</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="password" value="password" class="form-control p-0 border-0">
+                                            <input type="password" value="<?php echo $_SESSION['user']['Password']?>" class="form-control p-0 border-0" id="password">
+                                            <input type="hidden" id="root-password" value="<?php echo $_SESSION['user']['Password']?>">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Phone No</label>
+                                        <label for="phone" class="col-md-12 p-0">Phone</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" placeholder="123 456 7890"
-                                                class="form-control p-0 border-0">
+                                            <input type="text" value="<?php echo $_SESSION['user']['Phone'] ?>"
+                                                class="form-control p-0 border-0" id="phone">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Message</label>
+                                        <label for="address" class="col-md-12 p-0">Address</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <textarea rows="5" class="form-control p-0 border-0"></textarea>
+                                            <input type="text" value="<?php echo $_SESSION['user']['Address'] ?>"
+                                                class="form-control p-0 border-0" id="address">
                                         </div>
                                     </div>
-                                    <div class="form-group mb-4">
-                                        <label class="col-sm-12">Select Country</label>
-
-                                        <div class="col-sm-12 border-bottom">
-                                            <select class="form-select shadow-none p-0 border-0 form-control-line">
-                                                <option>London</option>
-                                                <option>India</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                                <option>Thailand</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <div class="form-group mb-4 error">Error print here</div>
                                     <div class="form-group mb-4">
                                         <div class="col-sm-12">
                                             <button class="btn btn-success">Update Profile</button>
@@ -230,5 +225,44 @@
     <!--Custom JavaScript -->
     <script src="../static/js/custom.js"></script>
 </body>
+
+<script>
+    $(document).on("click", "#form-profile", function(e) {
+        var form = $(this);
+        if (form.find("button.btn")[0] == e.target)
+        {
+            e.preventDefault();
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var root_password = document.getElementById("root-password").value;
+            var password = document.getElementById("password").value;
+            var phone = document.getElementById("phone").value;
+            var address = document.getElementById("address").value;
+
+            if (name.length < 5 || email.length < 5 || password.length < 5 || phone.length != 10 || address.length < 5) {
+                $("#form-profile div.error").css("display", "block");
+                $("#form-profile div.error").text("Invalid input");
+            } else if (prompt("Nhập mật khẩu hiện tại để lưu thay đổi") == root_password) {
+                $.ajax({
+                    method: "post",
+                    url: "../handle/handle_account.php",
+                    data: {
+                        name: name,
+                        email: email,
+                        password: password,
+                        phone: phone,
+                        address: address,
+                        update: "profile"
+                    },
+                    success: function (res) {
+                        if (res.trim() == "success") {
+                            window.location = "profile.php";
+                        } else alert("Thao tác thất bại !");
+                    }
+                })
+            }
+        }
+    })
+</script>
 
 </html>

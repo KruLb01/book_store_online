@@ -52,7 +52,7 @@
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <?php
-            include_once("header.php");
+        include_once("header.php");
         ?>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
@@ -76,7 +76,7 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Manage Sales</h4>
+                        <h4 class="page-title">Quản lý hóa đơn</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
@@ -101,11 +101,10 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Sales</h3>
+                            <h3 class="box-title">Hóa đơn</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-10"><code>All sales</code></p>
+                                <p class="text-muted col-sm-10"><code>Tất cả hóa đơn</code></p>
                                 <div class="col-md-2">
-                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create</button>
                                     <button type="button" class="btn btn-secondary">Export</button>
                                 </div>
                             </div>
@@ -115,32 +114,36 @@
                                         <tr>
                                             <th class="border-top-0">#</th>
                                             <th class="border-top-0">Code</th>
-                                            <th class="border-top-0">Name</th>
-                                            <th class="border-top-0">Start</th>
-                                            <th class="border-top-0">End</th>
-                                            <th class="border-top-0">Decrease %</th>
-                                            <th class="border-top-0">Decrease đồng</th>
+                                            <th class="border-top-0">Customer</th>
+                                            <th class="border-top-0">Date</th>
+                                            <th class="border-top-0">Shipping</th>
+                                            <th class="border-top-0">Total</th>
+                                            <th class="border-top-0">Status</th>
                                             <th class="border-top-0">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                        include_once("../class/sale.php");
-                                        $saleModel = new sale();
+                                        include_once("../class/invoice.php");
+                                        $invoiceModel = new invoice();
 
-                                        $data = $saleModel->getSales();
+                                        $data = $invoiceModel->getInvoices();
                                         $count = 1;
                                         foreach ($data as $key=>$val) {
-                                            $actionBtn = "<button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
+                                            $actionBtn = "<button f='details' type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#exampleModal'>Details</button>
+                                                           <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
                                                            <button f='delete' type='button' class='btn btn-danger'><i class='fas fa-trash'></i></button>";
+                                            $status = "Chờ xử lý";
+                                            if ($val["Status"] == 1) $status = "Đang giao hàng";
+                                            else if ($val["Status"] == 2) $status = "Đã giao hàng";
                                             $render =  "<tr>
                                                     <td>$count</td>
                                                     <td>".$val["Id"]."</td>
-                                                    <td>".$val["Name"]."</td>
-                                                    <td>".$val["Start"]."</td>
-                                                    <td>".$val["End"]."</td>
-                                                    <td>".$val["Percent"]."%</td>
-                                                    <td>".number_format($val["Dong"])."</td>
+                                                    <td>".$val["Customer"]."</td>
+                                                    <td>".$val["Date"]."</td>
+                                                    <td>".$val["Shipping"]."</td>
+                                                    <td>".number_format($val["Total"])."</td>
+                                                    <td>".$status."</td>
                                                     <td>".$actionBtn."</td>
                                                 </tr>";
                                             echo $render;
@@ -170,44 +173,71 @@
             <!-- ============================================================== -->
             <!-- Pop up add accounts -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Create new sale</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Chi tiết hóa đơn</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form id="create-form">
                                 <div class="mb-3">
-                                    <label for="code" class="form-label">Code</label>
-                                    <input type="text" class="form-control" id="code">
+                                    <label for="code" class="form-label">Mã hóa đơn</label>
+                                    <input type="text" class="form-control" id="code" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Sale name</label>
-                                    <input type="text" class="form-control" id="name">
+                                    <label for="customer" class="form-label">Khách hàng</label>
+                                    <input type="text" class="form-control" id="customer" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="start" class="form-label">Date start</label>
-                                    <input type="date" class="form-control" id="start">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="end" class="form-label">Date end</label>
-                                    <input type="date" class="form-control" id="end">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="percent" class="form-label">Decrease as %</label>
-                                    <input type="number" class="form-control" id="percent">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="dong" class="form-label">Decrease as dong</label>
-                                    <input type="number" class="form-control" id="dong" value="000">
+                                    <label for="total" class="form-label">Tổng giá</label>
+                                    <input type="text" class="form-control" id="total" disabled>
                                 </div>
                                 <div class="error">Error print here</div>
                             </form>
                         </div>
+                        <div class="container-fluid">
+                            <!-- ============================================================== -->
+                            <!-- Start Page Content -->
+                            <!-- ============================================================== -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="white-box">
+                                        <div class="table-responsive">
+                                            <table class="table text-nowrap">
+                                                <thead>
+                                                <tr>
+                                                    <th class="border-top-0">#</th>
+                                                    <th class="border-top-0">Mã sản phẩm</th>
+                                                    <th class="border-top-0">Tên sản phẩm</th>
+                                                    <th class="border-top-0">Loại</th>
+                                                    <th class="border-top-0">Số lượng</th>
+                                                    <th class="border-top-0">Đơn giá</th>
+                                                    <th class="border-top-0">Thành tiền</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="details-table">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- End PAge Content -->
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <!-- Right sidebar -->
+                            <!-- ============================================================== -->
+                            <!-- .right-sidebar -->
+                            <!-- ============================================================== -->
+                            <!-- End Right sidebar -->
+                            <!-- ============================================================== -->
+                        </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button id="submit-create-form" type="button" class="btn btn-primary">Create</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="submit-create-form" type="button" class="btn btn-primary">In</button>
                         </div>
                     </div>
                 </div>
@@ -247,46 +277,73 @@
 <script>
     $(document).on("click", "tbody tr", function (e) {
         var code = $(this).find("td").eq(1).text();
-        if (e.target == $(this).find("button")[1] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa chương trình giảm giá "${code}" ?!`)) {
+        var customer = $(this).find("td").eq(2).text();
+        var total = $(this).find("td").eq(5).text();
+        if (e.target == $(this).find("button")[2] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa hóa đơn "${code}" ?!`)) {
             $.ajax({
                 method:"post",
-                url:"../handle/handle_sale.php",
+                url:"../handle/handle_invoice.php",
                 data: {code: code, delete: "delete"},
                 success:function(res) {
                     if (res.trim() == "success") {
-                        window.location = "manage_sale.php";
+                        window.location = "manage_invoice.php";
                     } else alert("Thao tác thất bại !");
+                }
+            })
+        }
+
+        if (e.target == $(this).find("button")[0] && e.target.getAttribute("f") == "details") {
+            $("#code").val(code);
+            $("#customer").val(customer);
+            $("#total").val(total + " đồng");
+            $("#details-table").empty();
+            $.ajax({
+                method: "post",
+                url: "../handle/handle_invoice.php",
+                data: {code: code, get: "get"},
+                success: function(res) {
+                    var data = JSON.parse(res);
+                    var count = 1;
+                    for (row in data) {
+                        var render = `
+                        <tr>
+                            <td>${count++}</td>
+                            <td>${data[row]['Code']}</td>
+                            <td>${data[row]['Name']}</td>
+                            <td>${data[row]['Type']}</td>
+                            <td>${data[row]['Amount']}</td>
+                            <td>${data[row]['Price']}</td>
+                            <td>${data[row]['Total']}</td>
+                        </tr>`;
+                        $("#details-table").append(render);
+                    }
                 }
             })
         }
     })
 
     $("#submit-create-form").click(function () {
+        return; // Unavailable now ~
         var code = document.getElementById("code").value;
         var name = document.getElementById("name").value;
-        var start = document.getElementById("start").value;
-        var end = document.getElementById("end").value;
-        var percent = document.getElementById("percent").value;
-        var dong = document.getElementById("dong").value;
-        if (code.length < 5 || name.length < 5 || start == "" || end == "" || percent.length < 0 || dong.length < 3) {
+        var description = document.getElementById("description").value;
+
+        if (code.length < 5 || name.length < 5) {
             $("#create-form div.error").css("display", "unset");
             $("#create-form div.error").text("Fill out all inputs");
         } else {
             $.ajax({
                 method:"post",
-                url:"../handle/handle_sale.php",
+                url:"../handle/handle_nxb.php",
                 data: {
                     code: code,
                     name: name,
-                    start: start,
-                    end: end,
-                    percent: percent,
-                    dong: dong,
+                    description: description,
                     create: "create"
                 },
                 success:function(res) {
                     if (res.trim() == "success") {
-                        window.location = "manage_sale.php";
+                        window.location = "manage_nxb.php";
                     } else alert("Thao tác thất bại !");
                 }
             })
