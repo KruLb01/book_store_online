@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2021 at 06:13 PM
+-- Generation Time: Dec 15, 2021 at 10:25 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -31,8 +31,18 @@ CREATE TABLE `chi_tiet_hoa_don` (
   `id_hoa_don` varchar(10) NOT NULL,
   `id_san_pham` varchar(10) NOT NULL,
   `so_luong` int(10) NOT NULL,
+  `loai` varchar(6) NOT NULL,
   `don_gia` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `chi_tiet_hoa_don`
+--
+
+INSERT INTO `chi_tiet_hoa_don` (`id_hoa_don`, `id_san_pham`, `so_luong`, `loai`, `don_gia`) VALUES
+('HD001', 'SP001', 2, 'Book', 79000),
+('HD001', 'SP004', 1, 'Book', 168000),
+('HD001', 'SP006', 3, 'Book', 182000);
 
 -- --------------------------------------------------------
 
@@ -41,11 +51,21 @@ CREATE TABLE `chi_tiet_hoa_don` (
 --
 
 CREATE TABLE `chi_tiet_phieu_nhap` (
-  `id_phieu_nhap` varchar(10) NOT NULL,
+  `id_phieu_nhap` varchar(26) NOT NULL,
   `id_sach` varchar(10) NOT NULL,
   `so_luong` int(10) NOT NULL,
   `don_gia` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `chi_tiet_phieu_nhap`
+--
+
+INSERT INTO `chi_tiet_phieu_nhap` (`id_phieu_nhap`, `id_sach`, `so_luong`, `don_gia`) VALUES
+('PN-61b9a9b67ee8c8.47421857', 'SP002', 1, 70000),
+('PN-61b9a9b67ee8c8.47421857', 'SP006', 2, 65000),
+('PN-61b9b3ce9aa515.48653672', 'SP003', 1, 60000),
+('PN-61b9b3ce9aa515.48653672', 'SP007', 2, 68000);
 
 -- --------------------------------------------------------
 
@@ -74,7 +94,12 @@ INSERT INTO `chi_tiet_quyen_chuc_nang` (`id_quyen`, `id_chuc_nang`) VALUES
 ('2', 'CN009'),
 ('2', 'CN010'),
 ('2', 'CN011'),
-('2', 'CN099');
+('2', 'CN012'),
+('2', 'CN013'),
+('2', 'CN014'),
+('2', 'CN099'),
+('3', 'CN001'),
+('3', 'CN002');
 
 -- --------------------------------------------------------
 
@@ -95,18 +120,21 @@ CREATE TABLE `chuc_nang` (
 --
 
 INSERT INTO `chuc_nang` (`id_chuc_nang`, `ten_chuc_nang`, `mo_ta`, `icon`, `file`) VALUES
-('CN001', 'Dashboard', '', 'far fa-clock', 'index.php'),
-('CN002', 'Profile', '', 'fas fa-user-circle', 'profile.php'),
-('CN003', 'Customers', '', 'fas fa-users', 'manage_customers.php'),
-('CN004', 'Employees', '', 'fas fa-user', 'manage_employees.php'),
-('CN005', 'Books', '', ' fas fa-book', 'manage_books.php'),
-('CN006', 'Category', '', ' fas fa-heading', 'manage_category.php'),
-('CN007', 'Authors', '', ' fas fa-address-card', 'manage_authors.php'),
+('CN001', 'Trang chính', '', 'far fa-clock', 'index.php'),
+('CN002', 'Hồ sơ', '', 'fas fa-user-circle', 'profile.php'),
+('CN003', 'Khách hàng', '', 'fas fa-users', 'manage_customers.php'),
+('CN004', 'Nhân viên', '', 'fas fa-user', 'manage_employees.php'),
+('CN005', 'Sách', '', ' fas fa-book', 'manage_books.php'),
+('CN006', 'Danh mục', '', ' fas fa-heading', 'manage_category.php'),
+('CN007', 'Tác giả', '', ' fas fa-address-card', 'manage_authors.php'),
 ('CN008', 'Nhà xuất bản', '', ' fas fa-warehouse', 'manage_nxb.php'),
-('CN009', 'Shipping', '', 'fas fa-motorcycle', 'manage_shipping.php'),
+('CN009', 'Hình thức giao hàng', '', 'fas fa-motorcycle', 'manage_shipping.php'),
 ('CN010', 'Phân quyền', '', 'fas fa-sitemap', 'manage_role.php'),
-('CN011', 'Sale', '', ' fas fa-dolly', 'manage_sale.php'),
-('CN099', 'Icon Available', '', 'fas fa-font', 'fontawesome.html');
+('CN011', 'Chương trình khuyến mãi', '', ' fas fa-dolly', 'manage_sale.php'),
+('CN012', 'Hóa đơn', '', 'fas fa-database', 'manage_invoice.php'),
+('CN013', 'Nhập hàng', '', 'fas fa-upload', 'import_book.php'),
+('CN014', 'Phiếu nhập', '', 'fas fa-clipboard-list', 'manage_import.php'),
+('CN099', 'Icon có thể sử dụng', '', 'fas fa-font', 'fontawesome.html');
 
 -- --------------------------------------------------------
 
@@ -195,6 +223,13 @@ CREATE TABLE `hoa_don` (
   `id_sale` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `hoa_don`
+--
+
+INSERT INTO `hoa_don` (`id_hoa_don`, `id_nguoi_dung`, `ngay_mua`, `tong_gia`, `hinh_thuc_giao_hang`, `tinh_trang_don_hang`, `id_sale`) VALUES
+('HD001', 'thanhhoa', '2021-12-14', 872000, 'HTGH001', 0, '');
+
 -- --------------------------------------------------------
 
 --
@@ -217,14 +252,14 @@ CREATE TABLE `nguoi_dung` (
 --
 
 INSERT INTO `nguoi_dung` (`tai_khoan`, `mat_khau`, `email`, `ho_ten`, `dia_chi`, `so_dien_thoai`, `tinh_trang_tai_khoan`, `id_quyen`) VALUES
-('admin', '123', 'admin.work@gmail.com', 'Tên gì còn lâu mới nói', 'HCM City', 123456789, 1, '2'),
+('admin', '123', 'admin.work@gmail.com', 'Tên gì còn lâu mới nói', 'Milan', 123456789, 1, '2'),
 ('giaphuc', '3119560052', 'giaphuc.ec@gmail.com', 'Gia Phúc', 'HCM City', 123456789, 1, '1'),
-('nhanvien1', 'nhanvien1', 'nhanvien1.work@gmail.com', 'Thomas', 'New York', 123456789, 0, '3'),
+('nhanvien1', 'nhanvien1', 'nhanvien1.work@gmail.com', 'Thomas Olee', 'New York', 1234567890, 1, '3'),
 ('nhanvien2', 'nhanvien2', 'nhanvien2.work@gmail.com', 'Peter', 'Shanghai', 123456789, 1, '3'),
-('nhanvien3', 'nhanvien3', 'nhanvien3.work@gmail.com', 'Logan', 'Paris', 123456789, 0, '3'),
+('nhanvien3', 'nhanvien3', 'nhanvien3.work@gmail.com', 'Logan', 'Paris', 123456789, 1, '3'),
 ('nhanvien4', 'nhanvien4', 'nhanvien4.work@gmail.com', 'Lily', 'Bangkok', 123456789, 1, '3'),
 ('nhanvien5', 'nhanvien5', 'nhanvien5.work@gmail.com', 'Helios 300', 'HCM City', 12456898, 1, '3'),
-('thanhhoa', '3119560021', 'thanhhoa.ec@gmail.com', 'Thanh Hòa', 'HCM City', 123456789, 0, '1'),
+('thanhhoa', '3119560021', 'thanhhoa.ec@gmail.com', 'Thanh Hòa', 'HCM City', 123456789, 1, '1'),
 ('vankiet', '3119560033', 'vankiet.ec@gmail.com', 'Văn Kiệt', 'HCM City', 123456789, 1, '1'),
 ('vanluan', '3119560039', 'vanluan.ec@gmail.com', 'Văn Luân', 'HCM City', 123456789, 1, '1');
 
@@ -266,12 +301,20 @@ INSERT INTO `nha_xuat_ban` (`id_nha_xuat_ban`, `ten_nha_xuat_ban`, `mo_ta_nha_xu
 --
 
 CREATE TABLE `phieu_nhap` (
-  `id_phieu_nhap` varchar(10) NOT NULL,
+  `id_phieu_nhap` varchar(26) NOT NULL,
   `id_nhan_vien_nhap` varchar(20) NOT NULL,
   `id_nha_xuat_ban` varchar(10) NOT NULL,
   `ngay_nhap` date NOT NULL,
   `tong_gia_nhap` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `phieu_nhap`
+--
+
+INSERT INTO `phieu_nhap` (`id_phieu_nhap`, `id_nhan_vien_nhap`, `id_nha_xuat_ban`, `ngay_nhap`, `tong_gia_nhap`) VALUES
+('PN-61b9a9b67ee8c8.47421857', 'admin', 'NXB002', '2021-12-15', 200000),
+('PN-61b9b3ce9aa515.48653672', 'admin', 'NXB005', '2021-12-15', 196000);
 
 -- --------------------------------------------------------
 
