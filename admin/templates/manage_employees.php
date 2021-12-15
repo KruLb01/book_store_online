@@ -332,11 +332,11 @@
                         if (status == 0) {
                             $(first_target).attr("cs", 1);
                             $(first_target).css("color","#3e5569");
-                            $(e.target).replaceWith("<button f='status' type='button' class='btn btn-danger'>Disable</button>");
+                            $(e.target).replaceWith("<button f='status' type='button' class='btn btn-secondary'>Khóa</button>");
                         } else {
                             $(first_target).attr("cs", 0);
                             $(first_target).css("color", "red");
-                            $(e.target).replaceWith("<button f='status' type='button' class='btn btn-success'>Enable</button>");
+                            $(e.target).replaceWith("<button f='status' type='button' class='btn btn-success'>Mở khóa</button>");
                         }
                     } else alert("Thao tác thất bại !");
                 }

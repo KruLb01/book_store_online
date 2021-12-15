@@ -52,7 +52,7 @@
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <?php
-        include_once("header.php");
+            include_once("header.php");
         ?>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
@@ -76,7 +76,7 @@
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Quản lý khách hàng</h4>
+                        <h4 class="page-title">Quản lý phiếu nhập</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
@@ -101,11 +101,12 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Khách hàng</h3>
+                            <h3 class="box-title">Phiếu nhập</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-9"><code>Quản lý tài khoản khách hàng</code></p>
+                                <p class="text-muted col-sm-9"><code>Các phiếu nhập trong hệ thống</code></p>
                                 <div class="col-md-3">
-                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>
+<!--                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>-->
+                                    <button id="create-btn" type="button" class="btn btn-success" onclick="window.location= 'import_book.php'">Tạo phiếu nhập</button>
                                     <button type="button" class="btn btn-secondary">Xuất Excel</button>
                                 </div>
                             </div>
@@ -114,41 +115,35 @@
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Tài khoản</th>
-                                            <th class="border-top-0">Họ tên</th>
-                                            <th class="border-top-0">Email</th>
-                                            <th class="border-top-0">Số điện thoại</th>
-                                            <th class="border-top-0">Địa chỉ</th>
+                                            <th class="border-top-0">Mã phiếu</th>
+                                            <th class="border-top-0">Người nhập</th>
+                                            <th class="border-top-0">Chức vụ</th>
+                                            <th class="border-top-0">Nhà cung cấp</th>
+                                            <th class="border-top-0">Ngày nhập</th>
+                                            <th class="border-top-0">Tổng giá nhập</th>
                                             <th class="border-top-0">Thao tác</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                        include_once("../class/account.php");
-                                        $accountModel = new account();
+                                        include_once("../class/import.php");
+                                        $importModel = new import();
 
-                                        $data = $accountModel->customerAccounts();
+                                        $data = $importModel->getNotes();
                                         $count = 1;
                                         foreach ($data as $key=>$val) {
-                                            if ($val["Status"] == 0) {
-                                                $render = "<tr cs='0' style='color:red'>";
-                                                $actionBtn = "<button f='status' type='button' class='btn btn-success'>Mở khóa</button>
-                                                            <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
-                                                            <button f='delete' type='button' class='btn btn-danger' style='background: red'><i class='fas fa-trash'></i></button>";
-                                            } else {
-                                                $render = "<tr cs='1'>";
-                                                $actionBtn = "<button f='status' type='button' class='btn btn-secondary'>Khóa</button>
-                                                            <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
-                                                            <button f='delete' type='button' class='btn btn-danger' style='background: red'><i class='fas fa-trash'></i></button>";
-                                            }
-                                            $render .=  "
+                                            $actionBtn = "<button f='details' type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#exampleModal'>Details</button>
+                                                           <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
+                                                           <button f='delete' type='button' class='btn btn-danger'><i class='fas fa-trash'></i></button>";
+                                            $render =  "<tr>
                                                     <td>$count</td>
-                                                    <td>".$val["User"]."</td>
+                                                    <td>".$val["Id"]."</td>
                                                     <td>".$val["Name"]."</td>
-                                                    <td>".$val["Email"]."</td>
-                                                    <td>".$val["Phone"]."</td>
-                                                    <td>".$val["Address"]."</td>
-                                                    <td>$actionBtn</td>
+                                                    <td>".$val["Role"]."</td>
+                                                    <td>".$val["Ncc"]."</td>
+                                                    <td>".$val["Date"]."</td>
+                                                    <td>".$val["Total"]."</td>
+                                                    <td>".$actionBtn."</td>
                                                 </tr>";
                                             echo $render;
                                             $count++;
@@ -177,44 +172,70 @@
             <!-- ============================================================== -->
             <!-- Pop up add accounts -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Tạo tài khoản khách hàng mới</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Chi tiết phiếu nhập</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form id="create-form">
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Tài khoản</label>
-                                    <input type="text" class="form-control" id="username">
+                                    <label for="code" class="form-label">Mã phiếu nhập</label>
+                                    <input type="text" class="form-control" id="code" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Mật khẩu</label>
-                                    <input type="password" class="form-control" id="password">
+                                    <label for="date" class="form-label">Ngày nhập</label>
+                                    <input type="text" class="form-control" id="date" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Họ tên</label>
-                                    <input type="text" class="form-control" id="name">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="email">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="phone" class="form-label">Số điện thoại</label>
-                                    <input type="text" class="form-control" id="phone">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address" class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="address">
+                                    <label for="total" class="form-label">Tổng giá nhập</label>
+                                    <input type="text" class="form-control" id="total" disabled>
                                 </div>
                                 <div class="error">Error print here</div>
                             </form>
                         </div>
+                        <div class="container-fluid">
+                            <!-- ============================================================== -->
+                            <!-- Start Page Content -->
+                            <!-- ============================================================== -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="white-box">
+                                        <div class="table-responsive">
+                                            <table class="table text-nowrap">
+                                                <thead>
+                                                <tr>
+                                                    <th class="border-top-0">#</th>
+                                                    <th class="border-top-0">Mã sản phẩm</th>
+                                                    <th class="border-top-0">Tên sản phẩm</th>
+                                                    <th class="border-top-0">Số lượng</th>
+                                                    <th class="border-top-0">Đơn giá</th>
+                                                    <th class="border-top-0">Thành tiền</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="details-table">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- End PAge Content -->
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <!-- Right sidebar -->
+                            <!-- ============================================================== -->
+                            <!-- .right-sidebar -->
+                            <!-- ============================================================== -->
+                            <!-- End Right sidebar -->
+                            <!-- ============================================================== -->
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button id="submit-create-form" type="button" class="btn btn-primary">Thêm</button>
+                            <button id="submit-create-form" type="button" class="btn btn-primary">In</button>
                         </div>
                     </div>
                 </div>
@@ -253,71 +274,72 @@
 
 <script>
     $(document).on("click", "tbody tr", function (e) {
-        var user = $(this).find("td").eq(1).text();
-        var status = this.getAttribute("cs");
-        var first_target = $(this);
-        if (e.target == $(this).find("button")[0] && e.target.getAttribute("f") == "status" && confirm(`Đồng ý cập nhật trạng thái tài khoản "${user}" ?!`)) {
+        var code = $(this).find("td").eq(1).text();
+        var date = $(this).find("td").eq(5).text();
+        var total = $(this).find("td").eq(6).text();
+        if (e.target == $(this).find("button")[2] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa phiếu nhập "${code}" ?!`)) {
             $.ajax({
                 method:"post",
-                url:"../handle/handle_account.php",
-                data: {user: user, status: status},
+                url:"../handle/handle_import.php",
+                data: {code: code, delete: "delete"},
                 success:function(res) {
                     if (res.trim() == "success") {
-                        if (status == 0) {
-                            $(first_target).attr("cs", 1);
-                            $(first_target).css("color","#3e5569");
-                            $(e.target).replaceWith("<button f='status' type='button' class='btn btn-secondary'>Khóa</button>");
-                        } else {
-                            $(first_target).attr("cs", 0);
-                            $(first_target).css("color", "red");
-                            $(e.target).replaceWith("<button f='status' type='button' class='btn btn-success'>Mở khóa</button>");
-                        }
+                        window.location = "manage_import.php";
                     } else alert("Thao tác thất bại !");
                 }
             })
         }
 
-        if (e.target == $(this).find("button")[2] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa tài khoản "${user}" ?!`)) {
+        if (e.target == $(this).find("button")[0] && e.target.getAttribute("f") == "details") {
+            $("#code").val(code);
+            $("#date").val(date);
+            $("#total").val(total + " đồng");
+            $("#details-table").empty();
             $.ajax({
-                method:"post",
-                url:"../handle/handle_account.php",
-                data: {user: user, delete: "delete"},
-                success:function(res) {
-                    if (res.trim() == "success") {
-                        window.location = "manage_customers.php";
-                    } else alert("Thao tác thất bại !");
+                method: "post",
+                url: "../handle/handle_import.php",
+                data: {code: code, get: "get"},
+                success: function(res) {
+                    var data = JSON.parse(res);
+                    var count = 1;
+                    for (row in data) {
+                        var render = `
+                        <tr>
+                            <td>${count++}</td>
+                            <td>${data[row]['Code']}</td>
+                            <td>${data[row]['Name']}</td>
+                            <td>${data[row]['Amount']}</td>
+                            <td>${data[row]['Price']}</td>
+                            <td>${data[row]['Total']}</td>
+                        </tr>`;
+                        $("#details-table").append(render);
+                    }
                 }
             })
         }
     })
 
     $("#submit-create-form").click(function () {
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
+        var code = document.getElementById("code").value;
         var name = document.getElementById("name").value;
-        var email = document.getElementById("email").value;
-        var phone = document.getElementById("phone").value;
-        var address = document.getElementById("address").value;
+        var description = document.getElementById("description").value;
 
-        if (username.length < 5 || password.length < 5 || name.length < 5 || email.length < 5 || phone.length < 5 || address.length < 5 ) {
+        if (code.length < 5 || name.length < 5) {
             $("#create-form div.error").css("display", "unset");
             $("#create-form div.error").text("Vui lòng điền đầy đủ thông tin");
         } else {
             $.ajax({
                 method:"post",
-                url:"../handle/handle_account.php",
+                url:"../handle/handle_author.php",
                 data: {
-                    username: username,
-                    password: password,
+                    code: code,
                     name: name,
-                    email: email,
-                    phone: phone,
-                    address: address,
-                    create: "customer"
+                    description: description,
+                    create: "create"
                 },
                 success:function(res) {
                     if (res.trim() == "success") {
-                        window.location = "manage_customers.php";
+                        window.location = "manage_authors.php";
                     } else alert("Thao tác thất bại !");
                 }
             })
