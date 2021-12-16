@@ -105,7 +105,7 @@
                             <div class="row">
                                 <p class="text-muted col-sm-10"><code>Tất cả hóa đơn</code></p>
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
+                                    <button type="button" class="btn btn-secondary" onclick="window.location = '../handle/handle_invoice.php?export=invoice'">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">

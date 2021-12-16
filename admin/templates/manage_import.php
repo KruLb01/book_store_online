@@ -107,7 +107,7 @@
                                 <div class="col-md-3">
 <!--                                    <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>-->
                                     <button id="create-btn" type="button" class="btn btn-success" onclick="window.location= 'import_book.php'">Tạo phiếu nhập</button>
-                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
+                                    <button type="button" class="btn btn-secondary" onclick="window.location = '../handle/handle_import.php?export=import'">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">

@@ -1,11 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>PHPJabbers.com | Free Book Online Store Website Template</title>
+		<title>Tổng hợp sách tại ĐỌC SÁCH ĐI</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="icon" type="image/png" sizes="16x16" href="../admin/static/plugins/images/favicon.png">
 		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">

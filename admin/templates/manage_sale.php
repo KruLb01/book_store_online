@@ -106,7 +106,7 @@
                                 <p class="text-muted col-sm-9"><code>Tất cả chương trình khuyến mãi trong hệ thống</code></p>
                                 <div class="col-md-3">
                                     <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>
-                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
+                                    <button type="button" class="btn btn-secondary" onclick="window.location = '../handle/handle_sale.php?export=sale'">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">

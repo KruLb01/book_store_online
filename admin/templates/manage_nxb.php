@@ -103,10 +103,10 @@
                         <div class="white-box">
                             <h3 class="box-title">Nhà xuất bản</h3>
                             <div class="row">
-                                <p class="text-muted col-sm-10"><code>Tất cả nhà xuất bản</code></p>
-                                <div class="col-md-2">
+                                <p class="text-muted col-sm-9"><code>Tất cả nhà xuất bản</code></p>
+                                <div class="col-md-3">
                                     <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>
-                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
+                                    <button type="button" class="btn btn-secondary" onclick="window.location = '../handle/handle_nxb.php?export=nxb'">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">

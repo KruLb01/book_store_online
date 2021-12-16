@@ -106,7 +106,7 @@
                                 <p class="text-muted col-sm-9"><code>Quản lý tài khoản khách hàng</code></p>
                                 <div class="col-md-3">
                                     <button id="create-btn" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm</button>
-                                    <button type="button" class="btn btn-secondary">Xuất Excel</button>
+                                    <button id="export-btn" type="button" class="btn btn-secondary">Xuất Excel</button>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -322,6 +322,10 @@
                 }
             })
         }
+    })
+
+    $("#export-btn").click(function() {
+        window.location = "../handle/handle_account.php?export=customer";
     })
 </script>
 
