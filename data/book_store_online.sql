@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2021 at 10:25 AM
+-- Generation Time: Dec 16, 2021 at 03:33 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -188,6 +188,135 @@ CREATE TABLE `gio_hang` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hinh_anh_san_pham`
+--
+
+CREATE TABLE `hinh_anh_san_pham` (
+  `id_hinh_anh` varchar(10) NOT NULL,
+  `id_san_pham` varchar(10) NOT NULL,
+  `link_hinh_anh` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hinh_anh_san_pham`
+--
+
+INSERT INTO `hinh_anh_san_pham` (`id_hinh_anh`, `id_san_pham`, `link_hinh_anh`) VALUES
+('HA001', 'SP001', 'SP001_001.jpg'),
+('HA002', 'SP001', 'SP001_002.jpg'),
+('HA003', 'SP001', 'SP001_003.jpg'),
+('HA004', 'SP002', 'SP002_001.jpg'),
+('HA005', 'SP002', 'SP002_002.jpg'),
+('HA006', 'SP002', 'SP002_003.jpg'),
+('HA007', 'SP003', 'SP003_001.jpg'),
+('HA008', 'SP003', 'SP003_002.jpg'),
+('HA009', 'SP003', 'SP003_003.jpg'),
+('HA010', 'SP004', 'SP004_001.jpg'),
+('HA011', 'SP004', 'SP004_002.jpg'),
+('HA012', 'SP004', 'SP004_003.jpg'),
+('HA013', 'SP005', 'SP005_001.jpg'),
+('HA014', 'SP005', 'SP005_002.jpg'),
+('HA015', 'SP005', 'SP005_003.jpg'),
+('HA016', 'SP006', 'SP004_001.jpg'),
+('HA017', 'SP006', 'SP004_002.jpg'),
+('HA018', 'SP006', 'SP004_003.jpg'),
+('HA019', 'SP007', 'SP007_001.jpg'),
+('HA020', 'SP007', 'SP007_002.jpg'),
+('HA021', 'SP007', 'SP007_003.jpg'),
+('HA022', 'SP008', 'SP008_001.jpg'),
+('HA023', 'SP008', 'SP008_002.jpg'),
+('HA024', 'SP008', 'SP008_003.jpg'),
+('HA025', 'SP009', 'SP004_009.jpg'),
+('HA026', 'SP009', 'SP004_009.jpg'),
+('HA027', 'SP009', 'SP004_009.jpg'),
+('HA028', 'SP010', 'SP010_001.jpg'),
+('HA029', 'SP010', 'SP010_002.jpg'),
+('HA030', 'SP010', 'SP010_003.jpg'),
+('HA031', 'SP011', 'SP011_001.jpg'),
+('HA032', 'SP011', 'SP011_002.jpg'),
+('HA033', 'SP011', 'SP011_003.jpg'),
+('HA034', 'SP011', 'SP011_004.jpg'),
+('HA035', 'SP011', 'SP011_005.jpg'),
+('HA036', 'SP011', 'SP011_006.jpg'),
+('HA037', 'SP011', 'SP011_007.jpg'),
+('HA038', 'SP011', 'SP011_008.jpg'),
+('HA039', 'SP011', 'SP011_009.jpg'),
+('HA040', 'SP011', 'SP011_010.jpg'),
+('HA041', 'SP011', 'SP011_011.jpg'),
+('HA042', 'SP011', 'SP011_012.jpg'),
+('HA043', 'SP011', 'SP011_013.jpg'),
+('HA044', 'SP011', 'SP011_014.jpg'),
+('HA045', 'SP011', 'SP011_015.jpg'),
+('HA046', 'SP011', 'SP011_016.jpg'),
+('HA047', 'SP011', 'SP011_017.jpg'),
+('HA048', 'SP011', 'SP011_018.jpg'),
+('HA049', 'SP011', 'SP011_019.jpg'),
+('HA050', 'SP011', 'SP011_020.jpg'),
+('HA051', 'SP011', 'SP011_021.jpg'),
+('HA052', 'SP012', 'SP012_001.jpg'),
+('HA053', 'SP012', 'SP012_002.jpg'),
+('HA054', 'SP012', 'SP012_003.jpg'),
+('HA055', 'SP012', 'SP012_004.jpg'),
+('HA056', 'SP012', 'SP012_005.jpg'),
+('HA057', 'SP012', 'SP012_006.jpg'),
+('HA058', 'SP012', 'SP012_007.jpg'),
+('HA059', 'SP012', 'SP012_008.jpg'),
+('HA060', 'SP012', 'SP012_009.jpg'),
+('HA061', 'SP012', 'SP012_010.jpg'),
+('HA062', 'SP012', 'SP012_011.jpg'),
+('HA063', 'SP012', 'SP012_012.jpg'),
+('HA064', 'SP012', 'SP012_013.jpg'),
+('HA065', 'SP012', 'SP012_014.jpg'),
+('HA066', 'SP012', 'SP012_015.jpg'),
+('HA067', 'SP012', 'SP012_016.jpg'),
+('HA068', 'SP012', 'SP012_017.jpg'),
+('HA069', 'SP013', 'SP013_001.jpg'),
+('HA070', 'SP013', 'SP013_002.jpg'),
+('HA071', 'SP013', 'SP013_003.jpg'),
+('HA072', 'SP013', 'SP013_004.jpg'),
+('HA073', 'SP013', 'SP013_005.jpg'),
+('HA074', 'SP013', 'SP013_006.jpg'),
+('HA075', 'SP013', 'SP013_007.jpg'),
+('HA076', 'SP013', 'SP013_008.jpg'),
+('HA077', 'SP014', 'SP014_001.jpg'),
+('HA078', 'SP014', 'SP014_002.jpg'),
+('HA079', 'SP014', 'SP014_003.jpg'),
+('HA080', 'SP014', 'SP014_004.jpg'),
+('HA081', 'SP014', 'SP014_005.jpg'),
+('HA082', 'SP015', 'SP015_001.jpg'),
+('HA083', 'SP015', 'SP015_002.jpg'),
+('HA084', 'SP015', 'SP015_003.jpg'),
+('HA085', 'SP015', 'SP015_004.jpg'),
+('HA086', 'SP015', 'SP015_005.jpg'),
+('HA087', 'SP015', 'SP015_006.jpg'),
+('HA088', 'SP015', 'SP015_007.jpg'),
+('HA089', 'SP015', 'SP015_008.jpg'),
+('HA090', 'SP015', 'SP015_009.jpg'),
+('HA091', 'SP015', 'SP015_010.jpg'),
+('HA092', 'SP016', 'SP016_001.jpg'),
+('HA093', 'SP017', 'SP017_001.jpg'),
+('HA094', 'SP017', 'SP017_002.jpg'),
+('HA095', 'SP017', 'SP017_003.jpg'),
+('HA096', 'SP017', 'SP017_004.jpg'),
+('HA097', 'SP017', 'SP017_005.jpg'),
+('HA098', 'SP017', 'SP017_006.jpg'),
+('HA099', 'SP018', 'SP018_001.jpg'),
+('HA100', 'SP018', 'SP018_002.jpg'),
+('HA101', 'SP018', 'SP018_003.jpg'),
+('HA102', 'SP018', 'SP018_004.jpg'),
+('HA103', 'SP019', 'SP019_001.jpg'),
+('HA104', 'SP019', 'SP019_002.jpg'),
+('HA105', 'SP019', 'SP019_003.jpg'),
+('HA106', 'SP020', 'SP020_001.jpg'),
+('HA107', 'SP020', 'SP020_002.jpg'),
+('HA108', 'SP020', 'SP020_003.jpg'),
+('HA109', 'SP020', 'SP020_004.jpg'),
+('HA110', 'SP020', 'SP020_005.jpg'),
+('HA111', 'SP020', 'SP020_006.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hinh_thuc_giao_hang`
 --
 
@@ -259,6 +388,7 @@ INSERT INTO `nguoi_dung` (`tai_khoan`, `mat_khau`, `email`, `ho_ten`, `dia_chi`,
 ('nhanvien3', 'nhanvien3', 'nhanvien3.work@gmail.com', 'Logan', 'Paris', 123456789, 1, '3'),
 ('nhanvien4', 'nhanvien4', 'nhanvien4.work@gmail.com', 'Lily', 'Bangkok', 123456789, 1, '3'),
 ('nhanvien5', 'nhanvien5', 'nhanvien5.work@gmail.com', 'Helios 300', 'HCM City', 12456898, 1, '3'),
+('ptvuong', '123456', 'ptvuong.teacher@gmail.com', 'Phạm Thi Vương', '', 2147483647, 1, '1'),
 ('thanhhoa', '3119560021', 'thanhhoa.ec@gmail.com', 'Thanh Hòa', 'HCM City', 123456789, 1, '1'),
 ('vankiet', '3119560033', 'vankiet.ec@gmail.com', 'Văn Kiệt', 'HCM City', 123456789, 1, '1'),
 ('vanluan', '3119560039', 'vanluan.ec@gmail.com', 'Văn Luân', 'HCM City', 123456789, 1, '1');
@@ -487,6 +617,12 @@ ALTER TABLE `danh_gia`
 --
 ALTER TABLE `danh_muc`
   ADD PRIMARY KEY (`id_danh_muc`);
+
+--
+-- Indexes for table `hinh_anh_san_pham`
+--
+ALTER TABLE `hinh_anh_san_pham`
+  ADD PRIMARY KEY (`id_hinh_anh`,`id_san_pham`);
 
 --
 -- Indexes for table `hinh_thuc_giao_hang`
