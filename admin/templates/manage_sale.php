@@ -11,7 +11,7 @@
     <meta name="description"
         content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Ample Admin Lite Template by WrapPixel</title>
+    <title>Quản lý chương trình khuyến mãi</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../static/plugins/images/favicon.png">
@@ -75,10 +75,10 @@
             <!-- ============================================================== -->
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Quản lý chương trình khuyến mãi</h4>
                     </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                    <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
                         <div class="d-md-flex">
                             <ol class="breadcrumb ms-auto">
                                 <li><a href="index.php" class="fw-normal">Quay lại trang chính</a></li>

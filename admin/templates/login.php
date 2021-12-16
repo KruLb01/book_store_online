@@ -11,8 +11,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/plugins/images/favicon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Login Admin</title>
+    <title>Đăng nhập</title>
     <style>
         body {
             font-family: "Nunito Sans", sans-serif;
@@ -91,11 +92,11 @@
 
             <div class="content-login">
                 <form id="login-form">
-                    <label for="username">Username<input type="text" name="username" id="username"></label>
-                    <label for="password">Password<input type="password" name="password" id="password"></label>
+                    <label for="username">Tài khoản<input type="text" name="username" id="username"></label>
+                    <label for="password">Mật khẩu <input type="password" name="password" id="password"></label>
                     <span class="error">Error print here</span>
                     <div class="submit-container">
-                        <button id="login-btn">Login</button>
+                        <button id="login-btn">Đăng nhập</button>
                     </div>
                 </form>
             </div>
