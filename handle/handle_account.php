@@ -64,6 +64,16 @@
                 $_SESSION["customer"]["Address"] = $_POST["address"];
                 echo "success";
             } else echo "fail";
+        } else if ($update == "password") {
+            $user = array(
+                "User" => $_SESSION['customer']['User'],
+                "Password" => $_POST["new_password"],
+            );
+            $res = $accountModel->changePassword($user);
+            if (trim($res)) {
+                $_SESSION["customer"]["Password"] = $_POST["new_password"];
+                echo "success";
+            } else echo "fail";
         }
     }
 

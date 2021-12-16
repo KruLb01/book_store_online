@@ -19,6 +19,7 @@
             $_SESSION["user"]["Address"] = $data["Address"];
             $_SESSION["user"]["Status"] = $data["Status"];
             $_SESSION["user"]["Permission"] = $data["Permission"];
+            $_SESSION["user"]["Function"] = $data["Function"];
             echo "success";
         }
     } else if (isset($_GET["username"]) && isset($_GET["logout"])) {

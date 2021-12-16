@@ -23,6 +23,22 @@ class account
                 "Permission" => $user["id_quyen"]
             );
         }
+
+        $query = "select chuc_nang.file as file from nguoi_dung as nd, quyen, chi_tiet_quyen_chuc_nang as phan_quyen, chuc_nang 
+                where nd.id_quyen = quyen.id_quyen 
+                and quyen.id_quyen = phan_quyen.id_quyen 
+                and phan_quyen.id_chuc_nang = chuc_nang.id_chuc_nang 
+                and nd.tai_khoan = '{$username}'";
+        $data = $conn->select($query);
+        $funcs = array();
+        if (mysqli_num_rows($data)==0) {
+            $funcs = array();
+        } else {
+            while ($row = mysqli_fetch_array($data)) {
+                array_push($funcs, $row["file"]);
+            }
+        };
+        $user = $user + array("Function" => $funcs);
         return $user;
     }
 

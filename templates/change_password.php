@@ -85,17 +85,15 @@
             <div class="col-md-8">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Thông tin cá nhân</h4>
+                        <h4 class="text-right">Đổi mật khẩu</h4>
                     </div>
                     <div class="row mt-3" id="info-form">
                         <input type="hidden" name="password" value="<?php echo $_SESSION['customer']['Password'] ?>">
-                        <div class="col-md-12 mt-3"><label class="labels">Họ tên</label><input name="name" type="text" class="form-control" <?php if (isset($_SESSION['customer']['Name']) && $_SESSION['customer']['Name'] != "") echo "value='{$_SESSION['customer']['Name']}'"; else echo "placeholder='Xin chàoo 👋 bạn  ...'";  ?>></div>
-                        <div class="col-md-12 mt-3"><label class="labels">Số điện thoại</label><input name="phone" type="text" class="form-control" <?php if (isset($_SESSION['customer']['Phone']) && $_SESSION['customer']['Phone'] != "0") echo "value='{$_SESSION['customer']['Phone']}'"; else echo "placeholder='Cho xin số điện thoại đi mà 😢'";  ?>></div>
-                        <div class="col-md-12 mt-3"><label class="labels">Email</label><input name="email" type="text" class="form-control" <?php if (isset($_SESSION['customer']['Email']) && $_SESSION['customer']['Email'] != "") echo "value='{$_SESSION['customer']['Email']}'"; else echo "placeholder='Chưa có email nè'";  ?>></div>
-                        <div class="col-md-12 mt-3"><label class="labels">Địa chỉ</label><textarea name="address" type="text" rows="4" class="form-control" <?php if (isset($_SESSION['customer']['Address']) && $_SESSION['customer']['Address'] != "") echo ">{$_SESSION['customer']['Address']}"; else echo "placeholder='Cho tui địa chỉ giao hàng đi chứ 😠'>";  ?></textarea>
+                        <div class="col-md-12 mt-3"><label class="labels">Nhập mật khẩu mới</label><input name="new-password" type="password" class="form-control" placeholder="Nhập mật khẩu mới .."></div>
+                        <div class="col-md-12 mt-3"><label class="labels">Nhập lại mật khẩu</label><input name="re-password" type="password" class="form-control" placeholder="Nhập lại mật khẩu mới"></div>
                     </div>
                     <div class="error">Error print here</div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" id="save-btn">Lưu thông tin</button></div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" id="save-btn">Dổi mật khẩu</button></div>
                 </div>
             </div>
         </div>
@@ -112,28 +110,26 @@
     $("#save-btn").click(function() {
         var form = $("#info-form");
         var password = form.find("input[name=password]").val();
-        var name = form.find("input[name=name]").val();
-        var phone = form.find("input[name=phone]").val();
-        var email = form.find("input[name=email]").val();
-        var address = form.find("textarea[name=address]").val();
+        var new_password = form.find("input[name=new-password]").val();
+        var re_password = form.find("input[name=re-password]").val();
 
-        if (name.trim().length < 5 || phone.trim().length != 10 || email.trim().length < 5 || address.trim().length < 5 ) {
+        if (new_password.trim().length < 5 || re_password.trim().length < 5 ) {
             form.find(".error").css("display", "unset");
-            form.find(".error").text("Thông tin không hợp lệ");
-        } else if (prompt("Nhập mật khẩu để cập nhật thông tin")==password) {
+            form.find(".error").text("Mật khẩu phải dài hơn 5 kí tự");
+        } else if (new_password.trim() != re_password.trim()) {
+            form.find(".error").css("display", "unset");
+            form.find(".error").text("Mật khẩu không giống nhau");
+        } else if (prompt("Nhập mật khẩu để đổi mật khẩu")==password) {
             $.ajax({
                 method: "post",
                 url: "../handle/handle_account.php",
                 data: {
-                    name: name,
-                    phone: phone,
-                    email: email,
-                    address: address,
-                    update: "profile"
+                    new_password: new_password,
+                    update: "password"
                 },
                 success: function(res) {
                     if (res.trim()=="success") {
-                        window.location = "profile.php";
+                        window.location = "change_password.php";
                     } else alert("Thao tác thất bại");
                 }
             })

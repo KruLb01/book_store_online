@@ -45,4 +45,13 @@ class account
                       email = '{$user['Email']}', dia_chi = '{$user['Address']}' where tai_khoan = '{$user['User']}'";
         return $conn->execute($query);
     }
+
+    public function changePassword($user)
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "update nguoi_dung set mat_khau = '{$user['Password']}' where tai_khoan = '{$user['User']}'";
+        return $conn->execute($query);
+    }
 }

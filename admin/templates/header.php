@@ -2,6 +2,13 @@
 session_start();
 if (!isset($_SESSION["user"])) {
     header("Location: login.php");
+} else {
+    $array = explode("/", $_SERVER['SCRIPT_NAME']);
+    $current = end($array);
+
+    if (!in_array($current, $_SESSION["user"]['Function'])) {
+        header("Location: index.php");
+    }
 }
 ?>
 <header class="topbar" data-navbarbg="skin5">
