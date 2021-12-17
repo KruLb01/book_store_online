@@ -1,6 +1,4 @@
 <?php
-
-
 class connect_db
 {
     protected $host;

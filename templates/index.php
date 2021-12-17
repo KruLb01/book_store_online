@@ -1,15 +1,41 @@
+<?php
+    include_once '../class/book.php';
+    include_once '../class/author.php';
+    include_once '../class/book_image.php';
+    $bookQuery = new book();
+    $authorQuery = new author();
+    $prod_imageQuery = new book_image();
+?>
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>ĐỌC SÁCH ĐI</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../assets/css/main.css" />
+    <head>
+        <title>ReadBok</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../assets/css/main.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <link rel="icon" type="image/png" sizes="16x16" href="../admin/static/plugins/images/favicon.png">
         <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
-	</head>
+        <style>
+            .logo-container{
+                display:flex;
+            }
+            .logo-container > div input{
+                padding-top:20px;
+            }
+            .prod-image img{
+                width: 85%;
+                height: 250px;
+            }
+            .book-description {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 100%;
+            }
+        </style>
+    </head>
 	<body class="is-preload">
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -53,114 +79,64 @@
 						<div class="inner">
 							<!-- About Us -->
 							<header id="inner">
-								<h1>Thương hiệu ĐỌC SÁCH ĐI!</h1>
-								<p>Với sứ mệnh bán sách cho mấy thằng lười đọc sách :)</p>
+								<h1 align="center">Chào mừng bạn đến với ReadBok!</h1>
 							</header>
 
 							<br>
 
-							<h2 class="h2">Featured Products</h2>
+							<h2 class="h2">Sách nổi bật</h2>
 
 							<!-- Products -->
 							<section class="tiles">
-								<article class="style1">
-									<span class="image">
-										<img src="../images/product-1-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-								<article class="style2">
-									<span class="image">
-										<img src="../images/product-2-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-								<article class="style3">
-									<span class="image">
-										<img src="../images/product-3-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-
-								<article class="style4">
-									<span class="image">
-										<img src="../images/product-4-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-
-								<article class="style5">
-									<span class="image">
-										<img src="../images/product-5-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-
-								<article class="style6">
-									<span class="image">
-										<img src="../images/product-6-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
+                                                            <?php
+                                                                $result = $bookQuery -> getRangeListBook(1, 6);
+                                                                if($result)
+                                                                {
+                                                                    while($row = mysqli_fetch_array($result))
+                                                                    {
+                                                                        $nameBook = $row['ten_san_pham'];
+                                                                        $identityBook = $row['id_san_pham'];
+                                                                        $bookDescription = $row['mo_ta_sach'];
+                                                                        $authorDetail = $authorQuery -> getAuthor($row['id_tac_gia']);
+                                                                        $prodImageDetail = $prod_imageQuery -> getFirstImageBook($row['id_san_pham']);
+                                                                        $nameAuthor = $authorDetail['ten_tac_gia'];
+                                                                        $linkImage = $prodImageDetail['link_hinh_anh'];
+                                                                        echo "<article>
+                                                                                <a href='product-details.php?id_san_pham=$identityBook'>
+                                                                                    <div class='prod-image'>
+                                                                                        <img src='../images/$linkImage' alt='' />
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <h2>$nameBook</h2>
+                                                                                        <span style='padding-top:3px'><b>Mã sách:</b> $identityBook</span><br/>
+                                                                                        <p><b>Tác giả:</b> $nameAuthor</p>
+                                                                                    </div>
+                                                                                </a>
+                                                                             </article>";
+                                                                    }
+                                                                }
+                                                            ?>
 							</section>
-
-							<p class="text-center"><a href="products.php">More Books &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
-							
+							<p class="text-center"><a href="products.php">Xem nhiều sách hơn &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
 							<br>
-
-							<h2 class="h2">Testimonials</h2>
-							
+							<h2 class="h2">Các bài viết đánh giá</h2>
 							<div class="row">
 								<div class="col-sm-6 text-center">
-									<p class="m-n"><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt delectus mollitia, debitis architecto recusandae? Quidem ipsa, quo, labore minima enim similique, delectus ullam non laboriosam laborum distinctio repellat quas deserunt voluptas reprehenderit dignissimos voluptatum deleniti saepe. Facere expedita autem quos."</em></p>
+									<p class="m-n"><em>"Việc đọc sách e-book trên trang web là điều hết sức phi lý.
+                                                                                            Tuy nhiên tại ReadBok bạn còn làm những điều hơn thế"</em></p>
 
-									<p><strong> - John Doe</strong></p>
+									<p><strong> - Nhà văn Chúa hề</strong></p>
 								</div>
 
 								<div class="col-sm-6 text-center">
-									<p class="m-n"><em>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt delectus mollitia, debitis architecto recusandae? Quidem ipsa, quo, labore minima enim similique, delectus ullam non laboriosam laborum distinctio repellat quas deserunt voluptas reprehenderit dignissimos voluptatum deleniti saepe. Facere expedita autem quos."</em></p>
+									<p class="m-n"><em>"ReadBok mang đến cho tôi những cuốn sách toẹt vời mà những trang web khác không có
+                                                                                . Không thể nói nhiều hơn 3 từ <b>I Love ReadBok</b> <3"</em></p>
 
-									<p><strong>- John Doe</strong> </p>
+									<p><strong>- Chúa hề</strong> </p>
 								</div>
 							</div>
 
-							<p class="text-center"><a href="testimonials.html">Read More &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
+							<p class="text-center"><a href="testimonials.html">Đọc các bài viết đánh giá khác &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
 
 							<br>
 
@@ -170,39 +146,38 @@
 								<div class="col-sm-4 text-center">
 									<img src="../images/blog-1-720x480.jpg" class="img-fluid" alt="" />
 
-									<h2 class="m-n"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
+									<h2 class="m-n"><a href="#">Những điều thú vị khi đọc sách</a></h2>
 
-									<p> John Doe &nbsp;|&nbsp; 12/06/2020 10:30</p>
+									<p> Darkieeee &nbsp;|&nbsp; 17/12/2021 10:30</p>
 								</div>
 
 								<div class="col-sm-4 text-center">
 									<img src="../images/blog-2-720x480.jpg" class="img-fluid" alt="" />
 
-									<h2 class="m-n"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
+									<h2 class="m-n"><a href="#">Chọn lựa nơi tốt để đọc sách</a></h2>
 
-									<p> John Doe &nbsp;|&nbsp; 12/06/2020 10:30</p>
+									<p> Darkieeee &nbsp;|&nbsp; 17/12/2021 10:30</p>
 								</div>
 
 								<div class="col-sm-4 text-center">
 									<img src="../images/blog-3-720x480.jpg" class="img-fluid" alt="" />
 
-									<h2 class="m-n"><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
+									<h2 class="m-n"><a href="#">Làm thế nào để lựa chọn sách phù hợp để đọc ?</a></h2>
 
-									<p> John Doe &nbsp;|&nbsp; 12/06/2020 10:30</p>
+									<p> Darkieeee &nbsp;|&nbsp; 17/12/2021 10:30</p>
 								</div>
 							</div>
 
-							<p class="text-center"><a href="blog.html">Read More &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
+							<p class="text-center"><a href="blog.html">Đọc nhiều hơn &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
 
 							
 						</div>
 					</div>
-
 				<!-- Footer -->
 					<footer id="footer">
 						<div class="inner">
 							<section>
-								<h2>Contact Us</h2>
+								<h2>Liên hệ chúng tôi</h2>
 								<form method="post" action="#">
 									<div class="fields">
 										<div class="field half">
@@ -225,19 +200,18 @@
 											<label>&nbsp;</label>
 
 											<ul class="actions">
-												<li><input type="submit" value="Send Message" class="primary" /></li>
+												<li><input type="submit" value="Gửi tin nhắn" class="primary" /></li>
 											</ul>
 										</div>
 									</div>
 								</form>
 							</section>
 							<section>
-								<h2>Contact Info</h2>
-
+								<h2>Thông tin liên hệ</h2>
 								<ul class="alt">
-									<li><span class="fa fa-envelope-o"></span> <a href="#">contact@company.com</a></li>
-									<li><span class="fa fa-phone"></span> +1 333 4040 5566 </li>
-									<li><span class="fa fa-map-pin"></span> 212 Barrington Court New York, ABC 10001 United States of America</li>
+									<li><span class="fa fa-envelope-o"></span> <a href="#">readbok@company.com</a></li>
+									<li><span class="fa fa-phone"></span> 0123456789 </li>
+									<li><span class="fa fa-map-pin"></span> Somewhere on planets</li>
 								</ul>
 
 								<h2>Follow Us</h2>

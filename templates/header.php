@@ -4,19 +4,21 @@
 ?>
 <header id="header">
     <div class="inner">
-
         <!-- Logo -->
-        <a href="index.php" class="logo">
-            <span class="fa fa-book"></span> <span class="title">Đọc sách đi</span>
-        </a>
-
+        <div class="logo-container">
+            <a href="index.php" class="logo">
+                <img src="../logo/logo.jpg" width="100" height="100"> <span class="title">ReadBok</span>
+            </a>
+            <div class="ml-auto">
+                <input type="text" placeholder="Tìm kiếm sách" />
+            </div>
+        </div>
         <!-- Nav -->
         <nav>
             <ul>
-                <li><a href="#menu">Danh mục</a></li>
+                <li><a href="#menu"></a></li>
             </ul>
         </nav>
-
     </div>
 </header>
 
@@ -25,23 +27,19 @@
     <h2>Menu</h2>
     <ul>
         <li><a href="index.php" class="active">Trang chủ</a></li>
-
-        <li><a href="products.php">Sản phẩm</a></li>
-
-        <li><a href="checkout.html">Checkout</a></li>
-
+        <li><a href="products.php">Xem danh mục sản phẩm</a></li>
+        <li><a href="checkout.html">Thanh toán</a></li>
         <li>
-            <a href="#" class="dropdown-toggle">About</a>
-
+            <a href="#" class="dropdown-toggle">Giới thiệu</a>
             <ul>
-                <li><a href="about.html">About Us</a></li>
+                <li><a href="about.html">Giới thiệu trang web</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="terms.html">Terms</a></li>
+                <li><a href="blog.html">Các bài viết đánh giá</a></li>
+                <li><a href="terms.html">Điều khoản</a></li>
             </ul>
         </li>
 
-        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="contact.html">Liên hệ với chúng tôi</a></li>
         <?php
             if (isset($_SESSION["customer"])) {
                 echo "<li>
