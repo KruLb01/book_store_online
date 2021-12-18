@@ -24,16 +24,19 @@
             .logo-container > div input{
                 padding-top:20px;
             }
-            .prod-image img{
-                width: 85%;
-                height: 250px;
+            a.product-link {
+                border-bottom: none;
             }
-            .book-description {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                width: 100%;
+            .product-items {
+                flex-wrap: wrap;
+                display: flex;
+                
             }
+            .prod-item .prod-image {
+                width: 200px;
+                height:150px;
+            }
+            .prod-image 
         </style>
     </head>
 	<body class="is-preload">
@@ -87,7 +90,7 @@
 							<h2 class="h2">Sách nổi bật</h2>
 
 							<!-- Products -->
-							<section class="tiles">
+							<div class="product-items">
                                                             <?php
                                                                 $result = $bookQuery -> getRangeListBook(1, 6);
                                                                 if($result)
@@ -101,18 +104,18 @@
                                                                         $prodImageDetail = $prod_imageQuery -> getFirstImageBook($row['id_san_pham']);
                                                                         $nameAuthor = $authorDetail['ten_tac_gia'];
                                                                         $linkImage = $prodImageDetail['link_hinh_anh'];
-                                                                        echo "<article>
-                                                                                <a href='product-details.php?id_san_pham=$identityBook'>
+                                                                        echo "<div class='prod-item'>
+                                                                                <a class='product-link' href='product-details.php?id_san_pham=$identityBook'>
                                                                                     <div class='prod-image'>
-                                                                                        <img src='../images/$linkImage' alt='' />
+                                                                                        <img src='../images/$linkImage' alt=''/>
                                                                                     </div>
                                                                                     <div>
                                                                                         <h2>$nameBook</h2>
-                                                                                        <span style='padding-top:3px'><b>Mã sách:</b> $identityBook</span><br/>
+                                                                                        <span><b>Mã sách:</b> $identityBook</span><br/>
                                                                                         <p><b>Tác giả:</b> $nameAuthor</p>
                                                                                     </div>
                                                                                 </a>
-                                                                             </article>";
+                                                                             </div>";
                                                                     }
                                                                 }
                                                             ?>
@@ -125,12 +128,12 @@
 									<p class="m-n"><em>"Việc đọc sách e-book trên trang web là điều hết sức phi lý.
                                                                                             Tuy nhiên tại ReadBok bạn còn làm những điều hơn thế"</em></p>
 
-									<p><strong> - Nhà văn Chúa hề</strong></p>
+									<p><strong> - Chúa hề Deadline</strong></p>
 								</div>
 
 								<div class="col-sm-6 text-center">
 									<p class="m-n"><em>"ReadBok mang đến cho tôi những cuốn sách toẹt vời mà những trang web khác không có
-                                                                                . Không thể nói nhiều hơn 3 từ <b>I Love ReadBok</b> <3"</em></p>
+                                                                                . Tôi không thể nói nhiều hơn ngoài việc ngắn gọn 3 từ <b>I Love ReadBok <3</b>"</em></p>
 
 									<p><strong>- Chúa hề</strong> </p>
 								</div>
@@ -162,7 +165,7 @@
 								<div class="col-sm-4 text-center">
 									<img src="../images/blog-3-720x480.jpg" class="img-fluid" alt="" />
 
-									<h2 class="m-n"><a href="#">Làm thế nào để lựa chọn sách phù hợp để đọc ?</a></h2>
+									<h2 class="m-n"><a href="#">Làm thế nào để lựa chọn sách phù hợp để đọc?</a></h2>
 
 									<p> Darkieeee &nbsp;|&nbsp; 17/12/2021 10:30</p>
 								</div>

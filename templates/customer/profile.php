@@ -8,12 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />-->
-<!--    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />-->
-    <link rel="stylesheet" href="../assets/css/main.css" />
-<!--    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
     <link rel="icon" type="image/png" sizes="16x16" href="../admin/static/plugins/images/favicon.png">
-    <title>Document</title>
+    <title>Thông tin cá nhân</title>
     <style>
         body {
             background: #ccc
@@ -74,7 +74,7 @@
 <body>
     <div id="wrapper">
         <?php
-        include_once("header.php");
+        include_once("./header.php");
         ?>
     </div>
     <div class="container rounded bg-white mt-5 mb-5">
@@ -102,42 +102,42 @@
     </div>
         <?php echo $_SESSION['customer']['Address'] ?>
     <!-- Scripts -->
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/jquery.scrolly.min.js"></script>
-    <script src="../assets/js/jquery.scrollex.min.js"></script>
-    <script src="../assets/js/main.js"></script>
-</body>
-<script>
-    $("#save-btn").click(function() {
-        var form = $("#info-form");
-        var password = form.find("input[name=password]").val();
-        var name = form.find("input[name=name]").val();
-        var phone = form.find("input[name=phone]").val();
-        var email = form.find("input[name=email]").val();
-        var address = form.find("textarea[name=address]").val();
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script>
+        $("#save-btn").click(function() {
+            var form = $("#info-form");
+            var password = form.find("input[name=password]").val();
+            var name = form.find("input[name=name]").val();
+            var phone = form.find("input[name=phone]").val();
+            var email = form.find("input[name=email]").val();
+            var address = form.find("textarea[name=address]").val();
 
-        if (name.trim().length < 5 || phone.trim().length != 10 || email.trim().length < 5 || address.trim().length < 5 ) {
-            form.find(".error").css("display", "unset");
-            form.find(".error").text("Thông tin không hợp lệ");
-        } else if (prompt("Nhập mật khẩu để cập nhật thông tin")==password) {
-            $.ajax({
-                method: "post",
-                url: "../handle/handle_account.php",
-                data: {
-                    name: name,
-                    phone: phone,
-                    email: email,
-                    address: address,
-                    update: "profile"
-                },
-                success: function(res) {
-                    if (res.trim()=="success") {
-                        window.location = "profile.php";
-                    } else alert("Thao tác thất bại");
-                }
-            })
-        }
-    })
-</script>
+            if (name.trim().length < 5 || phone.trim().length != 10 || email.trim().length < 5 || address.trim().length < 5 ) {
+                form.find(".error").css("display", "unset");
+                form.find(".error").text("Thông tin không hợp lệ");
+            } else if (prompt("Nhập OK để cập nhật thông tin")=="OK") {
+                $.ajax({
+                    method: "post",
+                    url: "../../handle/handle_account.php",
+                    data: {
+                        name: name,
+                        phone: phone,
+                        email: email,
+                        address: address,
+                        update: "profile"
+                    },
+                    success: function(res) {
+                        if (res.trim()=="success") {
+                            window.location = "profile.php";
+                        } else alert("Thao tác thất bại");
+                    }
+                })
+            }
+        })
+    </script>
+</body>
 </html>

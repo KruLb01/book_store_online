@@ -1,6 +1,6 @@
 <html>
 <head>
-    <meta charset="UTF-8">
+        <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -8,12 +8,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />-->
-<!--    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />-->
-    <link rel="stylesheet" href="../assets/css/main.css" />
-<!--    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
     <link rel="icon" type="image/png" sizes="16x16" href="../admin/static/plugins/images/favicon.png">
-    <title>Document</title>
+    <title>Đổi mật khẩu</title>
     <style>
         body {
             background: #ccc
@@ -85,7 +85,7 @@
             <div class="col-md-8">
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Đổi mật khẩu</h4>
+                        <h2 class="text-right">Đổi mật khẩu</h2>
                     </div>
                     <div class="row mt-3" id="info-form">
                         <input type="hidden" name="password" value="<?php echo $_SESSION['customer']['Password'] ?>">
@@ -119,10 +119,10 @@
         } else if (new_password.trim() != re_password.trim()) {
             form.find(".error").css("display", "unset");
             form.find(".error").text("Mật khẩu không giống nhau");
-        } else if (prompt("Nhập mật khẩu để đổi mật khẩu")==password) {
+        } else if (prompt("Nhập OK để đổi mật khẩu")=="OK") {
             $.ajax({
                 method: "post",
-                url: "../handle/handle_account.php",
+                url: "../../handle/handle_account.php",
                 data: {
                     new_password: new_password,
                     update: "password"

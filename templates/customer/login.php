@@ -1,11 +1,13 @@
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" sizes="16x16" href="../admin/static/plugins/images/favicon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Log in & Register</title>
+    <title>Đăng nhập</title>
     <style>
         @charset "utf-8";
         /* CSS Document */
@@ -401,57 +403,58 @@
             }
         }
     </style>
+    <link rel="icon" type="image/png" sizes="16x16" href="../../admin/static/plugins/images/favicon.png">
 </head>
 <body>
     <section class="user">
         <div class="user_options-container">
             <div class="user_options-text">
                 <div class="user_options-unregistered">
-                    <h2 class="user_unregistered-title">Don't have an account?</h2>
-                    <p class="user_unregistered-text">Create now!</p>
-                    <button class="user_unregistered-signup" id="signup-button">Sign up</button>
+                    <h2 class="user_unregistered-title">Chưa có tài khoản?</h2>
+                    <p class="user_unregistered-text">Ấn nút đăng ký bên dưới để đăng ký!</p>
+                    <button class="user_unregistered-signup" id="signup-button">Đăng ký</button>
                 </div>
 
                 <div class="user_options-registered">
-                    <h2 class="user_registered-title">Already have a account!</h2>
-                    <p class="user_registered-text">Get started..</p>
-                    <button class="user_registered-login" id="login-button">Login</button>
+                    <h2 class="user_registered-title">Đã có tài khoản?</h2>
+                    <p class="user_registered-text">Ấn nút đăng ký bên dưới để đăng nhập!</p>
+                    <button class="user_registered-login" id="login-button">Đăng nhập</button>
                 </div>
             </div>
 
             <div class="user_options-forms" id="user_options-forms">
                 <div class="user_forms-login">
-                    <h2 class="forms_title">Login</h2>
+                    <h2 class="forms_title">Đăng nhập</h2>
                     <form class="forms_form" id="login-form">
                         <fieldset class="forms_fieldset">
                             <div class="forms_field">
-                                <input type="text" placeholder="Username" class="forms_field-input" name="login-username" required autofocus />
+                                <input type="text" placeholder="Tài khoản" class="forms_field-input" name="login-username" required autofocus />
                             </div>
                             <div class="forms_field">
-                                <input type="password" placeholder="Password" class="forms_field-input" name="login-password" required />
+                                <input type="password" placeholder="Mật khẩu" class="forms_field-input" name="login-password" required />
                             </div>
                         </fieldset>
                         <div class="error">Error print here</div>
                         <div class="forms_buttons">
-                            <button type="button" class="forms_buttons-forgot">Forgot password?</button>
-                            <input type="submit" id="login-btn" value="Log In" class="forms_buttons-action">
+                            <button type="button" class="forms_buttons-forgot">Quên mật khẩu?</button>
+                            <input type="submit" id="login-btn" value="Đăng nhập" class="forms_buttons-action">
                         </div>
                     </form>
                 </div>
                 <div class="user_forms-signup">
-                    <h2 class="forms_title">Sign Up</h2>
+                    <h2 class="forms_title">Đăng ký</h2>
                     <form class="forms_form" id="register-form">
                         <fieldset class="forms_fieldset">
                             <div class="forms_field">
-                                <input type="text" placeholder="Username" class="forms_field-input" name="register-username" required />
+                                <input type="text" placeholder="Tài khoản" class="forms_field-input" name="register-username" required />
                             </div>
                             <div class="forms_field">
-                                <input type="password" placeholder="Password" class="forms_field-input" name="register-password" required />
+                                <input type="password" placeholder="Mật khẩu" class="forms_field-input" name="register-password" required />
                             </div>
                         </fieldset>
                         <div class="error">Error print here</div>
                         <div class="forms_buttons">
-                            <input type="submit" id="register-btn" value="Sign up" class="forms_buttons-action">
+                            <input type="submit" id="register-btn" value="Đăng ký" class="forms_buttons-action">
                         </div>
                     </form>
                 </div>
@@ -464,7 +467,6 @@
     const signupButton = document.getElementById("signup-button"),
         loginButton = document.getElementById("login-button"),
         userForms = document.getElementById("user_options-forms");
-
     /**
      * Add event listener to the "Sign Up" button
      */
@@ -473,6 +475,7 @@
         ()=>{
             userForms.classList.remove("bounceRight");
             userForms.classList.add("bounceLeft");
+            document.getElementById("user_options-forms").style.height = "auto";
         },
         false
     );
@@ -485,11 +488,15 @@
         () => {
             userForms.classList.remove("bounceLeft");
             userForms.classList.add("bounceRight");
+            document.getElementById("user_options-forms").style.height = "570px";
         },
         false
     );
 </script>
 <script>
+    function hasWhiteSpace(s) {
+        return s.indexOf(' ') >= 0;
+    }
     $("#login-btn").click(function(e) {
         e.preventDefault();
         var username = $("#login-form").find("input[name=login-username]").val();
@@ -497,15 +504,16 @@
 
         $.ajax({
             method:"post",
-            url: "../handle/handle_account.php",
+            url: "../../handle/handle_account.php",
             data: {
                 username: username,
                 password: password,
-                login: "login"
+                login: true
             },
             success: function(res) {
-                if (res.trim()=="success") {
-                    window.location = "index.php";
+                if (res.trim() === "success") {
+                    var a = <?php if(isset($_POST['next'])){echo '"'.$_POST['next'].'"';}else{echo "'../index.php'";}?>;
+                    window.location.href = a;
                 } else alert("Login failed");
             }
         })
@@ -515,22 +523,25 @@
         e.preventDefault();
         var username = $("#register-form").find("input[name=register-username]").val();
         var password = $("#register-form").find("input[name=register-password]").val();
-
+        if(hasWhiteSpace(username.trim()))
+        {
+            $("#register-form").find(".error").css("display", "block");
+            $("#register-form").find(".error").text("Tài khoản không được có khoảng trắng");
+            return;
+        }
         if (username.trim().length < 5 || password.trim().length < 5) {
             $("#register-form").find(".error").css("display", "block");
-            $("#register-form").find(".error").text("Username or password should be more than 5 characters");
+            $("#register-form").find("#register-btn").css("margin-bottom", "20px");
+            return;
         }
         $.ajax({
             method:"post",
-            url: "../handle/handle_account.php",
-            data: {
-                username: username,
-                password: password,
-                register: "register"
-            },
+            url: "../../handle/handle_account.php",
+            data: "register=true&"+$("#register-form").serialize(),
             success: function(res) {
                 if (res.trim()=="success") {
-                    window.location = "index.php";
+                    var a = <?php if(isset($_POST['next'])){echo '"'.$_POST['next'].'"';}else{echo "'../index.php'";}?>;
+                    window.location.href = a;
                 } else alert("Register failed");
             }
         })

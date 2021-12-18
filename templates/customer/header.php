@@ -6,12 +6,9 @@
     <div class="inner">
         <!-- Logo -->
         <div class="logo-container">
-            <a href="index.php" class="logo">
-                <img src="../logo/logo.jpg" width="100" height="100"> <span class="title">ReadBok</span>
+            <a href='../index.php' class='logo'>
+                <span class='fa fa-book'></span> <span class='title'>ReadBok</span>
             </a>
-            <div class="ml-auto">
-                <input type="text" placeholder="Tìm kiếm sách" />
-            </div>
         </div>
         <!-- Nav -->
         <nav>
@@ -28,6 +25,7 @@
     <ul>
         <li><a href="index.php" class="active">Trang chủ</a></li>
         <li><a href="products.php">Xem danh mục sản phẩm</a></li>
+        <li><a href="checkout.html">Thanh toán</a></li>
         <li>
             <a href="#" class="dropdown-toggle">Giới thiệu</a>
             <ul>
@@ -46,13 +44,14 @@
                             <ul>
                         <li><a href='./customer/profile.php'><i class='fas fa-id-badge' style='padding-right: 0.6rem'></i> Hồ sơ</a></li>
                         <li><a href='./customer/change_password.php'><i class='fas fa-key' style='padding-right: 0.2rem'></i> Đổi mật khẩu</a></li>
-                        <li><a href='./cart/'><i class='fas fa-shopping-cart' style='padding-right: 0.25rem'></i> Giỏ hàng</a></li>
+                        <li><a href='blog.html'><i class='fas fa-shopping-cart' style='padding-right: 0.25rem'></i> Giỏ hàng</a></li>
                         <li><a href='testimonials.html'><i class='fas fa-receipt' style='padding-right: 0.7rem'></i> Đơn hàng</a></li>
-                        <li><a href='../handle/handle_account.php?logout=logout'><i class='fas fa-sign-out-alt' style='padding-right: 0.35rem'></i> Đăng xuất</a></li>
+                        <li><a href='../../handle/handle_account.php?logout=logout'><i class='fas fa-sign-out-alt' style='padding-right: 0.35rem'></i> Đăng xuất</a></li>
                     </ul>
                 </li>";
             } else {
-                echo '<li><a href="./customer/login.php">Đăng nhập</a></li>';
+                echo '<li><a href="./cart/">Giỏ hàng</a></li>
+                    <li><a href="./customer/login.php">Đăng nhập</a></li>';
             }
         ?>
     </ul>

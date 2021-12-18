@@ -4,11 +4,10 @@
     {
         include_once("../class/account.php");
         $accountModel = new account();
-
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        $data = $accountModel->checkLogin($username, $password);
+        $data = $accountModel-> checkLogin($username, $password);
         if (sizeof($data)==0) {
             echo "fail";
         } else {
@@ -25,13 +24,12 @@
 
     if (isset($_POST["register"]) && isset($_POST["username"]) && isset($_POST["password"]))
     {
-        include_once("../class/account.php");
+        include_once("../../class/account.php");
         $accountModel = new account();
-
         $username = $_POST["username"];
         $password = $_POST["password"];
         $res = $accountModel->registerAccount($username, $password);
-        if (trim($res)) {
+        if(trim($res)) {
             $_SESSION["customer"]["User"] = $username;
             $_SESSION["customer"]["Password"] = $password;
             echo "success";
@@ -50,11 +48,11 @@
 
         if ($update == "profile") {
             $user = array(
-              "User" => $_SESSION['customer']['User'],
-              "Name" => $_POST["name"],
-              "Phone" => $_POST["phone"],
-              "Email" => $_POST["email"],
-              "Address" => $_POST["address"],
+                "User" => $_SESSION['customer']['User'],
+                "Name" => $_POST["name"],
+                "Phone" => $_POST["phone"],
+                "Email" => $_POST["email"],
+                "Address" => $_POST["address"],
             );
             $res = $accountModel->updateProfile($user);
             if (trim($res)) {
