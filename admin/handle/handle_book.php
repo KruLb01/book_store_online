@@ -37,6 +37,34 @@
         } else echo "fail";
     }
 
+    if (isset($_POST["update"]))
+    {
+        session_start();
+        include_once("../class/books.php");
+        $bookModel = new books();
+        $update = $_POST["update"];
+
+        // Nhan input
+        $book = array(
+            "Code" => $_POST["code"],
+            "Name" => $_POST["name"],
+            "Amount" => $_POST["amount"],
+            "Language" => $_POST["language"],
+            "Description" => $_POST["description"],
+            "Price" => $_POST["price"],
+            "Ebook" => $_POST["ebook"],
+            "Category" => $_POST["category"],
+            "Author" => $_POST["author"],
+            "Nxb" => $_POST["nxb"],
+            "Year" => $_POST["year"],
+        );
+
+        $res = $bookModel->updateBook($book);
+        if (trim($res)) {
+            echo "success";
+        } else echo "fail";
+    }
+
     if (isset($_GET["export"])) {
         $type_export = $_GET["export"];
 

@@ -60,8 +60,9 @@
         session_start();
         include_once("../class/account.php");
         $accountModel = new account();
+        $update = $_POST["update"];
 
-        if ($_POST["update"]=="role") {
+        if ($update=="role") {
             $user = $_POST["username"];
             $role = $_POST["role"];
 
@@ -71,11 +72,30 @@
             } else echo "fail";
 
             return;
-        }
+        } else if ($update=="profile") {
+            // Nhan input
+            $user = array(
+                "User" => $_SESSION['user']['User'],
+                "Name" => $_POST['name'],
+                "Email" => $_POST['email'],
+                "Password" => $_POST['password'],
+                "Phone" => $_POST['phone'],
+                "Address" => $_POST['address'],
+            );
 
+            $res = $accountModel->updateAccount($user);
+            if (trim($res)) {
+                echo "success";
+                $_SESSION["user"]["Password"] = $user["Password"];
+                $_SESSION["user"]["Name"] = $user["Name"];
+                $_SESSION["user"]["Email"] = $user["Email"];
+                $_SESSION["user"]["Phone"] = $user["Phone"];
+                $_SESSION["user"]["Address"] = $user["Address"];
+            } else echo "fail";
+        }
         // Nhan input
         $user = array(
-            "User" => $_SESSION['user']['User'],
+            "User" => $_POST['username'],
             "Name" => $_POST['name'],
             "Email" => $_POST['email'],
             "Password" => $_POST['password'],

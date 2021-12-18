@@ -107,7 +107,11 @@ if (isset($_GET["export"])) {
         $phpExcel->getActiveSheet()->setCellValue('C' . $rowStart, $val["Date"]);
         $phpExcel->getActiveSheet()->setCellValue('D' . $rowStart, $val["Shipping"]);
         $phpExcel->getActiveSheet()->setCellValue('E' . $rowStart, number_format($val["Total"]) . " đồng");
-        $phpExcel->getActiveSheet()->setCellValue('F' . $rowStart, $val["Status"]);
+        $status = "Chờ xử lý";
+        if ($val["Status"] == 1) $status == "Đang giao hàng";
+        if ($val["Status"] == 2) $status == "Đã giao hàng";
+        if ($val["Status"] == 3) $status == "Đã hủy";
+        $phpExcel->getActiveSheet()->setCellValue('F' . $rowStart, $status);
         $data_details = $invoiceModel->getDetails($val["Id"]);
         foreach ($data_details as $key_d=>$val_d) {
             $phpExcel->getActiveSheet()->setCellValue('G' . $rowStart, $val_d["Code"]);

@@ -117,6 +117,8 @@
                                             <th class="border-top-0">Mã sách</th>
                                             <th class="border-top-0">Tên sách</th>
                                             <th class="border-top-0">Số lượng</th>
+                                            <th class="border-top-0">Ngôn ngữ</th>
+                                            <th class="border-top-0">Năm xuất bản</th>
                                             <th class="border-top-0">Giá sách giấy (đồng)</th>
                                             <th class="border-top-0">Giá sách Ebook</th>
                                             <th class="border-top-0">Thao tác</th>
@@ -130,15 +132,18 @@
                                         $data = $bookModel->getBooks();
                                         $count = 1;
                                         foreach ($data as $key=>$val) {
-                                            $actionBtn = "<button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
+                                            $actionBtn = "<button f='edit' type='button' class='btn btn-info' data-bs-toggle='modal' data-bs-target='#updateModal'><i class='fas fa-pencil-alt'></i></button>
                                                            <button f='delete' type='button' class='btn btn-danger'><i class='fas fa-trash'></i></button>";
                                             $render =  "<tr>
                                                     <td>$count</td>
                                                     <td>".$val["Id"]."</td>
                                                     <td>".$val["Name"]."</td>
                                                     <td>".$val["Amount"]."</td>
+                                                    <td>".$val["Language"]."</td>
+                                                    <td>".$val["DayReleased"]."</td>
                                                     <td>".number_format($val["PriceBook"])."</td>
                                                     <td>".number_format($val["PriceEbook"])."</td>
+                                                    <td style='display: none'>".$val["Description"]."</td>
                                                     <td>".$actionBtn."</td>
                                                 </tr>";
                                             echo $render;
@@ -166,7 +171,7 @@
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-            <!-- Pop up add accounts -->
+            <!-- Pop up add books -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -264,6 +269,105 @@
                 </div>
             </div>
             <!-- ============================================================== -->
+
+            <!-- Pop up update accounts -->
+            <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateModalLabel">Cập nhật thông tin sách</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="update-form">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Mã sách</label>
+                                    <input type="text" class="form-control" id="code-edit" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Tên sách</label>
+                                    <input type="text" class="form-control" id="name-edit">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Danh mục</label>
+                                    <select class="form-select" id="category-edit">
+                                        <option selected>Chọn danh mục</option>
+                                        <?php
+                                        include_once("../class/category.php");
+                                        $categoryModel = new category();
+
+                                        $roles = $categoryModel->getCategory();
+                                        foreach ($roles as $key=>$val) {
+                                            echo "<option value='{$val['Id']}'>{$val['Name']}</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Tác giả</label>
+                                    <select class="form-select" id="author-edit">
+                                        <option selected>Chọn tác giả</option>
+                                        <?php
+                                        include_once("../class/author.php");
+                                        $authorModel = new author();
+
+                                        $roles = $authorModel->getAuthors();
+                                        foreach ($roles as $key=>$val) {
+                                            echo "<option value='{$val['Id']}'>{$val['Name']}</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Nhà xuất bản</label>
+                                    <select class="form-select" id="nxb-edit">
+                                        <option selected>Chọn nhà xuất bản</option>
+                                        <?php
+                                        include_once("../class/nxb.php");
+                                        $nxbModel = new nxb();
+
+                                        $roles = $nxbModel->getNXB();
+                                        foreach ($roles as $key=>$val) {
+                                            echo "<option value='{$val['Id']}'>{$val['Name']}</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Số lượng</label>
+                                    <input type="number" class="form-control" id="amount-edit">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Ngôn ngữ</label>
+                                    <input type="text" class="form-control" id="language-edit">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Năm xuất bản</label>
+                                    <input type="number" class="form-control" id="year-edit">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Mô tả sách</label>
+                                    <textarea type="text" class="form-control" id="description-edit" rows="4"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Giá sách giấy</label>
+                                    <input type="number" class="form-control" id="price-edit">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Giá ebook</label>
+                                    <input type="number" class="form-control" id="ebook-edit">
+                                </div>
+                                <div class="error">Error print here</div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="submit-update-form" type="button" class="btn btn-primary">Cập nhật</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
@@ -298,6 +402,13 @@
 <script>
     $(document).on("click", "tbody tr", function (e) {
         var code = $(this).find("td").eq(1).text();
+        var name = $(this).find("td").eq(2).text();
+        var amount = parseInt($(this).find("td").eq(3).text().split(",").join(""));
+        var language = $(this).find("td").eq(4).text();
+        var released = $(this).find("td").eq(5).text();
+        var price = parseInt($(this).find("td").eq(6).text().split(",").join(""));
+        var ebook = parseInt($(this).find("td").eq(7).text().split(",").join(""));
+        var description = $(this).find("td").eq(8).text();
         if (e.target == $(this).find("button")[1] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa sản phẩm "${code}" ?!`)) {
             $.ajax({
                 method:"post",
@@ -309,6 +420,17 @@
                     } else alert("Thao tác thất bại !");
                 }
             })
+        }
+
+        if (e.target == $(this).find("button")[0] && e.target.getAttribute("f") == "edit") {
+            $("#code-edit").val(code);
+            $("#name-edit").val(name);
+            $("#amount-edit").val(amount);
+            $("#language-edit").val(language);
+            $("#description-edit").val(description);
+            $("#price-edit").val(price);
+            $("#ebook-edit").val(ebook);
+            $("#year-edit").val(released);
         }
     })
 
@@ -347,6 +469,51 @@
                     price: price,
                     ebook: ebook,
                     create: "create"
+                },
+                success:function(res) {
+                    if (res.trim() == "success") {
+                        window.location = "manage_books.php";
+                    } else alert("Thao tác thất bại !");
+                }
+            })
+        }
+    })
+
+    $("#submit-update-form").click(function () {
+        var code_edit = document.getElementById("code-edit").value;
+        var name_edit = document.getElementById("name-edit").value;
+        var amount_edit = document.getElementById("amount-edit").value;
+        var language_edit = document.getElementById("language-edit").value;
+        var description_edit = document.getElementById("description-edit").value;
+        var price_edit = document.getElementById("price-edit").value;
+        var ebook_edit = document.getElementById("ebook-edit").value;
+        var category_edit = document.getElementById("category-edit").value;
+        var author_edit = document.getElementById("author-edit").value;
+        var nxb_edit = document.getElementById("nxb-edit").value;
+        var released_edit = document.getElementById("year-edit").value;
+
+        if (name_edit.length < 5 || amount_edit.length <= 0 || language_edit.length < 5
+            || description_edit.length < 5 || price_edit.length < 3 || ebook_edit.length < 3
+            || category_edit.trim() == "Chọn danh mục" || author_edit.trim() == "Chọn tác giả" || nxb_edit.trim() == "Chọn nhà xuất bản") {
+            $("#update-form div.error").css("display", "unset");
+            $("#update-form div.error").text("Vui lòng điền đầy đủ thông tin");
+        } else if (confirm("Lưu cập nhật tài khoản khách hàng ?")) {
+            $.ajax({
+                method:"post",
+                url:"../handle/handle_book.php",
+                data: {
+                    code: code_edit,
+                    name: name_edit,
+                    amount: amount_edit,
+                    language: language_edit,
+                    description: description_edit,
+                    price: price_edit,
+                    ebook: ebook_edit,
+                    category: category_edit,
+                    author: author_edit,
+                    nxb: nxb_edit,
+                    year: released_edit,
+                    update: "update"
                 },
                 success:function(res) {
                     if (res.trim() == "success") {

@@ -51,6 +51,17 @@ class books
         return $conn->execute($query);
     }
 
+    public function updateBook($book)
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "update san_pham set id_danh_muc = '{$book['Category']}', ten_san_pham = '{$book['Name']}', id_tac_gia = '{$book['Author']}', id_nha_xuat_ban = '{$book['Nxb']}',
+                 nam_xuat_ban = '{$book['Year']}', so_luong = '{$book['Amount']}', mo_ta_sach = '{$book['Description']}', ngon_ngu = '{$book['Language']}',
+                  gia_sach_giay = '{$book['Price']}', gia_sach_ebook = '{$book['Ebook']}' where id_san_pham = '{$book['Code']}'";
+        return $conn->execute($query);
+    }
+
     public function exportDataBook()
     {
         include_once("connect_db.php");

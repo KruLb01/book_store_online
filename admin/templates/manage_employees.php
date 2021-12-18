@@ -118,6 +118,7 @@
                                             <th class="border-top-0">Họ tên</th>
                                             <th class="border-top-0">Email</th>
                                             <th class="border-top-0">Số điện thoại</th>
+                                            <th class="border-top-0">Địa chỉ</th>
                                             <th class="border-top-0">Quyền</th>
                                             <th class="border-top-0">Thao tác</th>
                                         </tr>
@@ -133,13 +134,13 @@
                                         if ($val["Status"] == 0) {
                                             $render = "<tr cs='0' style='color:red'>";
                                             $actionBtn = "<button f='status' type='button' class='btn btn-success'>Mở khóa</button>
-                                                            <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
+                                                            <button f='edit' type='button' class='btn btn-info data-bs-toggle='modal' data-bs-target='#updateModal''><i class='fas fa-pencil-alt'></i></button>
                                                             <button f='delete' type='button' class='btn btn-danger' style='background: red'><i class='fas fa-trash'></i></button>
                                                             <button f='role' type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#exampleModal1'>Phân quyền</button>";
                                         } else {
                                             $render = "<tr cs='1'>";
                                             $actionBtn = "<button f='status' type='button' class='btn btn-secondary'>Khóa</button>
-                                                            <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
+                                                            <button f='edit' type='button' class='btn btn-info' data-bs-toggle='modal' data-bs-target='#updateModal'><i class='fas fa-pencil-alt'></i></button>
                                                             <button f='delete' type='button' class='btn btn-danger' style='background: red'><i class='fas fa-trash'></i></button>
                                                             <button f='role' type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#exampleModal1'>Phân quyền</button>";
                                         }
@@ -152,6 +153,7 @@
                                                     <td>".$val["Name"]."</td>
                                                     <td>".$val["Email"]."</td>
                                                     <td>".$val["Phone"]."</td>
+                                                    <td>".$val["Address"]."</td>
                                                     <td>".$val["Permission"]."</td>
                                                     <td>$actionBtn</td>
                                                 </tr>";
@@ -285,6 +287,51 @@
             </div>
             <!-- ============================================================== -->
 
+            <!-- Pop up update accounts -->
+            <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateModalLabel">Cập nhật thông tin nhân viên</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="update-form">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Tài khoản</label>
+                                    <input type="text" class="form-control" id="username-edit" disabled>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="password-edit">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Họ tên</label>
+                                    <input type="text" class="form-control" id="name-edit">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" id="email-edit">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Số điện thoại</label>
+                                    <input type="text" class="form-control" id="phone-edit">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address" class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="address-edit">
+                                </div>
+                                <div class="error">Error print here</div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button id="submit-update-form" type="button" class="btn btn-primary">Cập nhật</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center"> 2021 © Ample Admin brought to you by <a
@@ -320,6 +367,9 @@
     $(document).on("click", "tbody tr", function (e) {
         var user = $(this).find("td").eq(1).text();
         var name = $(this).find("td").eq(2).text();
+        var email = $(this).find("td").eq(3).text();
+        var phone = $(this).find("td").eq(4).text();
+        var address = $(this).find("td").eq(5).text();
         var status = this.getAttribute("cs");
         var first_target = $(this);
         if (e.target == $(this).find("button")[0] && e.target.getAttribute("f") == "status" && confirm(`Đồng ý cập nhật trạng thái tài khoản "${user}" ?!`)) {
@@ -341,6 +391,14 @@
                     } else alert("Thao tác thất bại !");
                 }
             })
+        }
+
+        if (e.target == $(this).find("button")[1] && e.target.getAttribute("f") == "edit") {
+            $("#username-edit").val(user);
+            $("#name-edit").val(name);
+            $("#email-edit").val(email);
+            $("#phone-edit").val(phone);
+            $("#address-edit").val(address);
         }
 
         if (e.target == $(this).find("button")[2] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa tài khoản "${user}" ?!`)) {
@@ -387,6 +445,39 @@
                     address: address,
                     permission: role,
                     create: "employee"
+                },
+                success:function(res) {
+                    if (res.trim() == "success") {
+                        window.location = "manage_employees.php";
+                    } else alert("Thao tác thất bại !");
+                }
+            })
+        }
+    })
+
+    $("#submit-update-form").click(function () {
+        var username = document.getElementById("username-edit").value;
+        var password = document.getElementById("password-edit").value;
+        var name = document.getElementById("name-edit").value;
+        var email = document.getElementById("email-edit").value;
+        var phone = document.getElementById("phone-edit").value;
+        var address = document.getElementById("address-edit").value;
+
+        if (username.length < 5 || password.length < 5 || name.length < 5 || email.length < 5 || phone.length < 5 || address.length < 5 ) {
+            $("#update-form div.error").css("display", "unset");
+            $("#update-form div.error").text("Vui lòng điền đầy đủ thông tin");
+        } else if (confirm("Lưu cập nhật tài khoản nhân viên ?")) {
+            $.ajax({
+                method:"post",
+                url:"../handle/handle_account.php",
+                data: {
+                    username: username,
+                    password: password,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    address: address,
+                    update: "update"
                 },
                 success:function(res) {
                     if (res.trim() == "success") {
