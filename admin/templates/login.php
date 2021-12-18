@@ -1,8 +1,8 @@
 <?php
-    session_start();
-    if (isset($_SESSION["user"])) {
-        header("Location: ../index.php");
-    }
+session_start();
+if (isset($_SESSION["user"])) {
+    header("Location: ../index.php");
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -84,24 +84,24 @@
     </style>
 </head>
 <body>
-    <div class="login">
-        <div class="login-container">
-            <div class="logo">
-                <img src="../static/images/logo.jpg" alt="Logo website">
-            </div>
+<div class="login">
+    <div class="login-container">
+        <div class="logo">
+            <img src="../static/images/logo.jpg" alt="Logo website">
+        </div>
 
-            <div class="content-login">
-                <form id="login-form">
-                    <label for="username">Tài khoản<input type="text" name="username" id="username"></label>
-                    <label for="password">Mật khẩu <input type="password" name="password" id="password"></label>
-                    <span class="error">Error print here</span>
-                    <div class="submit-container">
-                        <button id="login-btn">Đăng nhập</button>
-                    </div>
-                </form>
-            </div>
+        <div class="content-login">
+            <form id="login-form">
+                <label for="username">Tài khoản<input type="text" name="username" id="username"></label>
+                <label for="password">Mật khẩu <input type="password" name="password" id="password"></label>
+                <span class="error">Error print here</span>
+                <div class="submit-container">
+                    <button id="login-btn">Đăng nhập</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 </body>
 
 <script>
@@ -128,6 +128,9 @@
                     if (res.trim() == "success") {
                         $('.error').css('display','none');
                         window.location = '../index.php';
+                    } else if (res.trim() == "unable") {
+                        $('.error').html('Tài khoản đã bị khóa !');
+                        $('.error').css('display','block');
                     } else {
                         $('.error').html('Tài khoản hoặc mật khẩu không đúng !');
                         $('.error').css('display','block');
