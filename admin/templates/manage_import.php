@@ -132,7 +132,7 @@
                                         $data = $importModel->getNotes();
                                         $count = 1;
                                         foreach ($data as $key=>$val) {
-                                            $actionBtn = "<button f='details' type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#exampleModal'>Details</button>
+                                            $actionBtn = "<button f='details' type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#exampleModal'>Chi tiết</button>
                                                            <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
                                                            <button f='delete' type='button' class='btn btn-danger'><i class='fas fa-trash'></i></button>";
                                             $render =  "<tr>

@@ -130,13 +130,16 @@
                                         $data = $invoiceModel->getInvoices();
                                         $count = 1;
                                         foreach ($data as $key=>$val) {
-                                            $typeUpdateBtn = $val["Status"] == 2 ? "none" : "unset";
+                                            $typeUpdateBtn = in_array($val["Status"], array(2, 3)) ? "none" : "unset";
+                                            $typeCancelBtn = in_array($val["Status"], array(2, 3)) ? "none" : "unset";
                                             $actionBtn = "<button f='details' type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#exampleModal'>Chi tiết</button>
                                                            <button f='update' type='hidden' class='btn btn-info' style='display: $typeUpdateBtn'>Cập nhật trạng thái</button>
+                                                           <button f='cancel' type='button' class='btn btn-danger' style='display: $typeCancelBtn'><b>X</b></button>
                                                            <button f='delete' type='button' class='btn btn-danger'><i class='fas fa-trash'></i></button>";
                                             $status = "Chờ xử lý";
                                             if ($val["Status"] == 1) $status = "Đang giao hàng";
                                             else if ($val["Status"] == 2) $status = "Đã giao hàng";
+                                            else if ($val["Status"] == 3) $status = "Đã hủy";
                                             $render =  "<tr>
                                                     <td>$count</td>
                                                     <td>".$val["Id"]."</td>
@@ -280,11 +283,23 @@
         var code = $(this).find("td").eq(1).text();
         var customer = $(this).find("td").eq(2).text();
         var total = $(this).find("td").eq(5).text();
-        if (e.target == $(this).find("button")[2] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa hóa đơn "${code}" ?!`)) {
+        if (e.target == $(this).find("button")[3] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa hóa đơn "${code}" ?!`)) {
             $.ajax({
                 method:"post",
                 url:"../handle/handle_invoice.php",
                 data: {code: code, delete: "delete"},
+                success:function(res) {
+                    if (res.trim() == "success") {
+                        window.location = "manage_invoice.php";
+                    } else alert("Thao tác thất bại !");
+                }
+            })
+        }
+        if (e.target == $(this).find("button")[2] && e.target.getAttribute("f") == "cancel" && confirm(`Đồng ý hủy đơn hàng "${code}" ?!`)) {
+            $.ajax({
+                method:"post",
+                url:"../handle/handle_invoice.php",
+                data: {code: code, cancel: "cancel"},
                 success:function(res) {
                     if (res.trim() == "success") {
                         window.location = "manage_invoice.php";

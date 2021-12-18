@@ -38,6 +38,22 @@ class invoice
         $query = "delete from hoa_don where id_hoa_don = '$code'; delete from chi_tiet_hoa_don where id_hoa_don = '$code'";
         return $conn->multiExecute($query);
     }
+
+    public function cancelInvoice($code)
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+        $invoice = new invoice();
+        $details = $invoice->getDetails($code);
+
+        $query = "update hoa_don set tinh_trang_don_hang = 3 where id_hoa_don = '$code';";
+
+        foreach ($details as $key=>$val) {
+            $query .= "update san_pham set so_luong = so_luong + '{$val['Amount']}' where id_san_pham = N'{$val['Id Product']}';";
+        }
+        return $conn->multiExecute($query);
+    }
+
     public function updateStatusInvoice($code)
     {
         include_once("connect_db.php");
@@ -52,7 +68,7 @@ class invoice
         include_once("connect_db.php");
         $conn = new connect_db();
 
-        $query = "select ct.id_san_pham as code, sp.ten_san_pham as name, ct.loai as type, ct.so_luong as amount, ct.don_gia as price 
+        $query = "select ct.id_san_pham as code, sp.id_san_pham as product, sp.ten_san_pham as name, ct.loai as type, ct.so_luong as amount, ct.don_gia as price 
                 from hoa_don, chi_tiet_hoa_don as ct, san_pham as sp 
                 where hoa_don.id_hoa_don = ct.id_hoa_don 
                   and ct.id_san_pham = sp.id_san_pham 
@@ -65,6 +81,7 @@ class invoice
             while ($row = mysqli_fetch_array($data)) {
                 $details[] = array(
                     "Code" => $row["code"],
+                    "Id Product" => $row["product"],
                     "Name" => $row["name"],
                     "Type" => $row["type"],
                     "Amount" => number_format($row["amount"]),
