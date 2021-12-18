@@ -106,11 +106,6 @@
         $res = $accountModel->updateAccount($user);
         if (trim($res)) {
             echo "success";
-            $_SESSION["user"]["Password"] = $user["Password"];
-            $_SESSION["user"]["Name"] = $user["Name"];
-            $_SESSION["user"]["Email"] = $user["Email"];
-            $_SESSION["user"]["Phone"] = $user["Phone"];
-            $_SESSION["user"]["Address"] = $user["Address"];
         } else echo "fail";
     }
 
