@@ -4,7 +4,7 @@ class book {
     {
         include_once 'connect_db.php';
         $connectDB = new connect_db();
-        return $connectDB -> select("select * from san_pham order by rand() limit $start,$end");
+        return $connectDB -> select("select * from san_pham limit $start,$end");
     }
     public function findSimilarBook($id_san_pham)
     {

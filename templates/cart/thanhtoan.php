@@ -153,17 +153,15 @@
                             ?>
                         </div>
                     </div>
-                    <form method="POST">
-                        <div class="container-message-fill-in">
-                            <span><font color='red'>(*)</font> Điền vào các mục này</span>
-                        </div>
+                    <form>
                         <div class="radiobox-container">
                             <div class="radiobox-title">
                                 <span>Chọn phương thức giao hàng</span>
                             </div>
                             <?php 
-                                $shipMethods = $shipment_methodModel ->getAllShipmentMethod();
-                                echo '<select name="ship_method">';
+                                $shipMethods = $shipment_methodModel ->getAllShipmentMethods();
+                                echo '<select id="ship_method" name="ship_method">'
+                                      . '<option hidden></option>';
                                 if($shipMethods != array())
                                 {
                                     foreach($shipMethods as $shipMethod){
@@ -171,10 +169,11 @@
                                     }
                                 }
                                 else{
-                                    echo '<option value="-1">Không tìm thấy phương thức giao hàng</option>';
+                                    echo '<option value="">Không tìm thấy phương thức giao hàng</option>';
                                 }
                                 echo '</select>';
                             ?>
+                            <span class="no-choice-opt"></span>
                         </div>
                         <div class="container-sale-input">
                             <div class="row">
@@ -182,56 +181,12 @@
                                     <span>Nhập mã sale để được giảm giá</span>
                                 </div>
                                 <div class="col">
-                                    <input type="text" name="sale-code" id="input-sale-code" value=""/>
-                                    <div class="show-error-sale-code">
-                                        <span></span>
-                                    </div>
-                                    <div class="new-update-total">
+                                    <input type="text" name="sale-code" id="sale-code" value=""/>
+                                    <div class="message-error-code-sale">
                                         <span></span>
                                     </div>
                                 </div>
                             </div>
-                            <script>
-                                $(document).ready(function(){
-                                    $("#input-sale-code").keyup(function(){
-                                        if($(this).val()==="")
-                                        {
-                                            $(".container-sale-input .show-error-sale-code span").text("");
-                                            $(".container-sale-input .show-error-sale-code span").removeClass("active-text");
-                                            $(".container-sale-input .show-error-sale-code span").removeClass("error-text");
-                                            $(".container-sale-input .new-update-total span").html("");
-                                        }
-                                        else{
-                                            $.ajax({
-                                                type:"POST",
-                                                url:"xulymasale.php",
-                                                data:{
-                                                    act:"check",
-                                                    code:$(this).val(),
-                                                    total:<?php echo $total;?>
-                                                },
-                                                success:function(data)
-                                                {
-                                                    var getData = JSON.parse(data);
-                                                    if(!getData.isValid)
-                                                    {
-                                                        $(".container-sale-input .show-error-sale-code span").text("Mã sale không hợp lệ");
-                                                        $(".container-sale-input .show-error-sale-code span").removeClass("active-text");
-                                                        $(".container-sale-input .show-error-sale-code span").addClass("error-text");
-                                                        $(".container-sale-input .new-update-total span").html("");
-                                                    }
-                                                    else{
-                                                        $(".container-sale-input .show-error-sale-code span").text("Mã sale khớp ["+getData.tensale+"]");
-                                                        $(".container-sale-input .show-error-sale-code span").removeClass("error-text");
-                                                        $(".container-sale-input .show-error-sale-code span").addClass("active-text");
-                                                        $(".container-sale-input .new-update-total span").html(getData.new_total);
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    });
-                                });
-                            </script>
                         </div>
                         <div class="submit-checkout">
                             <input type="submit" class="primary" value="Thanh toán"/>
@@ -297,54 +252,63 @@
         <script src="../../assets/js/main.js"></script>
         <script type='text/javascript'>
             $(document).ready(function(){
-                $("input[type='radio']").click(function(){
-                    if($("input[type='radio']").is(":checked")){
-                        $("input[type='radio']").prop("checked",false);
-                        $(this).prop("checked",true);
-                    }
-                    else $(this).prop("checked",true);
+                $("#input-sale-code").keyup(function(){
+                    $.ajax({
+                        url: "../../handle/handle_sale.php",
+                        type: "POST",
+                        data:{
+                            action: "find",
+                            id_sale: $(this).val(),
+                        },
+                        success: function(reps)
+                        {
+                            var getData = JSON.parse(reps);
+                            if(getData.valid)
+                            {
+                                $("div.message-error-code-sale").css("color","green");
+                                $("div.message-error-code-sale").text(getData.message);
+                            }
+                            else {
+                                $("div.message-error-code-sale").css("color","red")
+                                $("div.message-error-code-sale").text(getData.message);
+                            }
+                        }
                     });
-                     $("input[type='submit']").click(function(e){
-                        e.preventDefault();
-                        
-                        else{
-                            if(!$("input[type='radio']").is(":checked"))
+                });
+                $("input[type=submit]").click(function(e){
+                    e.preventDefault();
+                    var isNotEmptyCart = <?php if(isset($_SESSION['cart']) && $_SESSION['cart']) {echo 1;} else echo 0; ?>;
+                    if(isNotEmptyCart === 0){ //Empty cart found
+                        return;
+                    }
+                    if($("#ship_method").val() === "")
+                    {
+                        $(".no-choice-opt").text("(*) Vui lòng chọn phương thức giao hàng");
+                        $(".no-choice-opt").css("color","red");
+                        return;
+                    }
+                    if($("#input-sale-code").css("color") === "red")
+                    {
+                        return;
+                    }
+                    else {
+                        $.ajax({
+                            url: "../../handle/handle_invoice.php",
+                            type: "POST",
+                            data: {
+                                action: "add",
+                                ship_method: $("#ship_method").val(),
+                                id_sale: $("#sale-code").val()
+                            },
+                            success: function(reps)
                             {
-                                alert("Vui lòng chọn phương thức giao hàng");
-                                return;
+                                var getData = JSON.parse(reps);
+                                console.log(getData.success);
                             }
-                            if($(".container-sale-input .show-error-sale-code span").hasClass("error-text"))
-                            {
-                                $("html,body").animate({scrollTop: $(".container-sale-input .show-error-sale-code span").offset().top},500);
-                            }
-                            else{
-                                $.ajax({
-                                    url:"xulyhoadon.php",
-                                    type:"POST",
-                                    data: "act=add&"+$("form").serialize()+"&total="+'<?php echo $total;?>',
-                                    success:function(data)
-                                    {
-                                        var getData = JSON.parse(data);
-                                                    alert(getData.msg);
-                                                    if(getData.success===1)
-                                                    {
-                                                        $(".container-list-product-incart table .row-product-item").remove();
-                                                        $(".container-sale-input .show-error-sale-code span").removeClass("error-text");
-                                                        $(".container-sale-input .show-error-sale-code span").removeClass("active-text");
-                                                        $(".container-sale-input .show-error-sale-code span").text("");
-                                                        $(".total-price-all-products span").html("0<sup>đ</sup>");
-                                                        $("#input-sale-code").val("");
-                                                        $(".new-update-total span").html("");
-                                                    }    
-                                                }
-                                            });
-                                        }
-                                    }
-                                else{
-                                    alert("Giỏ hàng của bạn đang trống");
-                                }
-                            });
                         });
-                    </script>
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

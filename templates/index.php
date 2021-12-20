@@ -27,16 +27,35 @@
             a.product-link {
                 border-bottom: none;
             }
-            .product-items {
-                flex-wrap: wrap;
-                display: flex;
-                
+            .product-items{
+                display:flex;
+                width:100%;
+                flex-wrap:wrap;
+                text-align: center;
+                justify-content: space-around;
             }
-            .prod-item .prod-image {
-                width: 200px;
-                height:150px;
+            .product-items .product-item{
+                width:30%;
+                height:auto;
+                -moz-transition: -moz-transform 0.5s ease, opacity 0.5s ease;
+                -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+                -ms-transition: -ms-transform 0.5s ease, opacity 0.5s ease;
+                transition: transform 0.5s ease, opacity 0.5s ease;
             }
-            .prod-image 
+            .product-link {
+                -moz-transform: scale(1.1);
+		webkit-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+		transform: scale(1.1);
+            }
+            .prod-image {
+                height:300px;
+            }
+            .prod-image img{
+                width:100%;
+                padding:10px;
+                height:100%;
+            }
         </style>
     </head>
 	<body class="is-preload">
@@ -104,7 +123,7 @@
                                                                         $prodImageDetail = $prod_imageQuery -> getFirstImageBook($row['id_san_pham']);
                                                                         $nameAuthor = $authorDetail['ten_tac_gia'];
                                                                         $linkImage = $prodImageDetail['link_hinh_anh'];
-                                                                        echo "<div class='prod-item'>
+                                                                        echo "<div class='product-item'>
                                                                                 <a class='product-link' href='product-details.php?id_san_pham=$identityBook'>
                                                                                     <div class='prod-image'>
                                                                                         <img src='../images/$linkImage' alt=''/>
@@ -119,7 +138,7 @@
                                                                     }
                                                                 }
                                                             ?>
-							</section>
+							</div>
 							<p class="text-center"><a href="products.php">Xem nhiều sách hơn &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
 							<br>
 							<h2 class="h2">Các bài viết đánh giá</h2>

@@ -508,7 +508,7 @@
             data: {
                 username: username,
                 password: password,
-                login: true
+                action: "login"
             },
             success: function(res) {
                 if (res.trim() === "success") {
@@ -537,7 +537,11 @@
         $.ajax({
             method:"post",
             url: "../../handle/handle_account.php",
-            data: "register=true&"+$("#register-form").serialize(),
+            data: {
+                username: username,
+                password: password,
+                action: "register"
+            },
             success: function(res) {
                 if (res.trim()=="success") {
                     var a = <?php if(isset($_POST['next'])){echo '"'.$_POST['next'].'"';}else{echo "'../index.php'";}?>;

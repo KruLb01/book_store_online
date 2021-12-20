@@ -9,15 +9,28 @@ class sale {
         {
             if(mysqli_num_rows($result) === 1)
             {
-                return array("success" => true,"sale" => $result);
+                return true;
             }
             else {
-                return array("success" => false,"message" => "id_sale_not_found");
-            }
-                
+                return false;
+            }              
         }
         else {
-            return array("success" => false,"message" => "somethings happened wrong");
+            return false;
+        }
+    }
+    public function getSale($id_sale)
+    {
+        include_once 'connect_db.php';
+        $connectDB = new connect_db();
+        $result = $connectDB ->select("select * from sale where id_sale = '$id_sale'");
+        if($result)
+        {
+            $row = mysqli_fetch_array($result);
+            return $row;
+        }
+        else {
+            return array();
         }
     }
 }

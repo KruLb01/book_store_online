@@ -42,7 +42,13 @@
                 }
                 .prod-image img{
                     width: 55%;
-                    height: 180px;
+                    height: 150px;
+                }
+                span.more-content{
+                    display: none;
+                }
+                .read-more{
+                    color: blue;
                 }
             </style>
 	</head>
@@ -126,6 +132,15 @@
                                                     $nameAuthor = $authorDetail['ten_tac_gia'];
                                                     $yearPublish = $book['nam_xuat_ban'];
                                                     $bookDescription = $book['mo_ta_sach'];
+                                                    $readmore = "";
+                                                    if(strlen($bookDescription) > 500)
+                                                    {
+                                                        $morecontent = substr($bookDescription, 500, strlen($bookDescription));
+                                                        $readmore  = "<span class='dots'>...</span>"
+                                                                   . "<span class='more-content'>$morecontent</span>"
+                                                                   . "<a class='read-more' href='#'> Read more</a>";
+                                                        $bookDescription = substr($bookDescription,0,"500");
+                                                    }
                                                     $bookLanguage = $book['ngon_ngu'];
                                                     $firstImageLink = $prodImagesLink[0][2];
                                                     echo "<div class='inner'>
@@ -140,7 +155,7 @@
                                                                                 <div id='book-year-publish'><span><b>Năm xuất bản:</b> $yearPublish</span></div>
                                                                                 <div id='book-publisher'><span><b>Nhà xuất bản:</b> $publisherName</span></div>
                                                                                 <div id='book-language'><span><b>Ngôn ngữ:</b> $bookLanguage</span></div>
-                                                                                <div id='book-description'><p><b>Mô tả:</b><br/> $bookDescription</p></div>
+                                                                                <div id='book-description'><p><span><b>Mô tả:</b><br/> $bookDescription</span>$readmore</p></div>
                                                                                 <div class='row'>
                                                                             <div class='col-sm-4'>
                                                                                 <label class='control-label'>Loại sách</label>
@@ -253,7 +268,18 @@
                         function isNumber(number){
                             return parseInt(number);
                         }
-                        $(".add-to-cart").click( (e) => {
+                        $(".read-more").click ((e) => {
+                            e.preventDefault();
+                            $(".dots").toggle();
+                            $(".more-content").toggle();
+                            if($(".read-more").text().trim() === "Read more"){
+                                $(".read-more").text(" Read less");
+                            }
+                            else {
+                                $(".read-more").text(" Read more");
+                            }
+                        });
+                        $(".add-to-cart").click ((e) => {
                             e.preventDefault();
                             var isLogin = <?php if(isset($_SESSION['customer'])){echo 1;}else{echo 0;}?>;
                             if(isLogin === 0)
@@ -268,7 +294,7 @@
                             else {
                                 var idsp = '<?php echo $_GET['id_san_pham'] ?>';
                                 $.ajax({
-                                    url: "../handle/xulygiohang.php",
+                                    url: "../handle/handle_cart.php",
                                     type: "POST",
                                     data: {id_san_pham: idsp, loai_sach: $("#book-type").val(), soluong: $("#quantity").val()},
                                     success: function(response)
