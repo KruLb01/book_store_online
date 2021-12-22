@@ -514,7 +514,7 @@
                 if (res.trim() === "success") {
                     var a = <?php if(isset($_POST['next'])){echo '"'.$_POST['next'].'"';}else{echo "'../index.php'";}?>;
                     window.location.href = a;
-                } else alert("Login failed");
+                } else alert("Tài khoản đã bị khóa");
             }
         })
     })

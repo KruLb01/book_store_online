@@ -11,6 +11,9 @@ if (!isset($_SESSION["user"])) {
     }
 }
 ?>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Antic+Slab&family=Pushster&display=swap');
+</style>
 <header class="topbar" data-navbarbg="skin5">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <div class="navbar-header" data-logobg="skin6">
@@ -21,13 +24,16 @@ if (!isset($_SESSION["user"])) {
                 <!-- Logo icon -->
                 <b class="logo-icon">
                     <!-- Dark Logo icon -->
-                    <img src="../static/plugins/images/logo-icon.png" alt="homepage" />
+<!--                    <img src="../static/plugins/images/logo-icon.png" alt="homepage" />-->
+                    <img src="../static/images/logo.jpg" alt="homepage" style="width: 33px; height: 31px"/>
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
                 <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="../static/plugins/images/logo-text.png" alt="homepage" />
+                    <h3 style="color:black; margin-bottom: 0; font-family: 'Pushster', cursive;">ReadBok<span style="color:black; margin-bottom: 0; font-family: 'Antic Slab', serif;">admin</span>
+                    </h3>
+<!--                            <img src="../static/plugins/images/logo-text.png" alt="homepage" />-->
                         </span>
             </a>
             <!-- ============================================================== -->

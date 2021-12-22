@@ -8,7 +8,7 @@ class account
         include_once("connect_db.php");
         $conn = new connect_db();
 
-        $query = "select * from nguoi_dung where tai_khoan = '$username' and mat_khau = '$password'";
+        $query = "select * from nguoi_dung where id_quyen = 1 and tai_khoan = '$username' and mat_khau = '$password'";
         $data = $conn->select($query);
         if (mysqli_num_rows($data)==0) {
             $user = array();

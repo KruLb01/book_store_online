@@ -29,6 +29,10 @@
                 if (sizeof($data)==0) {
                     echo "fail";
                 } else {
+                    if ($data["Status"]==0) {
+                        echo "fail";
+                        return;
+                    }
                     $_SESSION["customer"]["User"] = $data["User"];
                     $_SESSION["customer"]["Password"] = $data["Password"];
                     $_SESSION["customer"]["Name"] = $data["Name"];

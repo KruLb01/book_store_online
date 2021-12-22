@@ -23,7 +23,7 @@
 <nav id="menu">
     <h2>Menu</h2>
     <ul>
-        <li><a href="index.php">Trang chủ</a></li>
+        <li><a href="index.php" class="active">Trang chủ</a></li>
         <li><a href="products.php">Xem danh mục sản phẩm</a></li>
         <li><a href="checkout.html">Thanh toán</a></li>
         <li>
@@ -40,12 +40,12 @@
         <?php
             if (isset($_SESSION["customer"])) {
                 echo "<li>
-                    <a href='#' class='dropdown-toggle active'><i class='fas fa-user' style='padding-right: 0.2rem'></i> {$_SESSION['customer']['User']}</a>
+                    <a href='#' class='dropdown-toggle'><i class='fas fa-user' style='padding-right: 0.2rem'></i> {$_SESSION['customer']['User']}</a>
                             <ul>
-                        <li><a href='./profile.php'><i class='fas fa-id-badge' style='padding-right: 0.6rem'></i> Hồ sơ</a></li>
-                        <li><a href='./change_password.php'><i class='fas fa-key' style='padding-right: 0.2rem'></i> Đổi mật khẩu</a></li>
-                        <li><a href='../cart/'><i class='fas fa-shopping-cart' style='padding-right: 0.25rem'></i> Giỏ hàng</a></li>
-                        <li><a href='../invoice/'><i class='fas fa-receipt' style='padding-right: 0.7rem'></i> Đơn hàng</a></li>
+                        <li><a href='profile.php'><i class='fas fa-id-badge' style='padding-right: 0.6rem'></i> Hồ sơ</a></li>
+                        <li><a href='change_password.php'><i class='fas fa-key' style='padding-right: 0.2rem'></i> Đổi mật khẩu</a></li>
+                        <li><a href='blog.html'><i class='fas fa-shopping-cart' style='padding-right: 0.25rem'></i> Giỏ hàng</a></li>
+                        <li><a href='testimonials.html'><i class='fas fa-receipt' style='padding-right: 0.7rem'></i> Đơn hàng</a></li>
                         <li><a href='../../handle/handle_account.php?logout=logout'><i class='fas fa-sign-out-alt' style='padding-right: 0.35rem'></i> Đăng xuất</a></li>
                     </ul>
                 </li>";
