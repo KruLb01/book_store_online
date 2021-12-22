@@ -104,6 +104,15 @@ class account
         return $res;
     }
 
+    public function updatePassword($user, $password) {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "update nguoi_dung set mat_khau = '$password' where tai_khoan = '$user'";
+        $res = $conn->execute($query);
+        return $res;
+    }
+
     public function deleteAccount($user)
     {
         include_once("connect_db.php");
@@ -129,8 +138,8 @@ class account
         $conn = new connect_db();
 
         $query = "update nguoi_dung set ho_ten = N'{$user['Name']}', email = '{$user['Email']}'
-                    , dia_chi = N'{$user['Address']}', so_dien_thoai = '{$user['Phone']}'
-                    , mat_khau = '{$user['Password']}' where tai_khoan = '{$user['User']}'";
+                    , dia_chi = N'{$user['Address']}', so_dien_thoai = '{$user['Phone']}' 
+                    where tai_khoan = '{$user['User']}'";
         return $conn->execute($query);
     }
 
@@ -141,5 +150,54 @@ class account
 
         $query = "update nguoi_dung set id_quyen = $role where tai_khoan = '$user'";
         return $conn->execute($query);
+    }
+
+    public function getNewCustomer()
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "select * from nguoi_dung where id_quyen = 1 order by ngay_tao limit 0, 5";
+        $data = $conn->select($query);
+        if (mysqli_num_rows($data)==0) {
+            $customer = array();
+        } else {
+            while ($row = mysqli_fetch_array($data)) {
+                $customer[] = array(
+                    "User" => $row["tai_khoan"],
+                    "Email" => $row["email"],
+                    "Name" => $row["ho_ten"],
+                    "Phone" => $row["so_dien_thoai"],
+                );
+            }
+        }
+        return $customer;
+    }
+
+    public function getMostValueCustomer()
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "select nguoi_dung.email as Email, nguoi_dung.ho_ten as Name, nguoi_dung.so_dien_thoai as Phone, sum(hoa_don.tong_gia) as total, count(hoa_don.id_hoa_don) as totalInvoice  
+                from nguoi_dung, hoa_don 
+                where nguoi_dung.tai_khoan = hoa_don.id_nguoi_dung 
+                group by hoa_don.id_nguoi_dung 
+                order by total desc";
+        $data = $conn->select($query);
+        if (mysqli_num_rows($data)==0) {
+            $customer = array();
+        } else {
+            while ($row = mysqli_fetch_array($data)) {
+                $customer[] = array(
+                    "Email" => $row["Email"],
+                    "Name" => $row["Name"],
+                    "Phone" => $row["Phone"],
+                    "Total" => number_format($row["total"]),
+                    "Amount Invoice" => number_format($row["totalInvoice"]),
+                );
+            }
+        }
+        return $customer;
     }
 }

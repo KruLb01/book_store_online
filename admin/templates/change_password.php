@@ -11,7 +11,7 @@
     <meta name="description"
         content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Hồ sơ</title>
+    <title>Đổi mật khẩu</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../static/plugins/images/favicon.png">
@@ -133,37 +133,29 @@
                             <div class="card-body">
                                 <form class="form-horizontal form-material" id="form-profile">
                                     <div class="form-group mb-4">
-                                        <label for="name" class="col-md-12 p-0">Họ tên</label>
+                                        <label for="root-password" class="col-md-12 p-0">Mật khẩu cũ</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" value="<?php echo $_SESSION['user']['Name'] ?>"
-                                                class="form-control p-0 border-0" id="name"> </div>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label for="email" class="col-md-12 p-0">Email</label>
-                                        <div class="col-md-12 border-bottom p-0">
-                                            <input type="email" value="<?php echo $_SESSION['user']['Email'] ?>"
-                                                class="form-control p-0 border-0"
-                                                id="email">
+                                            <input type="password" value="" class="form-control p-0 border-0" id="root-password">
+                                            <input type="hidden" value="<?= $_SESSION['user']['Password']?>" class="form-control p-0 border-0" id="user-password">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="phone" class="col-md-12 p-0">Số điện thoại</label>
+                                        <label for="new-password" class="col-md-12 p-0">Mật khẩu mới</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" value="<?php echo $_SESSION['user']['Phone'] ?>"
-                                                class="form-control p-0 border-0" id="phone">
+                                            <input type="password" value="" class="form-control p-0 border-0" id="new-password">
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="address" class="col-md-12 p-0">Địa chỉ</label>
+                                        <label for="re-password" class="col-md-12 p-0">Nhập lại mật khẩu mới</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" value="<?php echo $_SESSION['user']['Address'] ?>"
-                                                class="form-control p-0 border-0" id="address">
+                                            <input type="password" value="" class="form-control p-0 border-0" id="re-password">
                                         </div>
                                     </div>
+
                                     <div class="form-group mb-4 error">Error print here</div>
                                     <div class="form-group mb-4">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-success">Cập nhật hồ sơ</button>
+                                            <button class="btn btn-success">Đổi mật khẩu</button>
                                         </div>
                                     </div>
                                 </form>
@@ -222,31 +214,34 @@
 <script>
     $(document).on("click", "#form-profile", function(e) {
         var form = $(this);
-        if (form.find("button.btn")[0] == e.target)
-        {
+        if (form.find("button.btn")[0] == e.target) {
             e.preventDefault();
-            var name = document.getElementById("name").value;
-            var email = document.getElementById("email").value;
-            var phone = document.getElementById("phone").value;
-            var address = document.getElementById("address").value;
+            var password = document.getElementById("user-password").value;
+            var root_password = document.getElementById("root-password").value;
+            var new_password = document.getElementById("new-password").value;
+            var re_password = document.getElementById("re-password").value;
 
-            if (name.length < 5 || email.length < 5 || phone.length != 10 || address.length < 5) {
+            if (root_password.trim().length == 0 || new_password.trim().length < 5 || re_password.trim().length < 5) {
                 $("#form-profile div.error").css("display", "block");
-                $("#form-profile div.error").text("Invalid input");
-            } else if (confirm("Đồng ý cập nhật thông tin cá nhân ?!")) {
+                $("#form-profile div.error").text("Mật khẩu không hợp lệ");
+            } else if (root_password != password) {
+                $("#form-profile div.error").css("display", "block");
+                $("#form-profile div.error").text("Mật khẩu cũ không đúng");
+            } else if (new_password != re_password) {
+                $("#form-profile div.error").css("display", "block");
+                $("#form-profile div.error").text("Mật khẩu nhập lại không đúng");
+            } else if (confirm("Đồng ý đổi mật khẩu")) {
                 $.ajax({
                     method: "post",
                     url: "../handle/handle_account.php",
                     data: {
-                        name: name,
-                        email: email,
-                        phone: phone,
-                        address: address,
-                        update: "profile"
+                        root_password: root_password,
+                        new_password: new_password,
+                        update: "password"
                     },
                     success: function (res) {
                         if (res.trim() == "success") {
-                            window.location = "profile.php";
+                            window.location = "change_password.php";
                         } else alert("Thao tác thất bại !");
                     }
                 })

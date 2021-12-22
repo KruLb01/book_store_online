@@ -78,7 +78,6 @@
                 "User" => $_SESSION['user']['User'],
                 "Name" => $_POST['name'],
                 "Email" => $_POST['email'],
-                "Password" => $_POST['password'],
                 "Phone" => $_POST['phone'],
                 "Address" => $_POST['address'],
             );
@@ -86,27 +85,26 @@
             $res = $accountModel->updateAccount($user);
             if (trim($res)) {
                 echo "success";
-                $_SESSION["user"]["Password"] = $user["Password"];
                 $_SESSION["user"]["Name"] = $user["Name"];
                 $_SESSION["user"]["Email"] = $user["Email"];
                 $_SESSION["user"]["Phone"] = $user["Phone"];
                 $_SESSION["user"]["Address"] = $user["Address"];
             } else echo "fail";
-        }
-        // Nhan input
-        $user = array(
-            "User" => $_POST['username'],
-            "Name" => $_POST['name'],
-            "Email" => $_POST['email'],
-            "Password" => $_POST['password'],
-            "Phone" => $_POST['phone'],
-            "Address" => $_POST['address'],
-        );
 
-        $res = $accountModel->updateAccount($user);
-        if (trim($res)) {
-            echo "success";
-        } else echo "fail";
+            return;
+        } else if ($update=="password") {
+            $user = $_SESSION["user"]["User"];
+            $rootPassword = $_POST["root_password"];
+            $newPassword = $_POST["new_password"];
+
+            $res = $accountModel->updatePassword($user, $newPassword);
+            if (trim($res)) {
+                $_SESSION["user"]["Password"] = $newPassword;
+                echo "success";
+            } else echo "fail";
+
+            return;
+        }
     }
 
     if (isset($_GET["export"])) {
