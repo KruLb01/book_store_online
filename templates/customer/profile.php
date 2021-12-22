@@ -119,7 +119,7 @@
             if (name.trim().length < 5 || phone.trim().length != 10 || email.trim().length < 5 || address.trim().length < 5 ) {
                 form.find(".error").css("display", "unset");
                 form.find(".error").text("Thông tin không hợp lệ");
-            } else if (prompt("Nhập OK để cập nhật thông tin")=="OK") {
+            } else if (prompt("Nhập OK để cập nhật thông tin")==password) {
                 $.ajax({
                     method: "post",
                     url: "../../handle/handle_account.php",

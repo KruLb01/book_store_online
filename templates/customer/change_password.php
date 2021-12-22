@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/css/main.css" />
     <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
-    <link rel="icon" type="image/png" sizes="16x16" href="../admin/static/plugins/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../admin/static/plugins/images/favicon.png">
     <title>Đổi mật khẩu</title>
     <style>
         body {
@@ -100,11 +100,11 @@
     </div>
         <?php echo $_SESSION['customer']['Address'] ?>
     <!-- Scripts -->
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/jquery.scrolly.min.js"></script>
-    <script src="../assets/js/jquery.scrollex.min.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
 </body>
 <script>
     $("#save-btn").click(function() {
