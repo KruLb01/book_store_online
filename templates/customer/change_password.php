@@ -91,14 +91,13 @@
                         <input type="hidden" name="password" value="<?php echo $_SESSION['customer']['Password'] ?>">
                         <div class="col-md-12 mt-3"><label class="labels">Nhập mật khẩu mới</label><input name="new-password" type="password" class="form-control" placeholder="Nhập mật khẩu mới .."></div>
                         <div class="col-md-12 mt-3"><label class="labels">Nhập lại mật khẩu</label><input name="re-password" type="password" class="form-control" placeholder="Nhập lại mật khẩu mới"></div>
+                        <div class="error">Error print here</div>
                     </div>
-                    <div class="error">Error print here</div>
                     <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" id="save-btn">Dổi mật khẩu</button></div>
                 </div>
             </div>
         </div>
     </div>
-        <?php echo $_SESSION['customer']['Address'] ?>
     <!-- Scripts -->
     <script src="../../assets/js/jquery.min.js"></script>
     <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -119,7 +118,7 @@
         } else if (new_password.trim() != re_password.trim()) {
             form.find(".error").css("display", "unset");
             form.find(".error").text("Mật khẩu không giống nhau");
-        } else if (prompt("Nhập OK để đổi mật khẩu")=="OK") {
+        } else if (prompt("Nhập mật khẩu cũ để đổi mật khẩu")==password) {
             $.ajax({
                 method: "post",
                 url: "../../handle/handle_account.php",
