@@ -8,7 +8,10 @@ class books
         include_once("connect_db.php");
         $conn = new connect_db();
 
-        $query = "select * from san_pham order by id_san_pham";
+        $query = "select san_pham.*, min(ha.link_hinh_anh) as img from san_pham, hinh_anh_san_pham as ha 
+                    where san_pham.id_san_pham = ha.id_san_pham 
+                    group by san_pham.id_san_pham 
+                    order by san_pham.id_san_pham";
         $data = $conn->select($query);
         if (mysqli_num_rows($data)==0) {
             $books = array();
@@ -16,6 +19,7 @@ class books
             while ($row = mysqli_fetch_array($data)) {
                 $books[] = array(
                     "Id" => $row["id_san_pham"],
+                    "Img" => $row["img"],
                     "Category" => $row["id_danh_muc"],
                     "Name" => $row["ten_san_pham"],
                     "Author" => $row["id_tac_gia"],
@@ -47,8 +51,9 @@ class books
         $conn = new connect_db();
 
         $query = "insert into san_pham(id_san_pham, id_danh_muc, ten_san_pham, id_tac_gia, id_nha_xuat_ban, nam_xuat_ban, so_luong, mo_ta_sach, ngon_ngu, gia_sach_giay, gia_sach_ebook) 
-                values('{$book['Code']}', '{$book['Category']}', '{$book['Name']}', '{$book['Author']}', '{$book['Nxb']}', '{$book['Released']}', '{$book['Amount']}', '{$book['Description']}', '{$book['Language']}', '{$book['Price']}', '{$book['Ebook']}')";
-        return $conn->execute($query);
+                values('{$book['Code']}', '{$book['Category']}', '{$book['Name']}', '{$book['Author']}', '{$book['Nxb']}', '{$book['Released']}', '{$book['Amount']}', '{$book['Description']}', '{$book['Language']}', '{$book['Price']}', '{$book['Ebook']}');
+                insert into hinh_anh_san_pham(id_hinh_anh, id_san_pham) values('HA{$book['Code']}', '{$book['Code']}')";
+        return $conn->multiExecute($query);
     }
 
     public function updateBook($book)

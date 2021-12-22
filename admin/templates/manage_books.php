@@ -115,6 +115,7 @@
                                         <tr>
                                             <th class="border-top-0">#</th>
                                             <th class="border-top-0">Mã sách</th>
+                                            <th class="border-top-0">Hình sách</th>
                                             <th class="border-top-0">Tên sách</th>
                                             <th class="border-top-0">Số lượng</th>
                                             <th class="border-top-0">Ngôn ngữ</th>
@@ -137,6 +138,7 @@
                                             $render =  "<tr>
                                                     <td>$count</td>
                                                     <td>".$val["Id"]."</td>
+                                                    <td><img src='../../images/".$val["Img"]."' alt='img' style='width:50px; height:50px'></td>
                                                     <td>".$val["Name"]."</td>
                                                     <td>".$val["Amount"]."</td>
                                                     <td>".$val["Language"]."</td>
@@ -402,13 +404,13 @@
 <script>
     $(document).on("click", "tbody tr", function (e) {
         var code = $(this).find("td").eq(1).text();
-        var name = $(this).find("td").eq(2).text();
-        var amount = parseInt($(this).find("td").eq(3).text().split(",").join(""));
-        var language = $(this).find("td").eq(4).text();
-        var released = $(this).find("td").eq(5).text();
-        var price = parseInt($(this).find("td").eq(6).text().split(",").join(""));
-        var ebook = parseInt($(this).find("td").eq(7).text().split(",").join(""));
-        var description = $(this).find("td").eq(8).text();
+        var name = $(this).find("td").eq(3).text();
+        var amount = parseInt($(this).find("td").eq(4).text().split(",").join(""));
+        var language = $(this).find("td").eq(5).text();
+        var released = $(this).find("td").eq(6).text();
+        var price = parseInt($(this).find("td").eq(7).text().split(",").join(""));
+        var ebook = parseInt($(this).find("td").eq(8).text().split(",").join(""));
+        var description = $(this).find("td").eq(9).text();
         if (e.target == $(this).find("button")[1] && e.target.getAttribute("f") == "delete" && confirm(`Đồng ý xóa sản phẩm "${code}" ?!`)) {
             $.ajax({
                 method:"post",
@@ -434,7 +436,8 @@
         }
     })
 
-    $("#submit-create-form").click(function () {
+    $("#submit-create-form").click(function (e) {
+        e.preventDefault();
         var code = document.getElementById("code").value;
         var category = document.getElementById("category").value;
         var name = document.getElementById("name").value;
