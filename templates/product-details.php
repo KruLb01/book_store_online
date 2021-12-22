@@ -81,9 +81,7 @@
 						<ul>
 							<li><a href='index.php'>Trang chủ</a></li>
 
-							<li><a href='products.php' class='active'>Sản phẩm</a></li>
-
-							<li><a href='checkout.html'>Thanh toán</a></li>
+							<li><a href='products.php' class='active'>Xem danh mục sản phẩm</a></li>
 
 							<li>
 								<a href='#' class='dropdown-toggle'>Giới thiệu</a>
@@ -101,7 +99,7 @@
                                                             if (isset($_SESSION["customer"])) {
                                                                 echo "<li>
                                                                     <a href='#' class='dropdown-toggle'><i class='fas fa-user' style='padding-right: 0.2rem'></i> {$_SESSION['customer']['User']}</a>
-                                                                            <ul>
+                                                                    <ul>
                                                                         <li><a href='./customer/profile.php'><i class='fas fa-id-badge' style='padding-right: 0.6rem'></i> Hồ sơ</a></li>
                                                                         <li><a href='./customer/change_password.php'><i class='fas fa-key' style='padding-right: 0.2rem'></i> Đổi mật khẩu</a></li>
                                                                         <li><a href='./cart/index.php'><i class='fas fa-shopping-cart' style='padding-right: 0.25rem'></i> Giỏ hàng</a></li>

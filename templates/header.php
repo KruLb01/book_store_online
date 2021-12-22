@@ -11,7 +11,7 @@
             </a>
             <div class="ml-auto">
                 <form action="products.php">
-                    <input type="text" name="id_san_pham" placeholder="Tìm kiếm sách" />
+                    <input type="text" name="product" placeholder="Tìm kiếm sách" required/>
                 </form>
             </div>
         </div>

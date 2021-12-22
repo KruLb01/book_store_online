@@ -42,12 +42,6 @@
                 -ms-transition: -ms-transform 0.5s ease, opacity 0.5s ease;
                 transition: transform 0.5s ease, opacity 0.5s ease;
             }
-            .product-link {
-                -moz-transform: scale(1.1);
-		webkit-transform: scale(1.1);
-                -ms-transform: scale(1.1);
-		transform: scale(1.1);
-            }
             .prod-image {
                 height:300px;
             }
@@ -55,6 +49,12 @@
                 width:100%;
                 padding:10px;
                 height:100%;
+            }
+            p.bookprice {
+                color:red;
+                font-weight: bold;
+                font-size:14pt;
+                margin: 0;
             }
         </style>
     </head>
@@ -122,6 +122,7 @@
                                                                         $authorDetail = $authorQuery -> getAuthor($row['id_tac_gia']);
                                                                         $prodImageDetail = $prod_imageQuery -> getFirstImageBook($row['id_san_pham']);
                                                                         $nameAuthor = $authorDetail['ten_tac_gia'];
+                                                                        $bookPrice = number_format($row['gia_sach_giay'],0, '', '.');
                                                                         $linkImage = $prodImageDetail['link_hinh_anh'];
                                                                         echo "<article>
                                                                                 <a class='product-link' href='product-details.php?id_san_pham=$identityBook'>
@@ -129,8 +130,8 @@
                                                                                         <img src='../images/$linkImage' alt=''/>
                                                                                     </div>
                                                                                     <div>
-                                                                                        <h2>$nameBook</h2>
-                                                                                        <span><b>Mã sách:</b> $identityBook</span><br/>
+                                                                                        <strong>$nameBook</strong><br/>
+                                                                                        <p class='bookprice'>$bookPrice<sup>đ</sup></p>
                                                                                         <p><b>Tác giả:</b> $nameAuthor</p>
                                                                                     </div>
                                                                                 </a>
