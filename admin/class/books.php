@@ -95,4 +95,31 @@ class books
         }
         return $books;
     }
+
+    public function getMostBoughtBook()
+    {
+        include_once("connect_db.php");
+        $conn = new connect_db();
+
+        $query = "select san_pham.*, tac_gia.ten_tac_gia as author, count(ct.id_hoa_don) as total 
+                from san_pham, chi_tiet_hoa_don as ct, tac_gia   
+                where san_pham.id_san_pham = ct.id_san_pham 
+                and san_pham.id_tac_gia = tac_gia.id_tac_gia 
+                group by ct.id_san_pham 
+                order by total desc";
+        $data = $conn->select($query);
+        if (mysqli_num_rows($data)==0) {
+            $book = array();
+        } else {
+            while ($row = mysqli_fetch_array($data)) {
+                $book[] = array(
+                    "Id" => $row["id_san_pham"],
+                    "Name" => $row["ten_san_pham"],
+                    "Author" => $row["author"],
+                    "Total" => number_format($row["total"]),
+                );
+            }
+        }
+        return $book;
+    }
 }
