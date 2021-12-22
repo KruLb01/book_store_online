@@ -109,7 +109,7 @@
 							<h2 class="h2">Sách nổi bật</h2>
 
 							<!-- Products -->
-							<div class="product-items">
+							<section class="tiles">
                                                             <?php
                                                                 $result = $bookQuery -> getRangeListBook(1, 6);
                                                                 if($result)
@@ -123,7 +123,7 @@
                                                                         $prodImageDetail = $prod_imageQuery -> getFirstImageBook($row['id_san_pham']);
                                                                         $nameAuthor = $authorDetail['ten_tac_gia'];
                                                                         $linkImage = $prodImageDetail['link_hinh_anh'];
-                                                                        echo "<div class='product-item'>
+                                                                        echo "<article>
                                                                                 <a class='product-link' href='product-details.php?id_san_pham=$identityBook'>
                                                                                     <div class='prod-image'>
                                                                                         <img src='../images/$linkImage' alt=''/>
@@ -134,11 +134,11 @@
                                                                                         <p><b>Tác giả:</b> $nameAuthor</p>
                                                                                     </div>
                                                                                 </a>
-                                                                             </div>";
+                                                                             </article>";
                                                                     }
                                                                 }
                                                             ?>
-							</div>
+							</section>
 							<p class="text-center"><a href="products.php">Xem nhiều sách hơn &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
 							<br>
 							<h2 class="h2">Các bài viết đánh giá</h2>

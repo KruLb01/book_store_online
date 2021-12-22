@@ -1,14 +1,25 @@
+<?php
+    session_start();
+    include_once '../class/category.php';
+    $categoriesModel = new category();
+?>
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Tổng hợp sách tại ĐỌC SÁCH ĐI</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../assets/css/main.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="icon" type="image/png" sizes="16x16" href="../admin/static/plugins/images/favicon.png">
-		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+            <title>ReadBok | Danh mục sách</title>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+            <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="../assets/css/main.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+            <link rel="icon" type="image/png" sizes="16x16" href="../admin/static/plugins/images/favicon.png">
+            <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+            <style>
+                .container {
+                    display:flex;
+                    flex-wrap: wrap;
+                }
+            </style>
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
@@ -61,91 +72,42 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Products</h1>
-
+							<h1>Danh mục sản phẩm</h1>
 							<div class="image main">
 								<img src="../images/banner-image-6-1920x500.jpg" class="img-fluid" alt="" />
 							</div>
 
 							<!-- Products -->
-							<section class="tiles">
-								<article class="style1">
-									<span class="image">
-										<img src="../images/product-1-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-								<article class="style2">
-									<span class="image">
-										<img src="../images/product-2-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-								<article class="style3">
-									<span class="image">
-										<img src="../images/product-3-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-
-								<article class="style4">
-									<span class="image">
-										<img src="../images/product-4-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-
-								<article class="style5">
-									<span class="image">
-										<img src="../images/product-5-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-
-								<article class="style6">
-									<span class="image">
-										<img src="../images/product-6-720x480.jpg" alt="" />
-									</span>
-									<a href="product-details.php">
-										<h2>Lorem ipsum dolor sit amet, consectetur</h2>
-										
-										<p><del>$19.00</del> <strong>$19.00</strong></p>
-
-										<p>Vestibulum id est eu felis vulputate hendrerit uspendisse dapibus turpis in </p>
-									</a>
-								</article>
-							</section>
-						</div>
+                                                        <div class="container">
+                                                            <form>
+                                                        <span>Category Name:</span>
+                                                        <?php
+                                                            $result = $categorymd->getAll();
+                                                            if($result)
+                                                            {
+                                                                while($row = mysqli_fetch_array($result))
+                                                                {
+                                                                    $isChecked = "";
+                                                                    if(isset($_GET['cateids']) && $_GET['cateids'])
+                                                                    {
+                                                                        if(in_array($row['CategoryID'],$_GET['cateids']))
+                                                                        {
+                                                                            $isChecked = "checked";
+                                                                        }
+                                                                    }
+                                                                    echo "<div class='form-check'>
+                                                                            <label class='form-check-label'>
+                                                                            <input type='checkbox' name='cateids[]' class='form-check-input' value='$row[0]' $isChecked>$row[1]
+                                                                          </div>";
+                                                                }
+                                                                echo "<div class='form-group'>
+                                                                        <button class='btn btn-info'>Filter</button>
+                                                                      </div>";
+                                                            }
+                                                        ?>
+                                                    </form>
+                                                </div>
+                                            </div>
 					</div>
 
 				<!-- Footer -->

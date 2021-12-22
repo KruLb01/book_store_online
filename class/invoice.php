@@ -15,7 +15,7 @@ class invoice {
             $last_id = intval($idNumber);
         }
         $total = 0;
-        $queries2 = "";
+        $queries2 = array();
         $last_id += 1;
         $strID = "HD".sprintf("%03d",$last_id);
         foreach($details as $detail)
@@ -24,11 +24,11 @@ class invoice {
             $bookType = $detail['loai'];
             $quantity = $detail['soluong'];
             $prodPrice = $detail['don_gia'];
-            $queries2 .= "insert into chi_tiet_hoa_don values (LAST_INSERT_ID(),'$prodID',$quantity,'$bookType',$prodPrice);";
+            array_push($queries2,"insert into chi_tiet_hoa_don values ('$strID','$prodID',$quantity,'$bookType',$prodPrice);");
             $total += $detail['soluong'] * $detail['don_gia'];
         }
         $query1 = "insert into hoa_don values ('$strID','$userid','$curDate',$total,'$ship_method',0,'$id_sale')";
-        $result1 = $connectdb -> executeTwoReferencTables($query1, $queries2, false);
+        $result1 = $connectdb -> executeTwoReferencTables($query1, $queries2);
         return $result1;
     }
 }

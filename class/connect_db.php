@@ -36,20 +36,26 @@ class connect_db
         mysqli_close($conn);
         return true;
     }
-    public function executeTwoReferencTables($query1, $queries2, bool $autoCommit) {
+public function executeTwoReferencTables($query1, $queries2, bool $autoCommit = false) {
         if (!$conn = mysqli_connect($this->host,$this->username,$this->password,$this->database)) {
             return false;
         }
-        mysqli_autocommit($conn, $autoCommit);
-        $result = mysqli_multi_query($conn, $query1.";".$queries2);
-        echo $query1.";".$queries2;
-        if(!$result)
+        mysqli_autocommit($conn, false);
+        $result1 = mysqli_query($conn, $query1);
+        if(!$result1)
         {
+            mysqli_rollback($conn);
             return false;
         }
-        mysqli_commit($conn);
-        mysqli_close($conn);
-        return true;
+        foreach($queries2 as $query2){
+            $result2 = mysqli_query($conn, $query2);
+            if(!$result2)
+            {
+                mysqli_rollback($conn);
+                return false;
+            }
+        }
+        return mysqli_commit($conn);
     }
     public function multiExecute($query) {
         if (!$conn = mysqli_connect($this->host,$this->username,$this->password,$this->database)) {

@@ -95,7 +95,7 @@
                         <div class="col-md-12 mt-3"><label class="labels">Địa chỉ</label><textarea name="address" type="text" rows="4" class="form-control" <?php if (isset($_SESSION['customer']['Address']) && $_SESSION['customer']['Address'] != "") echo ">{$_SESSION['customer']['Address']}"; else echo "placeholder='Cho tui địa chỉ giao hàng đi chứ 😠'>";  ?></textarea>
                     </div>
                     <div class="error">Error print here</div>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" id="save-btn">Lưu thông tin</button></div>
+                    <div class="mt-5 text-center"><button class="btn profile-button" type="button" id="save-btn">Lưu thông tin</button></div>
                 </div>
             </div>
         </div>
@@ -116,10 +116,10 @@
             var email = form.find("input[name=email]").val();
             var address = form.find("textarea[name=address]").val();
 
-            if (name.trim().length < 5 || phone.trim().length != 10 || email.trim().length < 5 || address.trim().length < 5 ) {
+            if (name.trim().length < 5 || phone.trim().length !== 10 || email.trim().length < 5 || address.trim().length < 5 ) {
                 form.find(".error").css("display", "unset");
                 form.find(".error").text("Thông tin không hợp lệ");
-            } else if (prompt("Nhập OK để cập nhật thông tin")=="OK") {
+            } else if (prompt("Nhập OK để cập nhật thông tin") ==="OK") {
                 $.ajax({
                     method: "post",
                     url: "../../handle/handle_account.php",

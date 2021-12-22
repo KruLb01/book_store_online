@@ -17,17 +17,37 @@
         <script src='../../assets/js/post_method.js'></script>
         <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
         <style>
-            .wrap-img
+            .mid{
+                padding: 10px;
+            }
+            .header-content {
+                padding-left: 20px;
+            }
+            hr {
+                border: 1px black solid;
+            }
+            table thead th:not(:first-child){
+                text-align: center;
+            }
+            table tbody td:not(:first-child)
             {
-                width:130px;
-                height:140px;
+                text-align: center;
             }
-            .wrap-img img{
-                width:100%;
-                height:100%;
+            td > img {
+                width:100px;
             }
-            table {
-                overflow-x: scroll;
+            .submit-checkout{
+                display:flex;
+                justify-content: center;
+            }
+            .total-after-sale span {
+                font-weight: bold;
+                
+            }
+            .total div {
+                display:flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
             }
         </style>
     </head>
@@ -88,34 +108,19 @@
                 </ul>
             </nav>
             <div class="mid">
-                <div class="container-cart-checkout shadow p-3 mb-5 bg-white rounded">
-                    <div class="notification-box border border-danger">
-                        <p>Vui lòng khách hàng kiểm tra kĩ các thông tin trước khi thanh toán và điền vào các ô trống. Nếu muốn
-                            thay đổi thông tin thì nhấp vào <a href="../customer/profile.php">đây</a></p> 
+                <div style="display:flex;flex-wrap: wrap;justify-content: space-between">
+                    <h2 class="header-content">Thanh toán</h2>
+                    <div style="padding-right:10px; text-align: center;">
+                        <strong>Địa chỉ nhận hàng</strong><br/>
+                        <span><?php echo $_SESSION['customer']["Name"]." | ".$_SESSION['customer']['Phone']; ?></span><br/>
+                        <span><?php echo $_SESSION['customer']["Address"] ?></span><br/>
                     </div>
+                </div>
+                <hr/>
                     <div class="container-user-cart-infos">
-                        <div class="container-user-info">
-                            <div class="header-title">
-                                <h2>Thông tin của bạn</h2>
-                            </div>
-                            <div class="row">
-                                <div class="col-title"><strong>Họ tên</strong></div>
-                                <div class="col-content"><div><?php echo $_SESSION['customer']['Name']?></div></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-title"><strong>Địa chỉ</strong></div>
-                                <div class="col-content"><div><?php echo $_SESSION['customer']['Address']?></div></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-title"><strong>Số điện thoại</strong></div>
-                                <div class="col-content"><div><?php echo $_SESSION['customer']['Phone']?></div></div>
-                            </div>
-                        </div>
                         <div class="container-cart-info">
-                            <div class="header-title">
-                                <h2>Giỏ hàng của bạn</h2>
-                            </div>
                             <?php
+                                $total = 0;
                                 if(isset($_SESSION['cart']) && $_SESSION['cart'])
                                 {
                                     echo '<table class="table">
@@ -129,30 +134,30 @@
                                             </tr>
                                         </thead>
                                         <tbody>';
-                                    $total = 0;
                                     foreach($_SESSION['cart'] as $prodID => $value)
                                     {
                                         foreach($value as $booktype => $value1)
                                         {
                                             echo '<tr>
                                                     <td>'.$value1['tensach'].'</td>
-                                                    <td><div class="wrap-img"><img src="../../images/'.$value1['hinhanh'].'"/></div></td>
+                                                    <td><img src="../../images/'.$value1['hinhanh'].'"/></td>
                                                     <td>'.$booktype.'</td>
                                                     <td>'.$value1['giatien'].'</td>
                                                     <td>'.$value1['soluong'].'</td>'
                                                  .'</tr>';
-                                            $total += $value1['giatien'];
+                                            $total += $value1['giatien'] * $value1['soluong'];
                                         }
                                     }
                                     echo '<tbody>'
                                     . '</table>';
                                 }
                                 else {
-                                    echo "<div><span>Giỏ hàng của bạn đang trống</span></div>";
+                                    echo "<div><strong>Giỏ hàng của bạn đang trống</strong></div>";
                                 }
                             ?>
                         </div>
                     </div>
+                    <hr/>
                     <form>
                         <div class="radiobox-container">
                             <div class="radiobox-title">
@@ -176,11 +181,11 @@
                             <span class="no-choice-opt"></span>
                         </div>
                         <div class="container-sale-input">
-                            <div class="row">
-                                <div class="col">
+                            <div class="">
+                                <div class="">
                                     <span>Nhập mã sale để được giảm giá</span>
                                 </div>
-                                <div class="col">
+                                <div class="">
                                     <input type="text" name="sale-code" id="sale-code" value=""/>
                                     <div class="message-error-code-sale">
                                         <span></span>
@@ -188,8 +193,14 @@
                                 </div>
                             </div>
                         </div>
+                        <hr/>
+                        <div class='total'>
+                            <div class='total-before-sale'>Tổng tiền: <span align="center"><?php echo number_format($total,0,"",".")."<sup>đ</sup>"; ?></span></div>
+                            <div class='sale-discount'>Áp dụng khuyến mãi: <span align="center" class='discount-val'>0<sup>đ</sup></span></div>
+                            <div class='total-after-sale'><strong>Số tiền sau khi giảm:</strong> <span align="center"><?php echo number_format($total,0,"",".")."<sup>đ</sup>"; ?></span></div>
+                        </div>
                         <div class="submit-checkout">
-                            <input type="submit" class="primary" value="Thanh toán"/>
+                            <input class='thanhtoan primary' type="submit" class="primary" value="Đặt hàng"/>
                         </div>
                     </form>
                 </div>
@@ -242,9 +253,6 @@
                     </ul>
 		</div>
             </footer>
-        </div>
-        <script>
-        </script>
         <script src="../../assets/js/jquery.min.js"></script>
         <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../../assets/js/jquery.scrolly.min.js"></script>
@@ -252,30 +260,36 @@
         <script src="../../assets/js/main.js"></script>
         <script type='text/javascript'>
             $(document).ready(function(){
-                $("#input-sale-code").keyup(function(){
+                $("#sale-code").on("keyup",function(){
                     $.ajax({
                         url: "../../handle/handle_sale.php",
                         type: "POST",
                         data:{
                             action: "find",
-                            id_sale: $(this).val(),
+                            id_sale: $(this).val()
                         },
                         success: function(reps)
                         {
                             var getData = JSON.parse(reps);
+                            var total = <?php echo $total; ?>;
                             if(getData.valid)
                             {
                                 $("div.message-error-code-sale").css("color","green");
+                                var discount_value_str = (getData.discount_value - 0).toLocaleString("de-DE");
+                                $(".discount-val").html(discount_value_str+"<sup>đ</sup>");
+                                var newTotal = (total - getData.discount_value).toLocaleString("de-DE");
+                                $(".total-after-sale span").html(newTotal+"<sup>đ</sup>");
                                 $("div.message-error-code-sale").text(getData.message);
                             }
                             else {
-                                $("div.message-error-code-sale").css("color","red")
+                                $("div.message-error-code-sale").css("color","red");
+                                $(".discount-val").html("0<sup>đ</sup>");
                                 $("div.message-error-code-sale").text(getData.message);
                             }
                         }
                     });
                 });
-                $("input[type=submit]").click(function(e){
+                $(".thanhtoan").click(function(e){
                     e.preventDefault();
                     var isNotEmptyCart = <?php if(isset($_SESSION['cart']) && $_SESSION['cart']) {echo 1;} else echo 0; ?>;
                     if(isNotEmptyCart === 0){ //Empty cart found
@@ -303,7 +317,11 @@
                             success: function(reps)
                             {
                                 var getData = JSON.parse(reps);
-                                console.log(getData.success);
+                                alert(getData.message);
+                                if(getData.success)
+                                {
+                                    window.location.reload();
+                                }
                             }
                         });
                     }
