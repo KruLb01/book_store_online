@@ -1,20 +1,28 @@
 <?php 
     session_start();
-    if(!isset($_SESSION['customerlogin']) || $_SESSION['customerlogin']===array())
+    if(!isset($_SESSION['customer']) || $_SESSION['customer']===array())
     {
         header("Location: ../customer/login.php");
     }
-    include '../connection.php';
-    include '../class/order.php';
-    $ordermd = new order();
+    
 ?>
 <!DOCTYPE HTML>
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../css/bootstrap.css"/>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <title>History</title>
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../assets/css/main.css" />
+        <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+        <link rel="icon" type="image/png" sizes="16x16" href="../admin/static/plugins/images/favicon.png">
+        <title>Thông tin cá nhân</title>
         <style>
             .wrap{
                 padding:10px;
@@ -22,35 +30,9 @@
         </style>
     </head>
     <body>
+        <?php include_once '' ?>
         <div class="wrap">
-            <h3>History</h3>
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Detail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php
-                    $result = $ordermd->getAllOrder($_SESSION['customerlogin']['id']);
-                    if($result)
-                    {
-                        while($row = mysqli_fetch_array($result)){
-                            $href = "'detail.php?orderid=$row[0]'";
-                            echo '<tr>
-                                <td>'.$row[0].'</td>
-                                <td>'.$row[1].'</td>
-                                <td>'.$row[2].'</td>
-                                <td><button class="btn btn-info" onclick="location.href='.$href.'">Detail</button></td>
-                            </tr>';
-                        }
-                    }
-                ?>
-                </tbody>
-            </table>
-        </div>
+            <h3>Đơn hàng</h3>
+            
     </body>
 </html>

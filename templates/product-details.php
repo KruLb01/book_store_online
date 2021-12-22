@@ -142,7 +142,11 @@
                                                         $bookDescription = substr($bookDescription,0,"500");
                                                     }
                                                     $bookLanguage = $book['ngon_ngu'];
-                                                    $firstImageLink = $prodImagesLink[0][2];
+                                                    $giasachgiay = number_format($book['gia_sach_giay'],0, '', '.')."<sup>đ</sup>";
+                                                    $giaebook = number_format($book['gia_sach_ebook'],0, '', '.')."<sup>đ</sup>";
+                                                    //hinh_anh_san_pham(id_hinh_anh,id_san_pham,link_hinh_anh)
+                                                    $linkImage = 2; //index 2 contains the source of Image (count index from 0)
+                                                    $firstImageLink = $prodImagesLink[0][$linkImage];
                                                     echo "<div class='inner'>
                                                             <h1>$nameBook</h1>
                                                             <div class='container-fluid'>
@@ -161,8 +165,8 @@
                                                                                 <label class='control-label'>Loại sách</label>
                                                                                     <div class='form-group'>
                                                                                         <select name='loai_sach' id='book-type'>
-                                                                                            <option value='Book'>Sách in</option>
-                                                                                            <option value='EBook'>Sách Ebook</option>
+                                                                                            <option value='Book'>Sách in - $giasachgiay</option>
+                                                                                            <option value='EBook'>Sách Ebook - $giaebook</option>
                                                                                         </select>
                                                                                     </div>
                                                                             </div>
@@ -296,7 +300,12 @@
                                 $.ajax({
                                     url: "../handle/handle_cart.php",
                                     type: "POST",
-                                    data: {id_san_pham: idsp, loai_sach: $("#book-type").val(), soluong: $("#quantity").val()},
+                                    data: {
+                                        action: "add",
+                                        id_san_pham: idsp, 
+                                        loai_sach: $("#book-type").val(), 
+                                        soluong: $("#quantity").val()
+                                    },
                                     success: function(response)
                                     {
                                         var getData = JSON.parse(response);

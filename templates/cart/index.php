@@ -22,22 +22,15 @@
             {
                 text-align: center;
             }
-            td > .wrap-img {
-                display: flex;
-                justify-content: center;
+            td > img {
+                width:100px;
             }
-            .wrap-img
-            {
-                width:130px;
-                height:140px;
-            }
-            .wrap-img img{
-                width:100%;
-                height:100%;
-            }
-            .btn-payment{
+            .btns{
                 display:flex;
-                justify-content: center;
+            }
+            .btns > button {
+                margin-left: 10px;
+                margin-right: 10px;
             }
         </style>
     </head>
@@ -68,23 +61,25 @@
                         $total=0;
                         $amount=0;
                         if(isset($_SESSION['cart']) && $_SESSION['cart'] !== array()){
+                            $stt = 0;
                             foreach($_SESSION['cart'] as $prodID => $value)
                             {
                                 foreach($value as $booktype => $value1)
                                 {
                                     echo '<tr>
                                             <td>
-                                                <input type="checkbox" id="'.$prodID.'" class="delete" value="'.$prodID.'" />
-                                                <label for="'.$prodID.'"></label>
+                                                <input type="checkbox" id="'.$stt.'" class="delete" value="'.$prodID.'" />
+                                                <label for="'.$stt.'"></label>
                                             </td>
                                             <td>'.$value1['tensach'].'</td>
-                                            <td><div class="wrap-img"><img src="../../images/'.$value1['hinhanh'].'"/></div></td>
+                                            <td><img src="../../images/'.$value1['hinhanh'].'"/></td>
                                             <td>'.$booktype.'</td>
-                                            <td>'.$value1['giatien'].'</td>
+                                            <td>'.number_format($value1['giatien'],0, '', '.').'<sup>đ</sup></td>
                                             <td>'.$value1['soluong'].'</td>'
                                          .'</tr>';
                                     $amount += $value1['soluong'];
-                                    $total += $value1['giatien'];
+                                    $total += $value1['giatien'] * $value1['soluong'];
+                                    $stt++;
                                 }
                             }
                             echo '<tr>
@@ -92,15 +87,16 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td><b>Tổng tiền:</b> '.$total.'</td>
+                                    <td><b>Tổng tiền:</b> '.number_format($total,0, '', '.')."<sup>đ</sup>".'</td>
                                     <td><b>Số lượng:</b> '.$amount.'</td>
                                  </tr>';
                         }
                     ?>
                     </tbody>
                 </table>
-                <div class="btn-payment">
-                    <button onclick="location.href='thanhtoan.php'">Thanh toán</button>
+                <div class="btns">
+                    <button class="delete-products">Xoá sản phẩm đã chọn</button>
+                    <button class="primary" onclick="location.href='thanhtoan.php'">Đi đến trang thanh toán</button>
                 </div>
             </div>
         </div>
@@ -110,7 +106,35 @@
 	<script src="../../assets/js/jquery.scrolly.min.js"></script>
 	<script src="../../assets/js/jquery.scrollex.min.js"></script>
 	<script src="../../assets/js/main.js"></script>
-        <script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(".delete-products").click(function(e){
+                    e.preventDefault();
+                    var delProds = [];
+                    $("input[type='checkbox']").each(function(index){
+                        if($(this).is(":checked")){
+                            delProds.push(index);
+                        }
+                    });
+                    $.ajax({
+                        url: "../../handle/handle_cart.php",
+                        type: "POST",
+                        data: {
+                            action:"delete",
+                            delProds: delProds
+                        },
+                        success: function(reps)
+                        {
+                            var getData = JSON.parse(reps);
+                            alert(getData.message);
+                            if(getData.success)
+                            {
+                                window.location.reload();
+                            }
+                        }
+                    });
+                });
+            });
         </script>
     </body>
 </html>

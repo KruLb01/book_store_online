@@ -16,10 +16,11 @@
                 {
                     $ship_method = $_POST['ship_method'];
                     $saleID = isset($_POST['id_sale'])?$_POST['id_sale']:"";
-                    if($saleID === "" || $saleModel -> isValidSale($saleID))
+                    if($saleID === "" || $saleModel -> getSale($saleID) !== array())
                     {
                         $details = array();
                         $cart = $_SESSION['cart'];
+                        $total = 0;
                         foreach($cart as $prodID => $value)
                         {
                             foreach($value as $booktype => $value1)
@@ -29,9 +30,19 @@
                                                            "loai" => $booktype,
                                                            "don_gia" => $value1['giatien']
                                                            ));
+                                $total += $value1['giatien'] * $value1['soluong'];
                             }
                         }
-                        if($invoiceModel -> addInvoice($_SESSION['customer']['User'], $ship_method, $saleID, $details))
+                        if($saleID !== "")
+                        {
+                            $saleDetail = $saleModel -> getSale($saleID);
+                            $total -= $saleID[5];
+                        }
+                        if($total < 1000)
+                        {
+                            echo json_encode(array("success" => false, "message" => "Hoá đơn phải có giá trị tối thiểu là 1.000đ"));
+                        }
+                        else if($invoiceModel -> addInvoice($_SESSION['customer']['User'], $ship_method, $saleID, $details) == true)
                         {
                             $_SESSION['cart'] = array();
                             echo json_encode(array("success" => true, "message" => "Thanh toán thành công"));
