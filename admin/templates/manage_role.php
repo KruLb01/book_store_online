@@ -128,15 +128,19 @@
                                         $data = $roleModel->getAllRoles();
                                         $count = 1;
                                         foreach ($data as $key=>$val) {
-                                            $actionBtn = "<button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
+                                            $roleBtn = $val["Role"] != 1 ? "<button f='role-func' type='button' class='btn btn-orange' data-bs-toggle='modal' data-bs-target='#popupRoleFunc'>Phân quyền</button>" : "";
+                                            $actionBtn = " <button f='edit' type='button' class='btn btn-info'><i class='fas fa-pencil-alt'></i></button>
                                                            <button f='delete' type='button' class='btn btn-danger'><i class='fas fa-trash'></i></button>";
                                             if ($count <= 2) $actionBtn = "";
+                                            if ($val["Role"] != 1) {
+                                                $actionBtn = $roleBtn . $actionBtn;
+                                            }
                                             $render =  "<tr>
                                                     <td>$count</td>
                                                     <td>".$val["Role"]."</td>
                                                     <td>".$val["Name"]."</td>
                                                     <td>".$val["Description"]."</td>
-                                                    <td><button f='role-func' type='button' class='btn btn-orange' data-bs-toggle='modal' data-bs-target='#popupRoleFunc'>Phân quyền</button> ".$actionBtn."</td>
+                                                    <td>".$actionBtn."</td>
                                                 </tr>";
                                             echo $render;
                                             $count++;
