@@ -134,7 +134,7 @@
                                         if ($val["Status"] == 0) {
                                             $render = "<tr cs='0' style='color:red'>";
                                             $actionBtn = "<button f='status' type='button' class='btn btn-success'>Mở khóa</button>
-                                                            <button f='edit' type='button' class='btn btn-info data-bs-toggle='modal' data-bs-target='#updateModal''><i class='fas fa-pencil-alt'></i></button>
+                                                            <button f='edit' type='button' class='btn btn-info' data-bs-toggle='modal' data-bs-target='#updateModal'><i class='fas fa-pencil-alt'></i></button>
                                                             <button f='delete' type='button' class='btn btn-danger' style='background: red'><i class='fas fa-trash'></i></button>
                                                             <button f='role' type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#exampleModal1'>Phân quyền</button>";
                                         } else {

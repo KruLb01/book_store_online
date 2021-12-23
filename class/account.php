@@ -32,7 +32,10 @@ class account
         include_once("connect_db.php");
         $conn = new connect_db();
 
-        $query = "insert into nguoi_dung(tai_khoan, mat_khau, tinh_trang_tai_khoan, id_quyen) values('$username', '$password', '1', '1')";
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $time = date("Y-m-d H:i:s");
+
+        $query = "insert into nguoi_dung(tai_khoan, mat_khau, tinh_trang_tai_khoan, id_quyen, ngay_tao) values('$username', '$password', '1', '1', '$time')";
         return $conn->execute($query);
     }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2021 at 12:10 PM
+-- Generation Time: Dec 22, 2021 at 05:37 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -102,7 +102,6 @@ INSERT INTO `chi_tiet_quyen_chuc_nang` (`id_quyen`, `id_chuc_nang`) VALUES
 ('2', 'CN013'),
 ('2', 'CN014'),
 ('2', 'CN015'),
-('2', 'CN099'),
 ('3', 'CN001'),
 ('3', 'CN002');
 
@@ -223,18 +222,18 @@ INSERT INTO `hinh_anh_san_pham` (`id_hinh_anh`, `id_san_pham`, `link_hinh_anh`) 
 ('HA013', 'SP005', 'SP005_001.jpg'),
 ('HA014', 'SP005', 'SP005_002.jpg'),
 ('HA015', 'SP005', 'SP005_003.jpg'),
-('HA016', 'SP006', 'SP004_001.jpg'),
-('HA017', 'SP006', 'SP004_002.jpg'),
-('HA018', 'SP006', 'SP004_003.jpg'),
+('HA016', 'SP006', 'SP006_001.jpg'),
+('HA017', 'SP006', 'SP006_002.jpg'),
+('HA018', 'SP006', 'SP006_003.jpg'),
 ('HA019', 'SP007', 'SP007_001.jpg'),
 ('HA020', 'SP007', 'SP007_002.jpg'),
 ('HA021', 'SP007', 'SP007_003.jpg'),
 ('HA022', 'SP008', 'SP008_001.jpg'),
 ('HA023', 'SP008', 'SP008_002.jpg'),
 ('HA024', 'SP008', 'SP008_003.jpg'),
-('HA025', 'SP009', 'SP004_009.jpg'),
-('HA026', 'SP009', 'SP004_009.jpg'),
-('HA027', 'SP009', 'SP004_009.jpg'),
+('HA025', 'SP009', 'SP009_001.jpg'),
+('HA026', 'SP009', 'SP009_002.jpg'),
+('HA027', 'SP009', 'SP009_003.jpg'),
 ('HA028', 'SP010', 'SP010_001.jpg'),
 ('HA029', 'SP010', 'SP010_002.jpg'),
 ('HA030', 'SP010', 'SP010_003.jpg'),
@@ -289,16 +288,16 @@ INSERT INTO `hinh_anh_san_pham` (`id_hinh_anh`, `id_san_pham`, `link_hinh_anh`) 
 ('HA079', 'SP014', 'SP014_003.jpg'),
 ('HA080', 'SP014', 'SP014_004.jpg'),
 ('HA081', 'SP014', 'SP014_005.jpg'),
-('HA082', 'SP015', 'SP015_001.jpg'),
-('HA083', 'SP015', 'SP015_002.jpg'),
-('HA084', 'SP015', 'SP015_003.jpg'),
-('HA085', 'SP015', 'SP015_004.jpg'),
-('HA086', 'SP015', 'SP015_005.jpg'),
-('HA087', 'SP015', 'SP015_006.jpg'),
-('HA088', 'SP015', 'SP015_007.jpg'),
-('HA089', 'SP015', 'SP015_008.jpg'),
-('HA090', 'SP015', 'SP015_009.jpg'),
-('HA091', 'SP015', 'SP015_010.jpg'),
+('HA082', 'SP015', 'SP015_001.jfif'),
+('HA083', 'SP015', 'SP015_002.jfif'),
+('HA084', 'SP015', 'SP015_003.jfif'),
+('HA085', 'SP015', 'SP015_004.jfif'),
+('HA086', 'SP015', 'SP015_005.jfif'),
+('HA087', 'SP015', 'SP015_006.jfif'),
+('HA088', 'SP015', 'SP015_007.jfif'),
+('HA089', 'SP015', 'SP015_008.jfif'),
+('HA090', 'SP015', 'SP015_009.jfif'),
+('HA091', 'SP015', 'SP015_010.jfif'),
 ('HA092', 'SP016', 'SP016_001.jpg'),
 ('HA093', 'SP017', 'SP017_001.jpg'),
 ('HA094', 'SP017', 'SP017_002.jpg'),
@@ -318,7 +317,8 @@ INSERT INTO `hinh_anh_san_pham` (`id_hinh_anh`, `id_san_pham`, `link_hinh_anh`) 
 ('HA108', 'SP020', 'SP020_003.jpg'),
 ('HA109', 'SP020', 'SP020_004.jpg'),
 ('HA110', 'SP020', 'SP020_005.jpg'),
-('HA111', 'SP020', 'SP020_006.jpg');
+('HA111', 'SP020', 'SP020_006.jpg'),
+('HASP021', 'SP021', '');
 
 -- --------------------------------------------------------
 
@@ -364,8 +364,8 @@ CREATE TABLE `hoa_don` (
 
 INSERT INTO `hoa_don` (`id_hoa_don`, `id_nguoi_dung`, `ngay_mua`, `tong_gia`, `hinh_thuc_giao_hang`, `tinh_trang_don_hang`, `id_sale`) VALUES
 ('HD001', 'thanhhoa', '2021-12-14', 872000, 'HTGH001', 0, ''),
-('HD002', 'thanhhoa', '2021-12-14', 326000, 'HTGH001', 0, ''),
-('HD003', 'vankiet', '2021-12-16', 326000, 'HTGH001', 0, '');
+('HD002', 'thanhhoa', '2021-12-14', 326000, 'HTGH001', 1, ''),
+('HD003', 'vankiet', '2021-12-16', 326000, 'HTGH001', 2, '');
 
 -- --------------------------------------------------------
 
@@ -397,7 +397,7 @@ INSERT INTO `nguoi_dung` (`tai_khoan`, `mat_khau`, `email`, `ho_ten`, `dia_chi`,
 ('nhanvien3', 'nhanvien3', 'nhanvien3.work@gmail.com', 'Logan', 'Paris', '123456789', 1, '3', '2021-12-22 00:00:00'),
 ('nhanvien4', 'nhanvien4', 'nhanvien4.work@gmail.com', 'Lily', 'Bangkok', '123456789', 1, '3', '2021-12-22 00:00:00'),
 ('nhanvien5', 'nhanvien5', 'nhanvien5.work@gmail.com', 'Helios 300', 'HCM City', '12456898', 1, '3', '2021-12-22 00:00:00'),
-('ptvuong', '123456', 'ptvuong.teacher@gmail.com', 'Phạm Thi Vương', '', '2147483647', 0, '1', '2021-12-22 00:00:00'),
+('ptvuong', '123456', 'ptvuong.teacher@gmail.com', 'Phạm Thi Vương', 'HCM Cityy', '2147483647', 0, '1', '2021-12-22 00:00:00'),
 ('thanhhoa', '3119560021', 'thanhhoa.ec@gmail.com', 'Thanh Hòa', 'HCM City', '123456789', 1, '1', '2021-12-22 00:00:00'),
 ('vankiet', '3119560033', 'vankiet.ec@gmail.com', 'Văn Kiệt', 'HCM City', '123456789', 1, '1', '2021-12-22 00:00:00'),
 ('vanluan', '3119560039', 'vanluan.ec@gmail.com', 'Văn Luân', 'HCM City', '123456789', 1, '1', '2021-12-22 00:00:00');
@@ -474,8 +474,7 @@ CREATE TABLE `quyen` (
 INSERT INTO `quyen` (`id_quyen`, `ten_quyen`, `mo_ta`) VALUES
 ('1', 'Khách hàng', 'Quyền dành cho khách hàng'),
 ('2', 'Quản trị viên', 'Quyền dành cho quản trị viên'),
-('3', 'Nhân viên', 'Quyền dành cho nhân viên'),
-('4', 'ddsas', '');
+('3', 'Nhân viên', 'Quyền dành cho nhân viên');
 
 -- --------------------------------------------------------
 

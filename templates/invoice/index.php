@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="../../assets/css/main.css" />
         <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
         <link rel="icon" type="image/png" sizes="16x16" href="../admin/static/plugins/images/favicon.png">
-        <title>Thông tin cá nhân</title>
+        <title>Đơn hàng</title>
         <style>
             .wrap{
                 padding:10px;
@@ -30,7 +30,7 @@
         </style>
     </head>
     <body>
-        <?php include_once '' ?>
+        <?php include_once 'chitiethoadon.php' ?>
         <div class="wrap">
             <h3>Đơn hàng</h3>
             
