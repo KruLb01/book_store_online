@@ -127,8 +127,10 @@ class account
         include_once("connect_db.php");
         $conn = new connect_db();
 
-        $query = "insert into nguoi_dung(tai_khoan, mat_khau, email, ho_ten, dia_chi, so_dien_thoai, tinh_trang_tai_khoan, id_quyen) 
-                values('{$user['User']}', '{$user['Password']}', '{$user['Email']}', '{$user['Name']}', '{$user['Address']}', '{$user['Phone']}', '{$user['Status']}', '{$user['Permission']}')";
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $time = date("Y-m-d H:i:s");
+        $query = "insert into nguoi_dung(tai_khoan, mat_khau, email, ho_ten, dia_chi, so_dien_thoai, tinh_trang_tai_khoan, id_quyen, ngay_tao) 
+                values('{$user['User']}', '{$user['Password']}', '{$user['Email']}', '{$user['Name']}', '{$user['Address']}', '{$user['Phone']}', '{$user['Status']}', '{$user['Permission']}', '$time')";
         return $conn->execute($query);
     }
 
@@ -157,7 +159,7 @@ class account
         include_once("connect_db.php");
         $conn = new connect_db();
 
-        $query = "select * from nguoi_dung where id_quyen = 1 order by ngay_tao limit 0, 5";
+        $query = "select * from nguoi_dung where id_quyen = 1 order by ngay_tao desc limit 0, 5";
         $data = $conn->select($query);
         if (mysqli_num_rows($data)==0) {
             $customer = array();
@@ -182,6 +184,7 @@ class account
         $query = "select nguoi_dung.email as Email, nguoi_dung.ho_ten as Name, nguoi_dung.so_dien_thoai as Phone, sum(hoa_don.tong_gia) as total, count(hoa_don.id_hoa_don) as totalInvoice  
                 from nguoi_dung, hoa_don 
                 where nguoi_dung.tai_khoan = hoa_don.id_nguoi_dung 
+                and hoa_don.tinh_trang_don_hang = 2 
                 group by hoa_don.id_nguoi_dung 
                 order by total desc";
         $data = $conn->select($query);

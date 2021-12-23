@@ -6,7 +6,7 @@
         switch($action)
         {
             case "register": {
-                include_once("../../class/account.php");
+                include_once("../class/account.php");
                 $accountModel = new account();
                 $username = $_POST["username"];
                 $password = $_POST["password"];
