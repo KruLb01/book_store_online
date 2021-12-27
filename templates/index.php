@@ -55,6 +55,10 @@
                 font-size:14pt;
                 margin: 0;
             }
+            a.product-link:hover p.bookprice{
+                color: #f2849e !important; 
+                font-weight: bold;
+            }
         </style>
     </head>
 	<body class="is-preload">
@@ -144,8 +148,8 @@
 							<h2 class="h2">Các bài viết đánh giá</h2>
 							<div class="row">
 								<div class="col-sm-6 text-center">
-									<p class="m-n"><em>"Việc đọc sách e-book trên trang web là điều hết sức phi lý.
-                                                                                            Tuy nhiên tại ReadBok bạn còn làm những điều hơn thế"</em></p>
+									<p class="m-n"><em>Việc đọc sách ebook đã mang tính hiện đại trong xu hướng hiện nay 
+                                                                                và rất may ReadBok cũng đã đáp ứng được điều đó.</em></p>
 
 									<p><strong> - Chúa hề Deadline</strong></p>
 								</div>

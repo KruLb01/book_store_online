@@ -36,16 +36,18 @@
                         if($saleID !== "")
                         {
                             $saleDetail = $saleModel -> getSale($saleID);
-                            $total -= $saleID[5];
+                            $total -= intval($saleDetail[5]);
                         }
                         if($total < 1000)
                         {
-                            echo json_encode(array("success" => false, "message" => "Hoá đơn phải có giá trị tối thiểu là 1.000đ"));
+                            echo json_encode(array("success" => false, "message" => "Đơn hàng phải có giá trị tối thiểu là 1.000đ"));
+                            return;
                         }
-                        else if($invoiceModel -> addInvoice($_SESSION['customer']['User'], $ship_method, $saleID, $details) == true)
+                        $result = $invoiceModel -> addInvoice($_SESSION['customer']['User'], $ship_method, $saleID, $details);
+                        if($result)
                         {
                             $_SESSION['cart'] = array();
-                            echo json_encode(array("success" => true, "message" => "Thanh toán thành công"));
+                            echo json_encode(array("success" => true, "message" => "Đặt hàng thành công"));
                         }
                         else {
                             echo json_encode(array("success" => false, "message" => "Không thể thực hiện thao tác thanh toán"));

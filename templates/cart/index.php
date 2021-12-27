@@ -27,10 +27,19 @@
             }
             .btns{
                 display:flex;
+                justify-content: center;
             }
             .btns > button {
                 margin-left: 10px;
                 margin-right: 10px;
+            }
+            .cart-header {
+                padding:0 20px 0 5px;
+                display:flex;
+                justify-content: space-between;
+            }
+            .fa-trash {
+                cursor: pointer;
             }
         </style>
     </head>
@@ -44,7 +53,10 @@
         <div id="wrapper">
             <?php include_once 'header.php'; ?>
             <div class="cart" style="padding:20px;">
-                <h3>Giỏ hàng của bạn</h3>
+                <div class="cart-header">
+                    <h3>Giỏ hàng của bạn</h3>
+                    <i class="fas fa-trash delete-products"></i>
+                </div>
                 <table class="table">
                     <thead>
                         <tr>
@@ -95,7 +107,6 @@
                     </tbody>
                 </table>
                 <div class="btns">
-                    <button class="delete-products">Xoá sản phẩm đã chọn</button>
                     <button class="primary" onclick="location.href='thanhtoan.php'">Đi đến trang thanh toán</button>
                 </div>
             </div>
