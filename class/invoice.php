@@ -31,4 +31,68 @@ class invoice {
         $result1 = $connectdb -> executeTwoReferencTables($query1, $queries2);
         return $result1;
     }
+    public function getListOrder($id_nguoi_dung, $state)
+    {
+        include_once 'connect_db.php';
+        $connect_db = new connect_db();
+        $result = $connect_db ->select("select * from hoa_don where id_nguoi_dung = '$id_nguoi_dung' "
+                                                            . "and tinh_trang_don_hang = $state "
+                                                            . "order by ngay_mua desc");
+        $listOrder = array();
+        if($result)
+        {
+            while($row = mysqli_fetch_array($result))
+            {
+                array_push($listOrder,$row);
+            }
+        }
+        return $listOrder;
+    }
+    public function getOrder($orderid,$id_nguoi_dung)
+    {
+        include_once 'connect_db.php';
+        $connect_db = new connect_db();
+        $result = $connect_db ->select("select * from hoa_don where id_nguoi_dung = '$id_nguoi_dung' "
+                                                             . "and id_hoa_don = '$orderid'");
+        if($result)
+        {
+            $row = mysqli_fetch_array($result);
+            return $row;
+        }
+        else {
+            return null;
+        }
+    }
+    public function getDetailOrder($orderid,$id_nguoi_dung)
+    {
+        include_once 'connect_db.php';
+        $connect_db = new connect_db();
+        $result = $connect_db ->select("SELECT san_pham.ten_san_pham,hinh_anh_san_pham.link_hinh_anh, "
+                                       ."chi_tiet_hoa_don.loai,chi_tiet_hoa_don.don_gia,chi_tiet_hoa_don.so_luong "
+                                       ."FROM `chi_tiet_hoa_don`, `san_pham`, `hinh_anh_san_pham`, `hoa_don`"
+                                       ."where chi_tiet_hoa_don.id_hoa_don = '$orderid' "
+                                       ."and chi_tiet_hoa_don.id_san_pham = san_pham.id_san_pham "
+                                       ."and hoa_don.id_nguoi_dung = '$id_nguoi_dung' "
+                                       ."and san_pham.id_san_pham = hinh_anh_san_pham.id_san_pham " 
+                                       ."group by san_pham.id_san_pham");
+        $orderDetails = array();
+        if($result)
+        {
+            while ($row = mysqli_fetch_array($result))
+            {
+                array_push($orderDetails, $row);
+            }
+        }
+        return $orderDetails;
+    }
+    public function cancelOrder ($orderid,$id_nguoi_dung,$state)
+    {
+        include_once 'connect_db.php';
+        $connect_db = new connect_db();
+        $result = $connect_db -> execute("Update hoa_don "
+                                        ."set hoa_don.tinh_trang_don_hang = $state "
+                                        ."where hoa_don.id_hoa_don = '$orderid' "
+                                        ."and hoa_don.id_nguoi_dung = '$id_nguoi_dung'");
+        return $result; //true or false;
+    }
 }

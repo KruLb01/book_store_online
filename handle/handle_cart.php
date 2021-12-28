@@ -16,7 +16,7 @@
                 {
 
                     $idsp = $_POST['id_san_pham'];
-                    $book = $bookQuery ->findBook($idsp);
+                    $book = $bookQuery -> findBook($idsp);
                     if($book != array())
                     {
                         $soluong = $_POST['soluong'];

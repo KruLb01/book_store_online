@@ -1,7 +1,4 @@
 <!-- Header -->
-<?php
-    session_start();
-?>
 <header id="header">
     <div class="inner">
         <!-- Logo -->
