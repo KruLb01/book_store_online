@@ -37,13 +37,12 @@
             .product-items .product-item{
                 width:30%;
                 height:auto;
-                -moz-transition: -moz-transform 0.5s ease, opacity 0.5s ease;
-                -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
-                -ms-transition: -ms-transform 0.5s ease, opacity 0.5s ease;
-                transition: transform 0.5s ease, opacity 0.5s ease;
+                display:flex;
+                justify-content: center;
             }
             .prod-image {
-                height:300px;
+                height: 300px;
+                width: 100%;
             }
             .prod-image img{
                 width:100%;
@@ -109,7 +108,7 @@
 							<h2 class="h2">Sách nổi bật</h2>
 
 							<!-- Products -->
-							<section class="tiles">
+							<div class="product-items">
                                                             <?php
                                                                 $result = $bookQuery -> getRangeListBook(1, 6);
                                                                 if($result)
@@ -124,7 +123,7 @@
                                                                         $nameAuthor = $authorDetail['ten_tac_gia'];
                                                                         $bookPrice = number_format($row['gia_sach_giay'],0, '', '.');
                                                                         $linkImage = $prodImageDetail['link_hinh_anh'];
-                                                                        echo "<article>
+                                                                        echo "<div class='product-item'>
                                                                                 <a class='product-link' href='product-details.php?id_san_pham=$identityBook'>
                                                                                     <div class='prod-image'>
                                                                                         <img src='../images/$linkImage' alt=''/>
@@ -135,11 +134,11 @@
                                                                                         <p><b>Tác giả:</b> $nameAuthor</p>
                                                                                     </div>
                                                                                 </a>
-                                                                             </article>";
+                                                                             </div>";
                                                                     }
                                                                 }
                                                             ?>
-							</section>
+							</div>
 							<p class="text-center"><a href="products.php">Xem nhiều sách hơn &nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
 							<br>
 							<h2 class="h2">Các bài viết đánh giá</h2>
