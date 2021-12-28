@@ -120,9 +120,11 @@
                             $ngaymua = $order['ngay_mua'];
                             $trangthai = $order['tinh_trang_don_hang'];
                             $id_sale = $order['id_sale'];
+                            $shipping = $order['giao_hang'];
                             echo '<div class="order-info">'
                                .      '<div><strong>Mã hoá đơn: </strong>'.$id_hoa_don.'</div>'
                                .      '<div><strong>Ngày mua: </strong>'.date("d-m-Y",strtotime($ngaymua)).'</div>'
+                               .      '<div><strong>Hình thức giao hàng: </strong>'. $shipping.'</div>'
                                .      '<div><strong>Tình trạng đơn hàng: </strong>'. getStateName($trangthai).'</div>'
                                . '</div>';
                     ?>
