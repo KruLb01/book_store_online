@@ -17,6 +17,7 @@
         <script src='../../assets/js/post_method.js'></script>
         <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
         <style>
+<<<<<<< Updated upstream
             .mid{
                 padding: 10px;
             }
@@ -30,6 +31,15 @@
                 text-align: center;
             }
             table tbody td:not(:first-child)
+=======
+            div.mid{
+                padding:10px;
+            }
+            form > div{
+                margin-bottom: 20px;
+            }
+            .wrap-img
+>>>>>>> Stashed changes
             {
                 text-align: center;
             }
@@ -142,7 +152,7 @@
                                                     <td>'.$value1['tensach'].'</td>
                                                     <td><img src="../../images/'.$value1['hinhanh'].'"/></td>
                                                     <td>'.$booktype.'</td>
-                                                    <td>'.$value1['giatien'].'</td>
+                                                    <td>'.number_format($value1['giatien'],0,",",".")."<sup>đ</sup>".'</td>
                                                     <td>'.$value1['soluong'].'</td>'
                                                  .'</tr>';
                                             $total += $value1['giatien'] * $value1['soluong'];
@@ -181,6 +191,7 @@
                             <span class="no-choice-opt"></span>
                         </div>
                         <div class="container-sale-input">
+<<<<<<< Updated upstream
                             <div class="">
                                 <div class="">
                                     <span>Nhập mã sale để được giảm giá</span>
@@ -188,6 +199,18 @@
                                 <div class="">
                                     <input type="text" name="sale-code" id="sale-code" value=""/>
                                     <div class="message-error-code-sale">
+=======
+                            <div>
+                                <div>
+                                    <span>Nhập mã sale để được giảm giá</span>
+                                </div>
+                                <div>
+                                    <input type="text" name="sale-code" id="input-sale-code" value=""/>
+                                    <div class="show-error-sale-code">
+                                        <span></span>
+                                    </div>
+                                    <div class="new-update-total">
+>>>>>>> Stashed changes
                                         <span></span>
                                     </div>
                                 </div>
