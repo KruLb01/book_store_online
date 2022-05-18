@@ -52,7 +52,7 @@ class invoice {
     {
         include_once 'connect_db.php';
         $connect_db = new connect_db();
-        $result = $connect_db ->select("select * from hoa_don where id_nguoi_dung = '$id_nguoi_dung' "
+        $result = $connect_db ->select("select *, hinh_thuc_giao_hang.ten_hinh_thuc as giao_hang from hoa_don, hinh_thuc_giao_hang where hoa_don.hinh_thuc_giao_hang = hinh_thuc_giao_hang.id_hinh_thuc and id_nguoi_dung = '$id_nguoi_dung' "
                                                              . "and id_hoa_don = '$orderid'");
         if($result)
         {

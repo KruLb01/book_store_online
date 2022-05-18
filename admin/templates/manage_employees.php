@@ -302,10 +302,6 @@
                                     <input type="text" class="form-control" id="username-edit" disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Mật khẩu</label>
-                                    <input type="password" class="form-control" id="password-edit">
-                                </div>
-                                <div class="mb-3">
                                     <label for="name" class="form-label">Họ tên</label>
                                     <input type="text" class="form-control" id="name-edit">
                                 </div>
@@ -457,7 +453,7 @@
 
     $("#submit-update-form").click(function () {
         var username = document.getElementById("username-edit").value;
-        var password = document.getElementById("password-edit").value;
+        // var password = document.getElementById("password-edit").value;
         var name = document.getElementById("name-edit").value;
         var email = document.getElementById("email-edit").value;
         var phone = document.getElementById("phone-edit").value;
@@ -472,7 +468,7 @@
                 url:"../handle/handle_account.php",
                 data: {
                     username: username,
-                    password: password,
+                    // password: password,
                     name: name,
                     email: email,
                     phone: phone,

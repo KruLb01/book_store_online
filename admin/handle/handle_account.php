@@ -104,6 +104,22 @@
             } else echo "fail";
 
             return;
+        } else if ($update=="update") {
+            // Nhan input
+            $user = array(
+                "User" => $_POST['username'],
+                "Name" => $_POST['name'],
+                "Email" => $_POST['email'],
+                "Phone" => $_POST['phone'],
+                "Address" => $_POST['address'],
+            );
+
+            $res = $accountModel->updateAccount($user);
+            if (trim($res)) {
+                echo "success";
+            } else echo "fail";
+
+            return;
         }
     }
 

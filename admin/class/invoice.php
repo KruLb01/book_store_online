@@ -11,7 +11,7 @@ class invoice
         $query = "select hd.id_hoa_don as id, nd.ho_ten as customer, hd.ngay_mua as date, ht.ten_hinh_thuc as shipping, hd.tong_gia as total, hd.tinh_trang_don_hang as status 
                 from hoa_don as hd, nguoi_dung as nd, hinh_thuc_giao_hang as ht 
                 where hd.id_nguoi_dung = nd.tai_khoan and hd.hinh_thuc_giao_hang = ht.id_hinh_thuc 
-                order by hd.id_hoa_don";
+                order by hd.id_hoa_don desc";
         $data = $conn->select($query);
         if (mysqli_num_rows($data)==0) {
             $invoices = array();
