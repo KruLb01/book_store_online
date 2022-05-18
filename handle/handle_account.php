@@ -30,7 +30,7 @@
                     echo "fail";
                 } else {
                     if ($data["Status"]==0) {
-                        echo "fail";
+                        echo "locked";
                         return;
                     }
                     $_SESSION["customer"]["User"] = $data["User"];

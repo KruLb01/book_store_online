@@ -93,13 +93,13 @@
                             if (isset($_SESSION["customer"])) {
                                 echo "<li>
                                          <a href='#' class='dropdown-toggle'><i class='fas fa-user' style='padding-right: 0.2rem'></i> {$_SESSION['customer']['User']}</a>
-                                      <ul>
-                                      <li><a href='./customer/profile.php'><i class='fas fa-id-badge' style='padding-right: 0.6rem'></i> Hồ sơ</a></li>
-                                      <li><a href='./customer/change_password.php'><i class='fas fa-key' style='padding-right: 0.2rem'></i> Đổi mật khẩu</a></li>
-                                      <li><a href='./index.php' class='active'><i class='fas fa-shopping-cart' style='padding-right: 0.25rem'></i> Giỏ hàng</a></li>
-                                      <li><a href='testimonials.html'><i class='fas fa-receipt' style='padding-right: 0.7rem'></i> Đơn hàng</a></li>
-                                      <li><a href='../../handle/handle_account.php?logout=logout'><i class='fas fa-sign-out-alt' style='padding-right: 0.35rem'></i> Đăng xuất</a></li>
-                                      </ul>
+                                         <ul>
+                                            <li><a href='./customer/profile.php'><i class='fas fa-id-badge' style='padding-right: 0.6rem'></i> Hồ sơ</a></li>
+                                            <li><a href='./customer/change_password.php'><i class='fas fa-key' style='padding-right: 0.2rem'></i> Đổi mật khẩu</a></li>
+                                            <li><a href='./index.php' class='active'><i class='fas fa-shopping-cart' style='padding-right: 0.25rem'></i> Giỏ hàng</a></li>
+                                            <li><a href='../invoice/index.php'><i class='fas fa-receipt' style='padding-right: 0.7rem'></i> Đơn hàng</a></li>
+                                            <li><a href='../../handle/handle_account.php?logout=logout'><i class='fas fa-sign-out-alt' style='padding-right: 0.35rem'></i> Đăng xuất</a></li>
+                                         </ul>
                                       </li>";
                             } else {
                                 echo '<li><a href="./customer/login.php">Đăng nhập</a></li>';
@@ -276,7 +276,11 @@
                             {
                                 $("div.message-error-code-sale").css("color","green");
                                 var discount_value_str = (getData.discount_value - 0).toLocaleString("de-DE");
-                                $(".discount-val").html(discount_value_str+"<sup>đ</sup>");
+                                if(getData.discount_value > 0) {
+                                    $(".discount-val").html("-"+discount_value_str+"<sup>đ</sup>");
+                                } else {
+                                    $(".discount-val").html(discount_value_str+"<sup>đ</sup>");
+                                }
                                 var newTotal = (total - getData.discount_value).toLocaleString("de-DE");
                                 $(".total-after-sale span").html(newTotal+"<sup>đ</sup>");
                                 $("div.message-error-code-sale").text(getData.message);

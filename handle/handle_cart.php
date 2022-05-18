@@ -45,8 +45,10 @@
                             if($soluong + $qtyinCart > $book['so_luong']){
                                 echo json_encode(array("success" => false, "message" => "Số lượng sách mua vượt quá số lượng sách hiện có","error_code" => "out_of_stock"));
                             }
-                            addtoCart($book,$booktype,$soluong);
-                            echo json_encode(array("success" => true));
+                            else {
+                                addtoCart($book,$booktype,$soluong);
+                                echo json_encode(array("success" => true));
+                            }
                         }
                     }
                     else{

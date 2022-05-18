@@ -54,7 +54,7 @@
                 cursor: pointer;
                 transition: 0.3s;
                 text-align: center;
-                width: 160px;
+                width: 200px;
             }
 
             /* Change background color of buttons on hover */
@@ -102,7 +102,6 @@
             <div class="header">
                 <h3>Đơn hàng của bạn</h3>
                 <ul class="tab">
-                    <!-- Create tabs: https://www.w3schools.com/howto/howto_js_tabs.asp -->
                     <li class="tablinks active">Đơn hàng chờ xử lý</li>
                     <li class="tablinks">Đơn hàng đang giao</li>
                     <li class="tablinks">Đơn hàng đã giao</li>

@@ -141,9 +141,9 @@
                                         ."<div class='product'>"
                                            .'<div class="prod-image"><img src="../../images/'.$detailOrder[1].'" /></div>'
                                            .'<div class="prod-info">'
-                                              .'<span>'.$detailOrder[0].'</span>'
+                                              .'<strong>'.$detailOrder[0].'</strong>'
                                               .'<p>'.$detailOrder[2].'</p>'
-                                              .'<span>x'.$detailOrder[4].'</span>'
+                                              .'<span>x '.$detailOrder[4].'</span>'
                                            .'</div>'
                                         .'</div>'
                                         .'<div class="price">'

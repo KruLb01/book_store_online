@@ -136,7 +136,7 @@
                                                         $morecontent = substr($bookDescription, 500, strlen($bookDescription));
                                                         $readmore  = "<span class='dots'>...</span>"
                                                                    . "<span class='more-content'>$morecontent</span>"
-                                                                   . "<a class='read-more' href='#'> Read more</a>";
+                                                                   . "<a class='read-more' href='#'> Đọc thêm</a>";
                                                         $bookDescription = substr($bookDescription,0,"500");
                                                     }
                                                     $bookLanguage = $book['ngon_ngu'];
@@ -274,11 +274,11 @@
                             e.preventDefault();
                             $(".dots").toggle();
                             $(".more-content").toggle();
-                            if($(".read-more").text().trim() === "Read more"){
-                                $(".read-more").text(" Read less");
+                            if($(".read-more").text().trim() === "Đọc thêm"){
+                                $(".read-more").text(" Thu gọn");
                             }
                             else {
-                                $(".read-more").text(" Read more");
+                                $(".read-more").text(" Đọc thêm");
                             }
                         });
                         $(".add-to-cart").click ((e) => {
